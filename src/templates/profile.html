@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block error_msg %}
+{% if error %}
+	<div class="alert alert-warning">
+  		<strong>{{error_msg}}</strong>
+	</div>
+{% endif %}
+{% endblock %}
+
+{%block content %}
+{% if not error %}
+
+<h1>Profile for {{profile.uniqname}}</h1>
+{% if is_curr_user %}
+	<h3><a href="{% url 'profile_edit' profile.uniqname %}">Edit</a></h3>
+{% endif %} 
+<div class='row'>
+	<div class='col-sm-6 col-sm-offset-3'>
+		{% if profile.profile_pic %}
+		<img class="img-responsive" src="{{profile.profile_pic.url}}">
+		{% else %}
+		<img class="img-responsive" src="{%static 'img/default_profile_pic.jpg'%}">
+		{% endif %}		
+	</div>
+</div>
+<table class="table">
+	<tr>
+		<td>First Name: </td>
+		<td>{{profile.first_name}} </td>
+	</tr>
+	<tr>
+		<td>Last Name: </td>
+		<td>{{profile.last_name}} </td>
+	</tr>
+	<tr>
+		<td>Major: </td>
+		<td>{{profile.major}} </td>
+	</tr>
+	<tr>
+		<td>Educatione Level: </td>
+		<td>{{profile.edu_level}} </td>
+	</tr>
+	<tr>
+		<td>Expected Grad Date: </td>
+		<td>{{profile.expected_grad_date}} </td>
+	</tr>
+	<tr>
+		<td>Resume: </td>
+		{% if profile.resume %}
+		<td><a href="{{profile.resume.url}}">Link</a></td>
+		{% else %}
+		<td>No resume uploaded</td>
+		{% endif %}	
+	</tr>
+</table>
+{% endif %}
+{% endblock %}

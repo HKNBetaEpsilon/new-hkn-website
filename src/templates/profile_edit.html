@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block error_msg %}
+{% if error %}
+	<div class="alert alert-warning">
+  		<strong>{{error_msg}}</strong>
+	</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if not error %}
+{% if profile_saved %}
+	<div class="alert alert-success">
+  		<strong>You're profile has been successfully updated.</strong>
+	</div>
+{% endif %}
+<h1>Profile Edit for {{uniqname}}</h1>
+
+<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+	{{form|crispy}}
+	<input class='btn btn-default' type='submit' value='Submit' />
+</form>
+{% endif %}
+{% endblock %}

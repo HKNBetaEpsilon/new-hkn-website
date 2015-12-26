@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{%block content %}
+<h1>Tools.html</h1>
+{% if new_members_submitted %}
+	<div class="alert alert-success">
+  		<strong>You have successfully created new members.</strong>
+	</div>
+{% endif %}
+<p>To create new members, enter there uniqnames here seperated by commas</p>
+<form method='POST' action=''>{% csrf_token %}
+	{{form|crispy}}
+	<input class='btn btn-default' type='submit' value='Submit' />
+</form>
+{% endblock %}
