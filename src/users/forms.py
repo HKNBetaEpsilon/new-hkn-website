@@ -12,10 +12,10 @@ class MemberForm(forms.ModelForm):
 
 	def clean_resume(self):
 		resume = self.cleaned_data.get('resume')
+		if resume == None:
+			return resume
 		resume_parts = resume.name.split('.')
 		extension = resume_parts[-1]
-		print resume_parts
-		print extension
 		if extension != 'pdf' and extension != 'PDF':
 			raise forms.ValidationError("Resumes must be a PDF document")
 		return resume
