@@ -3,3 +3,4 @@
 ### Dependencies
 * django crispy forms
 * python-social-aut
+* Pillow
