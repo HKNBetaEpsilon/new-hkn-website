@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from .models import Member
 from .forms import MemberForm
+from hknWebsiteProject.resume_zip import zip_resumes
 import string
 
 def member_list(request):
@@ -53,6 +54,7 @@ def profile_edit(request, uniqname):
 			form = MemberForm(request.POST, request.FILES, instance = m)
 			if form.is_valid():
 				form.save()
+				zip_resumes()
 				context['profile_saved'] = True
 
 		context['uniqname'] = uniqname
