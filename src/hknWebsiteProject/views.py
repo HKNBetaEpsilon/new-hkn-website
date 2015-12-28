@@ -5,6 +5,12 @@ from django.contrib.auth import login
 from users.models import Member
 from users.forms import NewMemberForm
 
+class MyError(Exception):
+	def __init__(self, value):
+		self.value = value
+	def __str__(self):
+		return repr(self.value)
+
 def home(request):
 	return render(request, "home.html", {})
 
@@ -21,9 +27,19 @@ def tools(request):
 	form = NewMemberForm(request.POST or None)
 	if form.is_valid():
 		uniqnames = form.cleaned_data.get('new_members').split(',')
-		for name in uniqnames:
-			Member(uniqname = name).save()
-		context['new_members_submitted'] = True
+		try:
+			for name in uniqnames:
+				if Member.objects.filter(uniqname = name).exists():
+					raise MyError('Uniqname already exists')
+				else:
+					Member(uniqname = name).save()
+		except MyError:
+			context = {
+				'error' : True,
+				'error_msg' : 'Uniqname ' + name + ' alread exists!' 
+			}
+		else:
+			context['new_members_submitted'] = True
 	
 	context['form'] = form
 
