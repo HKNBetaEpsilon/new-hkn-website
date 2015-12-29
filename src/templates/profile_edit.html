@@ -11,12 +11,7 @@
 
 {% block content %}
 {% if not error %}
-{% if profile_saved %}
-	<div class="alert alert-success">
-  		<strong>You're profile has been successfully updated.</strong>
-	</div>
-{% endif %}
-<h1>Profile Edit for {{uniqname}}</h1>
+<h1>Profile Edit</h1>
 
 <form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
 	{{form|crispy}}

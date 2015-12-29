@@ -56,8 +56,11 @@ def profile_edit(request, uniqname):
 				form.save()
 				zip_resumes()
 				context['profile_saved'] = True
+				context['profile'] = m
+				context['is_curr_user'] = 'is_curr_user'
 
-		context['uniqname'] = uniqname
+				return render(request, "profile.html", context)
+
 		context['form'] = form
 
 	return render(request, "profile_edit.html", context)
