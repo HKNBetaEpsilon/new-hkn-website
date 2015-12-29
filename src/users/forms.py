@@ -5,7 +5,7 @@ from .models import Member
 class MemberForm(forms.ModelForm):
 	class Meta:
 		model = Member
-		exclude = ['uniqname']
+		exclude = ['uniqname', 'status']
 		widgets = {
 			'expected_grad_date': forms.SelectDateWidget(),
 		}

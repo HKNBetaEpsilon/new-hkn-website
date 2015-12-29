@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login
 
 from users.models import Member
+from users.models import Electee
 from users.forms import NewMemberForm
 
 class MyError(Exception):
@@ -33,6 +34,7 @@ def tools(request):
 					raise MyError('Uniqname already exists')
 				else:
 					Member(uniqname = name).save()
+					Electee(uniqname = name).save()
 		except MyError:
 			context = {
 				'error' : True,
