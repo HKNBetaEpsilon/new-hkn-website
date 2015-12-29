@@ -16,6 +16,13 @@
 {% if is_curr_user %}
 	<h3><a href="{% url 'profile_edit' profile.uniqname %}">Edit</a></h3>
 {% endif %} 
+
+{% if profile_saved %}
+	<div class="alert alert-success">
+  		<strong>You have successfully edited your profile.</strong>
+	</div>
+{% endif %}
+
 <div class='row'>
 	<div class='col-sm-6 col-sm-offset-3'>
 		{% if profile.profile_pic %}

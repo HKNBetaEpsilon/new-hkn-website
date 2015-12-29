@@ -20,14 +20,14 @@ def make_zip(dir, name):
 	zip_f.close()
 
 def get_members_with_resumes():
-	members_with_resumes =  Member.objects.all().filter(resume__isnull=False)
+	members_with_resumes = Member.objects.all().filter(resume__isnull=False)
 	members_with_resumes = members_with_resumes.exclude(resume__exact="")
-	members_with_resumes =  Member.objects.all().filter(first_name__isnull=False)
+	members_with_resumes = members_with_resumes.filter(first_name__isnull=False)
 	members_with_resumes = members_with_resumes.exclude(first_name__exact="")
-	members_with_resumes =  Member.objects.all().filter(last_name__isnull=False)
+	members_with_resumes = members_with_resumes.filter(last_name__isnull=False)
 	members_with_resumes = members_with_resumes.exclude(last_name__exact="")
-	members_with_resumes =  Member.objects.all().filter(expected_grad_date__isnull=False)
-	members_with_resumes =  Member.objects.all().filter(major__isnull=False)
+	members_with_resumes = members_with_resumes.filter(expected_grad_date__isnull=False)
+	members_with_resumes = members_with_resumes.filter(major__isnull=False)
 	return members_with_resumes
 
 def aggregate_resumes(type, members_with_resumes, resumes_dir):

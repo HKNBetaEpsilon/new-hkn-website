@@ -12,7 +12,7 @@ class MemberForm(forms.ModelForm):
 
 	def clean_resume(self):
 		resume = self.cleaned_data.get('resume')
-		if resume == None:
+		if resume == None or resume == False:
 			return resume
 		resume_parts = resume.name.split('.')
 		extension = resume_parts[-1]
