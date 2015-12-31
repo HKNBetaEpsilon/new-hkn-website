@@ -1,17 +1,30 @@
 {% extends 'base.html' %}
 
 {%block content %}
-{% if not request.user.is_anonymous %}
-<h1>Members</h1>
-	<table class="table">
-		{% for inst in member_list %}
-			<tr>
-				<td><a href="{%url 'profile' inst.uniqname %}">{{inst.first_name}} {{inst.last_name}}</a></td>
-			</tr>
-		{% endfor %}
-	</table>
-{% else %}
-<h1>Hey now, you have to be logged in to see profiles</h1>
-{% endif %}
-
+<div class='container'>
+	{% if not request.user.is_anonymous %}
+		<h1>Members of HKN</h1>
+		<hr>
+	{% for alpha, members in member_list.items %}
+		<h1>{{alpha}}</h1>
+		<table class="table borderless">
+			{% for mem in members %}
+				{% if forloop.counter0|divisibleby:5 %}
+				<tr>
+					<td class='member-list-data' id="left-padding-0">
+				{% else %}
+					<td class='member-list-data'>
+				{% endif %}
+						<p><a href="{%url 'profile' mem.uniqname %}">{{mem.first_name}} {{mem.last_name}}</a></p>
+					</td>
+				{% if forloop.counter|divisibleby:5 %}
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	{% endfor %}
+	{% else %}
+	<h1>Hey now, you have to be logged in to see profiles</h1>
+	{% endif %}
+</div>
 {% endblock %}
