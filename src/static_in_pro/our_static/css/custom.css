@@ -5,6 +5,10 @@ p {
     font-family: 'Open Sans', sans-serif;
 }
 
+body {
+	margin-bottom: 2em;
+}
+
 .text-align-center{
 	text-align: center;
 }
@@ -63,4 +67,13 @@ p {
 
 .top-pictures-row {
 	margin-bottom: 1.2em;
+}
+
+.logo {
+	margin-top: 30px;
+}
+
+.eecs-logo {
+	margin-top: 50px;
+	max-height: 175px;
 }
