@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block error_msg %}
+{% if error %}
+	<div class="alert alert-warning">
+  		<strong>{{error_msg}}</strong>
+	</div>
+{% endif %}
+{% endblock %}
+
+{%block content %}
+{% if not error %}
+{% if service_hours_submitted %}
+	<div class="alert alert-success">
+		<strong>Successfully submitted service hours</strong>
+	</div>
+{% endif %}
+
+<h3>Submit Service Hours</h3>
+<form method='POST' action=''>{% csrf_token %}
+	{{form|crispy}}
+	<input class='btn btn-default' type='submit' value='Submit' />
+</form>
+{% endif %}
+{% endblock %}

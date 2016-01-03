@@ -19,6 +19,9 @@
             {% endif %}
             {% if request.user.is_superuser %}
             <li><a href="{% url 'tools' %}">Tools</a></li>
+            <li><a href="{% url 'tools2' %}">Tools 2</a></li>
+            <li><a href="{% url 'all_electees' %}">Tools 3</a></li>
+            <li><a href="{% url 'electee_submission_approval' %}">Tools 4</a></li>
             {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">

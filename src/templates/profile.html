@@ -13,16 +13,20 @@
 
 {%block content %}
 {% if not error %}
-
 <div class='container'>
 	<div class="row">
-	    <div class="col-sm-10 vcenter">
+	    <div class="col-sm-6 col-md-9 vcenter">
 			<h1 class="profile-name">{{profile.first_name}} {{profile.last_name}}</h1>
 	    </div><!--
-	 --><div class="col-sm-2 vcenter">
+	 --><div class="col-sm-3 col-md-2 vcenter">
+	 		{% if electee_progress %}
+				<a class="btn btn-info pull-left" href="{% url 'electee_progress' profile.uniqname %}">Electee Progress</a>
+			{% endif %}
+		</div><!--
+	 --><div class="col-sm-3 col-md-1 vcenter">
 			{% if is_curr_user %}
-				<a class="btn btn-primary pull-right" href="{% url 'profile_edit' profile.uniqname %}">Edit Profile</a>
-			{% endif %}    
+				<a class="btn btn-primary" href="{% url 'profile_edit' profile.uniqname %}">Edit Profile</a>
+			{% endif %}
 		</div>
 	</div>
 

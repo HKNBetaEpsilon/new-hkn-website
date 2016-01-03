@@ -27,7 +27,7 @@ class Member(models.Model):
 		('AL', 'Alumni'),
 	)
 
-	uniqname = models.CharField(max_length=8)
+	uniqname = models.CharField(max_length=8, primary_key=True)
 	first_name = models.CharField(max_length=100, null=True, blank=True)
 	last_name = models.CharField(max_length=100, null=True, blank=True)
 	status = models.CharField(max_length=1, choices=STATUS, default='E')
@@ -41,7 +41,7 @@ class Member(models.Model):
 		return self.uniqname
 
 class Electee(models.Model):
-	uniqname = models.CharField(max_length=8)
+	member = models.OneToOneField(Member, on_delete=models.CASCADE, primary_key=True)
 	num_socials_approved = models.IntegerField(default=0)
 	num_socials_total = models.IntegerField(default=0)
 	num_service_hours_approved = models.IntegerField(default=0)
@@ -55,15 +55,15 @@ class Electee(models.Model):
 	general_meetings_missed = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return self.uniqname
+		return self.member.uniqname
 
 class Social(models.Model):
-	uniqname = models.CharField(max_length=8)
+	electee = models.ForeignKey(Electee, on_delete=models.CASCADE)
 	social_name = models.CharField(max_length=100)
 	approved = models.BooleanField(default=False)
 
 	def __unicode__(self):
-		return self.uniqname
+		return self.electee.member.uniqname
 
 class Service_Hours(models.Model):
 	SERVICE_TYPE = (
@@ -72,11 +72,11 @@ class Service_Hours(models.Model):
 		('Ex', 'External'),
 	)
 
-	uniqname = models.CharField(max_length=8)
+	electee = models.ForeignKey(Electee, on_delete=models.CASCADE)
 	service_type = models.CharField(max_length=3, choices=SERVICE_TYPE)
 	service_name = models.CharField(max_length=100)
 	num_hours = models.IntegerField()
 	approved = models.BooleanField(default=False)
-
+	
 	def __unicode__(self):
-		return self.uniqname
+		return self.electee.member.uniqname

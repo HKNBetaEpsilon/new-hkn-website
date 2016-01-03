@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{%block content %}
+<h2>Unapproved Socials</h2>
+	<table class="table">
+		{% for inst in social_list %}
+			<tr>
+				<td>{{inst.electee.member.uniqname}}</td>
+				<td>{{inst.social_name}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+<h2>Unapproved Service Hours</h2>
+	<table class="table">
+		{% for inst in service_hour_list %}
+			<tr>
+				<td>{{inst.electee.member.uniqname}}</td>
+				<td>{{inst.service_type}}</td>
+				<td>{{inst.service_name}}</td>
+				<td>{{inst.num_hours}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
