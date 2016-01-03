@@ -5,6 +5,8 @@ from django.contrib.auth import login
 from users.models import Member
 from users.models import Electee
 from users.forms import NewMemberForm
+from electeeManagement.models import Requirements
+from electeeManagement.forms import RequirementsForm
 
 class MyError(Exception):
 	def __init__(self, value):
@@ -33,8 +35,9 @@ def tools(request):
 				if Member.objects.filter(uniqname = name).exists():
 					raise MyError('Uniqname already exists')
 				else:
-					Member(uniqname = name).save()
-					Electee(uniqname = name).save()
+					m = Member(uniqname = name)
+					m.save()
+					Electee(member = m).save()
 		except MyError:
 			context = {
 				'error' : True,
@@ -46,6 +49,26 @@ def tools(request):
 	context['form'] = form
 
 	return render(request, "tools.html", context)
+
+def tools2(request):
+	context = {
+		'requirement_changed' : False
+	}
+
+	form = RequirementsForm(request.POST or None)
+	if form.is_valid():
+		requirement = form.cleaned_data.get('requirement')
+		num_required = form.cleaned_data.get('num_required')
+
+		instance = Requirements.objects.get(pk=requirement)
+		instance.num_required = num_required
+		instance.save()
+		context['requirement_changed'] = True
+
+	context['req_list'] = Requirements.objects.all().order_by('requirement')
+	context['form'] = form
+
+	return render(request, "tools2.html", context)
 
 def login_user(request):
 	email = request.user.email
@@ -59,7 +82,6 @@ def login_user(request):
 			request = badUser(request)
 
 	return redirect('/')
-
 
 def badUser(request):
 	User.objects.get(username__exact=request.user).delete()

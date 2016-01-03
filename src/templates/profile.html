@@ -15,6 +15,9 @@
 <h1>Profile for {{profile.uniqname}}</h1>
 {% if is_curr_user %}
 	<h3><a href="{% url 'profile_edit' profile.uniqname %}">Edit</a></h3>
+{% endif %}
+{% if electee_progress %}
+	<h3><a class="btn btn-primary" href="{% url 'electee_progress' profile.uniqname %}">Electee Progress</a></h3>
 {% endif %} 
 
 {% if profile_saved %}

@@ -26,10 +26,15 @@ urlpatterns = [
 	url(r'^about/', 'hknWebsiteProject.views.about', name='about'),
 	url(r'^corporate/', 'hknWebsiteProject.views.corporate', name='corporate'),
 	url(r'^tools/', 'hknWebsiteProject.views.tools', name='tools'),
+	url(r'^tools2/', 'hknWebsiteProject.views.tools2', name='tools2'),
+	url(r'^all_electees/', 'users.views.all_electees', name='all_electees'),
 	url(r'^login_user/', 'hknWebsiteProject.views.login_user', name='login_user'), 
 	url(r'^profile/(?P<uniqname>[a-z]{3,8})/$', 'users.views.profile', name='profile'),
 	url(r'^update/(?P<uniqname>[a-z]{3,8})/$', 'users.views.profile_edit', name='profile_edit'),
-
+	url(r'^electee_progress/(?P<uniqname>[a-z]{3,8})/$', 'users.views.electee_progress', name='electee_progress'),
+	url(r'^submit_social/', 'users.views.submit_social', name='submit_social'),
+	url(r'^submit_service_hours/', 'users.views.submit_service_hours', name='submit_service_hours'),
+	url(r'^electee_submission_approval/', 'users.views.electee_submission_approval', name='electee_submission_approval'),
 
 	url('', include('social.apps.django_app.urls', namespace='social')),
 	url('', include('django.contrib.auth.urls', namespace='auth')),
