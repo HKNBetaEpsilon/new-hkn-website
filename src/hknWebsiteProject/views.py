@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login
+from utils import has_complete_profile
 
 from users.models import Member
 from users.models import Electee
@@ -13,7 +14,13 @@ class MyError(Exception):
 		return repr(self.value)
 
 def home(request):
-	return render(request, "home.html", {})
+	context = {}
+	if not request.user.is_anonymous():
+		if not has_complete_profile(request.user.username):
+			context = {
+				'has_not_complete_profile' : True
+			}
+	return render(request, "home.html", context)
 
 def about(request):
 	return render(request, "about.html", {})

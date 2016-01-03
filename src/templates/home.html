@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block error_msg %}
+{% if has_not_complete_profile %}
+	<div class='container'>
+		<div class="alert alert-info">
+	  		<a class="btn btn-primary btn-sm btn-uncomplete-profile" href="{% url 'profile_edit' request.user.username %}">Edit Profile</a>	  		
+	  		<strong>Your profile is incomplete. Update your profile now!</strong>
+		</div>
+	</div>
+{% endif %}
+{% endblock %}
+
 {%block content %}
 <div class='container'>
 	<h1>Eta Kappa Nu</h1>
