@@ -76,7 +76,8 @@ def profile_edit(request, uniqname):
 				context['profile_saved'] = True
 				context['profile'] = m
 				context['is_curr_user'] = 'is_curr_user'
-
+				context['electee_progress'] = is_electee(uniqname) and (uniqname == request.user.username or is_officer(request.user.username))
+		
 				return render(request, "profile.html", context)
 
 		context['form'] = form
