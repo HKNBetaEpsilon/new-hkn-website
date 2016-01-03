@@ -1,3 +1,79 @@
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'PT Sans', sans-serif;
+}
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+	margin-bottom: 2em;
+}
+
 .text-align-center{
 	text-align: center;
+}
+
+.navbar-static-top {
+  background-color: #100C6C;
+}
+
+#bootstrap-overrides .navbar-nav>li>a{
+	color: #D3D3D3;
+}
+
+#bootstrap-overrides .navbar-nav>li>a:hover{
+	color: #B20317;
+}
+
+#bootstrap-overrides .navbar-inverse .navbar-brand{
+	color: #D3D3D3;
+}
+
+.borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+    border: none;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.profile-name {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.profile-pic {
+	max-height: 450px;
+}
+
+.td-right{
+   text-align: right;   
+}
+
+.member-list-data {
+	width: 20%;
+}
+
+#left-padding-0 {
+	padding-left: 0px;
+}
+
+#bootstrap-overrides .pictures {
+	background-color: #D3D3D3;
+	padding:1.2em 1.5em;
+}
+
+.top-pictures-row {
+	margin-bottom: 1.2em;
+}
+
+.logo {
+	margin-top: 30px;
+}
+
+.eecs-logo {
+	margin-top: 50px;
+	max-height: 175px;
 }

@@ -11,59 +11,69 @@
 
 {%block content %}
 {% if not error %}
-
-<h1>Profile for {{profile.uniqname}}</h1>
-{% if is_curr_user %}
-	<h3><a href="{% url 'profile_edit' profile.uniqname %}">Edit</a></h3>
-{% endif %}
-{% if electee_progress %}
-	<h3><a class="btn btn-primary" href="{% url 'electee_progress' profile.uniqname %}">Electee Progress</a></h3>
-{% endif %} 
-
-{% if profile_saved %}
-	<div class="alert alert-success">
-  		<strong>You have successfully edited your profile.</strong>
+<div class='container'>
+	<div class="row">
+	    <div class="col-sm-6 col-md-9 vcenter">
+			<h1 class="profile-name">{{profile.first_name}} {{profile.last_name}}</h1>
+	    </div><!--
+	 --><div class="col-sm-3 col-md-2 vcenter">
+	 		{% if electee_progress %}
+				<a class="btn btn-info pull-left" href="{% url 'electee_progress' profile.uniqname %}">Electee Progress</a>
+			{% endif %}
+		</div><!--
+	 --><div class="col-sm-3 col-md-1 vcenter">
+			{% if is_curr_user %}
+				<a class="btn btn-primary" href="{% url 'profile_edit' profile.uniqname %}">Edit Profile</a>
+			{% endif %}
+		</div>
 	</div>
-{% endif %}
 
-<div class='row'>
-	<div class='col-sm-6 col-sm-offset-3'>
-		{% if profile.profile_pic %}
-		<img class="img-responsive" src="{{profile.profile_pic.url}}">
-		{% else %}
-		<img class="img-responsive" src="{%static 'img/default_profile_pic.jpg'%}">
-		{% endif %}		
+	{% if profile_saved %}
+		<div class="alert alert-success">
+	  		<strong>You have successfully edited your profile.</strong>
+		</div>
+	{% endif %}
+
+	<div class='row'>
+		<div class='col-sm-6 col-sm-offset-3'>
+			{% if profile.profile_pic %}
+			<img class="img-responsive img-rounded center-block profile-pic" src="{{profile.profile_pic.url}}">
+			{% else %}
+			<img class="img-responsive center-block profile-pic" src="{%static 'img/default_profile_pic.jpg'%}">
+			{% endif %}		
+		</div>
+	</div>
+	<hr>
+	<div class='row'>
+		<div class='col-sm-8 col-sm-offset-2'>
+		<table class="table borderless">
+			<tr>
+				<td><h4><b>Name:</b></h4></td>
+				<td class='td-right'><h4>{{profile.first_name}} {{profile.last_name}}</h4></td>
+			</tr>
+			<tr>
+				<td><h4><b>Major:</b></h4></td>
+				<td class='td-right'><h4>{{profile.get_major_display}}</h4></td>
+			</tr>
+			<tr>
+				<td><h4><b>Educatione Level:</b></h4></td>
+				<td class='td-right'><h4>{{profile.get_edu_level_display}}</h4></td>
+			</tr>
+			<tr>
+				<td><h4><b>Expected Grad Date:</b></h4></td>
+				<td class='td-right'><h4>{{profile.expected_grad_date}}</h4></td>
+			</tr>
+			<tr>
+				<td><h4><b>Resume:</b></h4></td>
+				{% if profile.resume %}
+				<td class='td-right'><a href="{{profile.resume.url}}"><h4>Link</h4></a></td>
+				{% else %}
+				<td class='td-right'><h4>No resume uploaded</h4></td>
+				{% endif %}	
+			</tr>
+		</table>
+	</div>
 	</div>
 </div>
-<table class="table">
-	<tr>
-		<td>First Name: </td>
-		<td>{{profile.first_name}} </td>
-	</tr>
-	<tr>
-		<td>Last Name: </td>
-		<td>{{profile.last_name}} </td>
-	</tr>
-	<tr>
-		<td>Major: </td>
-		<td>{{profile.major}} </td>
-	</tr>
-	<tr>
-		<td>Educatione Level: </td>
-		<td>{{profile.edu_level}} </td>
-	</tr>
-	<tr>
-		<td>Expected Grad Date: </td>
-		<td>{{profile.expected_grad_date}} </td>
-	</tr>
-	<tr>
-		<td>Resume: </td>
-		{% if profile.resume %}
-		<td><a href="{{profile.resume.url}}">Link</a></td>
-		{% else %}
-		<td>No resume uploaded</td>
-		{% endif %}	
-	</tr>
-</table>
 {% endif %}
 {% endblock %}
