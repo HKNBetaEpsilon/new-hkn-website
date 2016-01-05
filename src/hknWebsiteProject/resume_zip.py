@@ -2,6 +2,7 @@ import os, zipfile, shutil
 
 from django.conf import settings
 from users.models import Member
+from utils import get_members_with_complete_profile
 
 def zipdir(path,zipf):
 	for root,dirs,files in os.walk(path):
@@ -18,17 +19,6 @@ def make_zip(dir, name):
 	os.chdir(dir)
 	zipdir('.',zip_f)
 	zip_f.close()
-
-def get_members_with_resumes():
-	members_with_resumes = Member.objects.all().filter(resume__isnull=False)
-	members_with_resumes = members_with_resumes.exclude(resume__exact="")
-	members_with_resumes = members_with_resumes.filter(first_name__isnull=False)
-	members_with_resumes = members_with_resumes.exclude(first_name__exact="")
-	members_with_resumes = members_with_resumes.filter(last_name__isnull=False)
-	members_with_resumes = members_with_resumes.exclude(last_name__exact="")
-	members_with_resumes = members_with_resumes.filter(expected_grad_date__isnull=False)
-	members_with_resumes = members_with_resumes.filter(major__isnull=False)
-	return members_with_resumes
 
 def aggregate_resumes(type, members_with_resumes, resumes_dir):
 	if os.path.exists(resumes_dir):
@@ -52,7 +42,7 @@ def zip_resumes():
 	resumes_year_dir = os.path.join(settings.MEDIA_ROOT, 'resume_year')
 	resumes_major_dir = os.path.join(settings.MEDIA_ROOT, 'resume_major')
 
-	members_with_resumes = get_members_with_resumes()
+	members_with_resumes = get_members_with_complete_profile()
 
 	aggregate_resumes('year', members_with_resumes, resumes_year_dir)
 	aggregate_resumes('major', members_with_resumes, resumes_major_dir)
