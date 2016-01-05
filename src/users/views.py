@@ -8,15 +8,13 @@ from hknWebsiteProject.resume_zip import zip_resumes
 import string
 from string import ascii_uppercase
 import collections
+from hknWebsiteProject.utils import get_members_with_complete_profile
 
 def member_list(request):
-	# member_list = Member.objects.all().filter(first_name__isnull=False).filter(last_name__isnull=False)
-	# member_list = member_list.exclude(first_name__exact="").exclude(last_name__exact="")
-	# member_list = member_list.order_by('first_name','last_name')
 	alpha_list = collections.OrderedDict()
 
 	for letter in ascii_uppercase:
-		member_list = Member.objects.filter(first_name__startswith=letter)
+		member_list = get_members_with_complete_profile().filter(first_name__startswith=letter)
 		member_list = member_list.order_by('first_name','last_name')
 		if member_list:
 			alpha_list[letter] = member_list
