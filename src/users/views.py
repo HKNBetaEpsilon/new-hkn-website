@@ -13,8 +13,9 @@ from hknWebsiteProject.utils import get_members_with_complete_profile
 def member_list(request):
 	alpha_list = collections.OrderedDict()
 
+	members_with_completed_profile = get_members_with_complete_profile()
 	for letter in ascii_uppercase:
-		member_list = get_members_with_complete_profile().filter(first_name__startswith=letter)
+		member_list = members_with_completed_profile.filter(first_name__startswith=letter)
 		member_list = member_list.order_by('first_name','last_name')
 		if member_list:
 			alpha_list[letter] = member_list
