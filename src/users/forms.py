@@ -1,8 +1,6 @@
 from django import forms
 
-from .models import Member
-from .models import Social
-from .models import Service_Hours
+from .models import Member, Social, Service_Hours
 
 class MemberForm(forms.ModelForm):
 	class Meta:

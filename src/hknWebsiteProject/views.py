@@ -3,8 +3,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login
 from utils import has_complete_profile
 
-from users.models import Member
-from users.models import Electee
+from users.models import Member, Electee
 from users.forms import NewMemberForm
 from electeeManagement.models import Requirements
 from electeeManagement.forms import RequirementsForm

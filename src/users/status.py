@@ -1,5 +1,4 @@
-from django.conf import settings
-from users.models import Member
+from .models import Member
 
 def is_officer(uniqname):
 	m = Member.objects.get(uniqname = uniqname)
