@@ -1,15 +1,9 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Member
-from .models import Electee
-from .models import Social
-from .models import Service_Hours
-from .forms import MemberForm
-from .forms import SocialForm
-from .forms import ServiceHoursForm
-from .status import is_officer
-from .status import is_electee
+from .models import Member, Electee, Social, Service_Hours
+from .forms import MemberForm, SocialForm, ServiceHoursForm
+from .status import is_officer, is_electee
 from hknWebsiteProject.resume_zip import zip_resumes
 import string
 from string import ascii_uppercase
