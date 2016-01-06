@@ -14,7 +14,8 @@ def get_members_with_complete_profile():
 	members_comp_prof = members_comp_prof.filter(major__isnull=False)
 	members_comp_prof = members_comp_prof.filter(edu_level__isnull=False)
 	members_comp_prof = members_comp_prof.filter(expected_grad_date__isnull=False)
-	members_comp_prof = members_comp_prof.filter(profile_pic__isnull=False)
+	members_comp_prof = members_comp_prof.exclude(profile_pic__exact="")
 	members_comp_prof = members_comp_prof.filter(resume__isnull=False)
 	members_comp_prof = members_comp_prof.exclude(resume__exact="")
+	print members_comp_prof
 	return members_comp_prof
