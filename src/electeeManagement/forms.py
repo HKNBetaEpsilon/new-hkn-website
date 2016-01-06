@@ -2,6 +2,7 @@ from django import forms
 
 from .models import Requirements
 
+# form to set Requirements Model
 class RequirementsForm(forms.Form):
 	REQUIREMENTS = (
 		('A_UG_SOCIAL', 'Number Undergrad Socials'),
