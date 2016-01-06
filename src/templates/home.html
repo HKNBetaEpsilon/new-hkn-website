@@ -3,18 +3,15 @@
 
 {% block error_msg %}
 {% if has_not_complete_profile %}
-	<div class='container'>
-		<div class="alert alert-info">
-	  		<a class="btn btn-primary btn-sm btn-uncomplete-profile" href="{% url 'profile_edit' request.user.username %}">Edit Profile</a>	  		
-	  		<strong>Your profile is incomplete, update your profile now!</strong> Your profile will not appear in the members list until you complete your profile.
-		</div>
+	<div class="alert alert-info">
+  		<a class="btn btn-primary btn-sm btn-uncomplete-profile" href="{% url 'profile_edit' request.user.username %}">Edit Profile</a>	  		
+  		<strong>Your profile is incomplete, update your profile now!</strong> Your profile will not appear in the members list until you complete your profile.
 	</div>
 {% endif %}
 {% endblock %}
 
 {%block content %}
-<div class='container'>
-	<h1>Eta Kappa Nu</h1>
+<h1>Eta Kappa Nu</h1>
 	<div class='row'>
 		<div class='col-sm-9'>
 			<!-- <p class='lead'> Eta Kappa Nu (HKN) strives to help progress the engineering student body through leadership, scholarship, and service. At the University of Michigan, the Beta-Epsilon chapter is composed of electrical, computer, and computer science engineers. As an organization, we bring services to the greater student body and community through the dB Cafe, service project, and community events, and we help our own members by providing networking and educational opportunities.</p> -->
@@ -58,6 +55,5 @@
 			</iframe>
 		</div>
 	</div>
-</div>
 </div>
 {% endblock %}

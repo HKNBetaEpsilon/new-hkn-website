@@ -3,17 +3,14 @@
 
 {% block error_msg %}
 {% if error %}
-	<div class='container'>
-		<div class="alert alert-warning">
-	  		<strong>{{error_msg}}</strong>
-		</div>
+	<div class="alert alert-warning">
+  		<strong>{{error_msg}}</strong>
 	</div>
 {% endif %}
 {% endblock %}
 
 {%block content %}
 {% if not error %}
-<div class='container'>
 	<div class="row">
 	    <div class="col-sm-6 col-md-9 vcenter">
 			<h1 class="profile-name">{{profile.first_name}} {{profile.last_name}}</h1>
@@ -74,7 +71,6 @@
 				{% endif %}	
 			</tr>
 		</table>
-	</div>
 	</div>
 </div>
 {% endif %}
