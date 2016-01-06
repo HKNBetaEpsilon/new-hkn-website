@@ -84,6 +84,11 @@ def login_user(request):
 	else:
 		try:
 			m = Member.objects.get(uniqname = email_base)
+			if not m.first_name:
+				m.first_name = request.user.first_name
+			if not m.last_name:
+				m.last_name = request.user.last_name
+			m.save()
 		except Member.DoesNotExist:
 			request = badUser(request)
 
