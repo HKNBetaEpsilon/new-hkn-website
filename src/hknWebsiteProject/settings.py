@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'electeeManagement',
     'crispy_forms',
+    'leadership'
 ]
 
 MIDDLEWARE_CLASSES = [

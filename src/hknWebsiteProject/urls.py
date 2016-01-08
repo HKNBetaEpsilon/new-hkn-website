@@ -35,6 +35,8 @@ urlpatterns = [
 	url(r'^submit_social/', 'users.views.submit_social', name='submit_social'),
 	url(r'^submit_service_hours/', 'users.views.submit_service_hours', name='submit_service_hours'),
 	url(r'^electee_submission_approval/', 'users.views.electee_submission_approval', name='electee_submission_approval'),
+	url(r'^leadership/', 'leadership.views.leadership', name='leadership'),
+	url(r'^edit_leadership/', 'leadership.views.edit_leadership', name='edit_leadership'),
 
 	url('', include('social.apps.django_app.urls', namespace='social')),
 	url('', include('django.contrib.auth.urls', namespace='auth')),

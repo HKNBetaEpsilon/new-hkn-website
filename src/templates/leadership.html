@@ -2,4 +2,26 @@
 {% load staticfiles %}
 
 {%block content %}
+{% if leader_saved %}
+	<div class="alert alert-success">
+  		<strong>You have successfully edited your profile.</strong>
+	</div>
+{% endif %}
+<h1>Current Leadership</h1>
+{% for leader in leaders %}
+	{% if forloop.counter0|divisibleby:3 %}
+	<div class='row'>
+	{% endif %}
+		<div class='col-sm-4'>
+			<img class="img-responsive img-rounded center-block profile-pic" src="{{leader.member.profile_pic.url}}">
+			<h3 class='text-center'>
+				<a href="{%url 'profile' leader.member.uniqname %}">{{leader.member.first_name}} {{leader.member.last_name}}</a>
+			</h3>
+			<h4 class='text-center'>{{leader.position}}</h4>
+			<h4 class='text-center'>{{leader.email}}</h4>
+		</div>
+	{% if forloop.counter|divisibleby:3 %}
+	</div>
+	{% endif %}
+{% endfor %}
 {% endblock %}
