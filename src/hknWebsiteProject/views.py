@@ -84,6 +84,9 @@ def login_user(request):
 	else:
 		try:
 			m = Member.objects.get(uniqname = email_base)
+			
+			# If the user doesn't have name in thier profile, defualt to the 
+			# name registered with their login info
 			if not m.first_name:
 				m.first_name = request.user.first_name
 			if not m.last_name:

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block error_msg %}
+{% if error %}
+	<div class="alert alert-warning">
+  		<strong>{{error_msg}}</strong>
+	</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if not error %}
+{% if position_added %}
+	<div class="alert alert-success">
+  		<strong>You have successfully added/removed a position</strong>
+	</div>
+{% endif %}
+<h1>Change Leadership</h1>
+<a class='btn btn-success' href='{% url 'add_leadership' %}'>Add New Position</a>
+<a class='btn btn-danger' href='{% url 'delete_leader' %}'>Remove Position</a>
+<div class='row'>
+	<div class='col-xs-6'>
+		<div class='row'>
+			<div class='col-xs-6'>
+				<h3>Position</h3>
+			</div>
+			<div class='col-xs-6'>
+				<h3>Current Leader</h3>
+			</div>
+		</div>
+
+		{% for leader in leaders %}
+		<div class='row'>
+			<div class='col-md-6'>
+				<p>{{leader.position}}</p>
+			</div>
+			<div class='col-md-6'>
+				<p>{{leader.member.first_name}} {{leader.member.last_name}}</p>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class='col-xs-6'>
+		<h3>New Leader</h3>
+		<form method='POST' action=''>{% csrf_token %}
+		    {{ aa.management_form }}
+		    {% for form in aa %}
+		        {% for field in form %}
+		        	<div class='row new-member-select'>
+		            {{ field }}
+		        	</div>
+		        {% endfor %}
+		    {% endfor %}
+	</div>
+</div>
+<input class='btn btn-default btn-primary' type='submit' value='Submit' />
+</form>
+
+{% endif %}
+
+{% endblock %}
