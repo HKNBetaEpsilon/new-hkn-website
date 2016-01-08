@@ -41,6 +41,8 @@ def edit_leadership(request):
 		if request.POST:
 			formset = LeaderFormSet(request.POST)
 			formset.save()
+			context['leader_saved'] = True
+			return render(request, "leadership.html", context)
 	# 		form = LeaderForm(request.POST, instance = l)
 	# 		if form.is_valid():
 	# 			form.save()
