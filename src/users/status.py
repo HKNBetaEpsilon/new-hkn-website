@@ -1,3 +1,5 @@
+# use to check the status of a member
+
 from .models import Member
 
 def is_officer(uniqname):

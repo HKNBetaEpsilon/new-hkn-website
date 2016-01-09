@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-# Create your models here.
+# Various hour requirements for electing that have to potential to change
+# Model includes the name of the requirement and the number of hours
 class Requirements(models.Model):
 	REQUIREMENTS = (
 		('A_UG_SOCIAL', 'Number Undergrad Socials'),

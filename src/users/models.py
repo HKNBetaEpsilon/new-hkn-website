@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django import forms
+
 # Create your models here.
 from django.contrib.auth.models import User
 
@@ -43,6 +44,7 @@ class Member(models.Model):
 	class Meta:
 		ordering = ["uniqname"]
 
+# Model for keeping track of the progress of an electee on various electee requirements
 class Electee(models.Model):
 	member = models.OneToOneField(Member, on_delete=models.CASCADE, primary_key=True)
 	num_socials_approved = models.IntegerField(default=0)
@@ -60,6 +62,9 @@ class Electee(models.Model):
 	def __unicode__(self):
 		return self.member.uniqname
 
+# Model for when an electee submits a social
+# Includes the type of the name of the event, the number of hours, 
+# 	and whether or not it has been approved
 class Social(models.Model):
 	electee = models.ForeignKey(Electee, on_delete=models.CASCADE)
 	social_name = models.CharField(max_length=100)
@@ -68,6 +73,9 @@ class Social(models.Model):
 	def __unicode__(self):
 		return self.electee.member.uniqname
 
+# Model for when an electee submits a service event
+# Includes the type of service event, the name of the event, 
+# 	the number of hours, and whether or not it has been approved
 class Service_Hours(models.Model):
 	SERVICE_TYPE = (
 		('dB', 'dB Cafe'),
