@@ -11,18 +11,29 @@ import collections
 from hknWebsiteProject.utils import get_members_with_complete_profile
 
 def member_list(request):
-	alpha_list = collections.OrderedDict()
+	if request.user.is_anonymous():
+		context = {
+			'error' : True,
+			'error_msg' : 'You must be a member to see member\'s profiles'
+		}
+	else :
+		alpha_list = collections.OrderedDict()
 
-	members_with_completed_profile = get_members_with_complete_profile()
-	for letter in ascii_uppercase:
-		member_list = members_with_completed_profile.filter(first_name__startswith=letter)
-		member_list = member_list.order_by('first_name','last_name')
-		if member_list:
-			alpha_list[letter] = member_list
+		# displays the list of all members who have a complete profile
+		members_with_completed_profile = get_members_with_complete_profile()
 
-	context = {
-		'member_list' : alpha_list
-	}
+		# separate member list by letter first name starts with in order to display 
+		# 	members in these groupings
+		for letter in ascii_uppercase:
+			member_list = members_with_completed_profile.filter(first_name__startswith=letter)
+			member_list = member_list.order_by('first_name','last_name')
+			if member_list:
+				alpha_list[letter] = member_list
+
+		context = {
+			'member_list' : alpha_list,
+			'error' : False,
+		}
 
 	return render(request, "member_list.html", context)
 

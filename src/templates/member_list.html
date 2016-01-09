@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 
+{% block error_msg %}
+{% if error %}
+	<div class="alert alert-warning">
+  		<strong>{{error_msg}}</strong>
+	</div>
+{% endif %}
+{% endblock %}
+
 {%block content %}
-{% if not request.user.is_anonymous %}
+{% if not error %}
 	<h1>Members of HKN</h1>
 	<hr>
 	{% for alpha, members in member_list.items %}
@@ -22,7 +30,5 @@
 			{% endfor %}
 		</table>
 	{% endfor %}
-{% else %}
-<h1>Hey now, you have to be logged in to see profiles</h1>
 {% endif %}
 {% endblock %}

@@ -17,12 +17,13 @@ class MyError(Exception):
 def home(request):
 	context = {}
 	if not request.user.is_anonymous():
+		# display prompt to ask member to complete their profile
 		if not has_complete_profile(request.user.username):
 			context = {
 				'has_not_complete_profile' : True
 			}
 	return render(request, "home.html", context)
-
+	
 def about(request):
 	return render(request, "about.html", {})
 
@@ -37,6 +38,9 @@ def tools(request):
 	if form.is_valid():
 		uniqnames = form.cleaned_data.get('new_members').split(',')
 		try:
+			# validate each submitted uniqname to make sure that a member 
+			# 	with that uniqname does not alread exist, and that it is
+			# 	alphabetic and a valid number of characters
 			for name in uniqnames:
 				if Member.objects.filter(uniqname = name).exists():
 					raise MyError('Uniqname already exists')
@@ -50,6 +54,7 @@ def tools(request):
 				'error_msg' : 'Uniqname ' + name + ' alread exists!' 
 			}
 		else:
+			# display message saying members were successfully submitted
 			context['new_members_submitted'] = True
 	
 	context['form'] = form
@@ -66,9 +71,11 @@ def tools2(request):
 		requirement = form.cleaned_data.get('requirement')
 		num_required = form.cleaned_data.get('num_required')
 
+		# change the current instance of this requirement to the new number of required hours
 		instance = Requirements.objects.get(pk=requirement)
 		instance.num_required = num_required
 		instance.save()
+		# display message saying that the requirement was successfully changed
 		context['requirement_changed'] = True
 
 	context['req_list'] = Requirements.objects.all().order_by('requirement')

@@ -20,6 +20,7 @@ class MemberForm(forms.ModelForm):
 			raise forms.ValidationError("Resumes must be a PDF document")
 		return resume
 
+# Form to submit a comma separated list of new member to create member objects for
 class NewMemberForm(forms.Form):
 	new_members = forms.CharField()
 

@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 def user_directory_path(instance, filename):
 	return '{0}/{1}'.format(instance.uniqname, filename)
 
+# Primary model (profile) for each person who is a member
+# Only people with Member models are allowed to login
 class Member(models.Model):
 	STATUS = (
 		('A', 'Active'),
@@ -29,9 +31,10 @@ class Member(models.Model):
 	)
 
 	uniqname = models.CharField(max_length=8, primary_key=True)
+
 	first_name = models.CharField(max_length=100, null=True, blank=True)
 	last_name = models.CharField(max_length=100, null=True, blank=True)
-	status = models.CharField(max_length=1, choices=STATUS, default='E')
+	status = models.CharField(max_length=1, choices=STATUS, default='E') # default status is electee
 	major = models.CharField(max_length=2, choices=MAJOR, null=True, blank=True)
 	edu_level = models.CharField(max_length=2, choices=EDU_LEVEL, null=True, blank=True)
 	expected_grad_date = models.DateField(auto_now=False, auto_now_add=False, null=True,  blank=True)
@@ -46,7 +49,10 @@ class Member(models.Model):
 
 # Model for keeping track of the progress of an electee on various electee requirements
 class Electee(models.Model):
+	# member for this electee 
 	member = models.OneToOneField(Member, on_delete=models.CASCADE, primary_key=True)
+
+	# electee requirement progress
 	num_socials_approved = models.IntegerField(default=0)
 	num_socials_total = models.IntegerField(default=0)
 	num_service_hours_approved = models.IntegerField(default=0)
@@ -66,7 +72,9 @@ class Electee(models.Model):
 # Includes the type of the name of the event, the number of hours, 
 # 	and whether or not it has been approved
 class Social(models.Model):
+	# electee who submitted this social
 	electee = models.ForeignKey(Electee, on_delete=models.CASCADE)
+
 	social_name = models.CharField(max_length=100)
 	approved = models.BooleanField(default=False)
 
@@ -83,7 +91,9 @@ class Service_Hours(models.Model):
 		('Ex', 'External'),
 	)
 
+	# electee who submitted these service hours
 	electee = models.ForeignKey(Electee, on_delete=models.CASCADE)
+
 	service_type = models.CharField(max_length=3, choices=SERVICE_TYPE)
 	service_name = models.CharField(max_length=100)
 	num_hours = models.IntegerField()

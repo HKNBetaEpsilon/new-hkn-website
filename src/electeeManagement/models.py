@@ -5,6 +5,7 @@ from django.db import models
 # Various hour requirements for electing that have to potential to change
 # Model includes the name of the requirement and the number of hours
 class Requirements(models.Model):
+	# alphabetized by the order in which they should be grouped/displayed 
 	REQUIREMENTS = (
 		('A_UG_SOCIAL', 'Number Undergrad Socials'),
 		('B_G_SOCIAL', 'Number Grad Socials'),
