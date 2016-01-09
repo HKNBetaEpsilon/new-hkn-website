@@ -40,6 +40,9 @@ class Member(models.Model):
 	def __unicode__(self):
 		return self.uniqname
 
+	class Meta:
+		ordering = ["uniqname"]
+
 class Electee(models.Model):
 	member = models.OneToOneField(Member, on_delete=models.CASCADE, primary_key=True)
 	num_socials_approved = models.IntegerField(default=0)
