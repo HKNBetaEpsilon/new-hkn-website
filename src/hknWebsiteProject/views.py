@@ -30,7 +30,7 @@ def about(request):
 def corporate(request):
 	return render(request, "corporate.html", {})
 
-def tools(request):
+def create_new_members(request):
 	context = {}
 	context['new_members_submitted'] = False
 
@@ -59,9 +59,9 @@ def tools(request):
 	
 	context['form'] = form
 
-	return render(request, "tools.html", context)
+	return render(request, "create_new_members.html", context)
 
-def tools2(request):
+def edit_electee_requirements(request):
 	context = {
 		'requirement_changed' : False
 	}
@@ -81,7 +81,7 @@ def tools2(request):
 	context['req_list'] = Requirements.objects.all().order_by('requirement')
 	context['form'] = form
 
-	return render(request, "tools2.html", context)
+	return render(request, "edit_electee_requirements.html", context)
 
 def login_user(request):
 	email = request.user.email
