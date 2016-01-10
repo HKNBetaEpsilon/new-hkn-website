@@ -85,3 +85,12 @@ body {
 #bootstrap-overrides .new-member-select{
 	margin-bottom: 5px;
 }
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
+    background-color: #100C6C;
+    color: #D3D3D3;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-default .navbar-nav .open .dropdown-menu {
+    color: #B20317;
+}

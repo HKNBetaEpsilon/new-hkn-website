@@ -16,22 +16,30 @@
             <li><a href="{% url 'leadership' %}">Leadership</a></li>
             <li><a href="{% url 'corporate' %}">Corporate</a></li>
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'member_list' %}">Members</a></li>
+              <li><a href="{% url 'member_list' %}">Members</a></li>
             {% endif %}
             {% if request.user.is_superuser %}
-            <li><a href="{% url 'tools' %}">Tools</a></li>
-            <li><a href="{% url 'tools2' %}">Tools 2</a></li>
-            <li><a href="{% url 'all_electees' %}">Tools 3</a></li>
-            <li><a href="{% url 'electee_submission_approval' %}">Tools 4</a></li>
-            <li><a href="{% url 'edit_leadership' %}">Change Leadership</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  Tools
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'tools' %}">Create New Members</a></li>
+                  <li><a href="{% url 'tools2' %}">Edit Electee Requirements</a></li>
+                  <li><a href="{% url 'all_electees' %}">All Electee's Progess</a></li>
+                  <li><a href="{% url 'electee_submission_approval' %}">Approve Electee Socials/Hours</a></li>
+                  <li><a href="{% url 'edit_leadership' %}">Change Leadership</a></li>
+                </ul>
+              </li>
             {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if request.user.is_authenticated %}
-            <li><a href="{%url 'profile' request.user%}">{{request.user}}</a></li>
-            <li><a href="{% url 'auth:logout' %}?next=/">Logout</a></li>     
+              <li><a href="{%url 'profile' request.user%}">{{request.user}}</a></li>
+              <li><a href="{% url 'auth:logout' %}?next=/">Logout</a></li>     
             {% else %}       
-            <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></li>
+              <li><a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></li>
             {% endif %}
           </ul>
           </ul>
