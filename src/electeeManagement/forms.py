@@ -8,6 +8,11 @@ class SocialForm(forms.ModelForm):
 		model = Social
 		exclude = ['electee', 'approved']
 
+class ApproveSocialForm(forms.ModelForm):
+	class Meta:
+		model = Social
+		exclude = []
+
 # Form to submit a service hours model
 class ServiceHoursForm(forms.ModelForm):
 	class Meta:

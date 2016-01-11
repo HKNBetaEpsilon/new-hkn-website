@@ -1,24 +1,40 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {%block content %}
 <h2>Unapproved Socials</h2>
-	<table class="table">
-		{% for inst in social_list %}
-			<tr>
-				<td>{{inst.electee.member.uniqname}}</td>
-				<td>{{inst.social_name}}</td>
-			</tr>
-		{% endfor %}
-	</table>
+	<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+		<table class="table">
+		    {{ social_formset.management_form }}
+	        {% for form in social_formset %}
+	        <!-- We don't know whey you need form.id -->
+	        {{form.id}}
+	        <tr>
+	        	<td>{{form.instance.electee}}</td>
+	        	<td>{{form.instance.social_name}}</td>
+	        	<td>{{form.approved}}</td>
+	        </tr>
+	        {% endfor %}
+	 	</table>
+
+		<input class='btn btn-primary' type='submit' value='Submit' />
+	</form>
 <h2>Unapproved Service Hours</h2>
-	<table class="table">
-		{% for inst in service_hour_list %}
-			<tr>
-				<td>{{inst.electee.member.uniqname}}</td>
-				<td>{{inst.service_type}}</td>
-				<td>{{inst.service_name}}</td>
-				<td>{{inst.num_hours}}</td>
-			</tr>
-		{% endfor %}
-	</table>
+	<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+		<table class="table">
+  			{{ service_formset.management_form }}
+	        {% for form in service_formset %}
+	        <!-- We don't know whey you need form.id -->
+	        {{form.id}}	
+	        	<tr>
+					<td>{{form.instance.electee}}</td>
+					<td>{{form.instance.service_type}}</td>
+					<td>{{form.instance.service_name}}</td>
+					<td>{{form.instance.num_hours}}</td>
+					<td>{{form.approved}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<input class='btn btn-primary' type='submit' value='Submit' />
+	</form>
 {% endblock %}

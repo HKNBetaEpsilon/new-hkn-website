@@ -1,10 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from .forms import SocialForm, ServiceHoursForm, RequirementsForm
+from .forms import SocialForm, ServiceHoursForm, RequirementsForm, ApproveSocialForm
 from .models import Electee, Social, Service_Hours, Requirements
 from users.status import is_officer, is_electee
+
+from django.forms import modelformset_factory
+
+def update_approved_hours():
+	all_electees = Electee.objects.all()
+	for e in all_electees:
+		e.num_socials_approved = Social.objects.filter(electee=e).filter(approved='1').count()
+		service_hours = Service_Hours.objects.filter(electee=e).filter(approved='1')
+		for event in service_hours:
+			e.num_service_hours_approved += event.num_hours
+		e.save()
 
 # display all of the electee objects in a list, should only be viewable by officers
 def all_electees(request):
@@ -98,11 +109,30 @@ def electee_submission_approval(request):
 	# get all unapproved socials and service hours
 	social_list = Social.objects.filter(approved='0')
 	service_hour_list = Service_Hours.objects.filter(approved='0')
+	
+	SocialFormSet = modelformset_factory(Social, fields=('approved',), extra=0)
+	social_formset = SocialFormSet(queryset=Social.objects.filter(approved='0'))
+	
+	ServiceFormSet = modelformset_factory(Service_Hours, fields=('approved',), extra=0)
+	service_formset = ServiceFormSet(queryset=Service_Hours.objects.filter(approved='0'))
 
 	context = {
 		'social_list' : social_list,
 		'service_hour_list' : service_hour_list,
+		'social_formset' : social_formset,
+		'service_formset' : service_formset,
 	}
+
+	if request.POST:
+		formset = SocialFormSet(request.POST)
+		if formset.is_valid():
+			formset.save()
+			update_approved_hours()
+		formset = ServiceFormSet(request.POST)
+		if formset.is_valid():
+			formset.save()
+			update_approved_hours()
+		return redirect('electee_submission_approval')
 
 	return render(request, "electee_submission_approval.html", context)
 
