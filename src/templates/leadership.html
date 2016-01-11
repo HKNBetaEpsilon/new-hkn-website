@@ -14,7 +14,12 @@
 	<div class='row top-pictures-row'>
 	{% endif %}
 		<div class='col-sm-4'>
+			{% if leader.member.profile_pic %}
 			<img class="img-responsive img-rounded center-block profile-pic" src="{{leader.member.profile_pic.url}}">
+			{% else %}
+			<img class="img-responsive center-block profile-pic" src="{%static 'img/default_profile_pic.jpg'%}">
+			{% endif %}		
+
 			<h3 class='text-center'>
 				<a href="{%url 'profile' leader.member.uniqname %}">{{leader.member.first_name}} {{leader.member.last_name}}</a>
 			</h3>
