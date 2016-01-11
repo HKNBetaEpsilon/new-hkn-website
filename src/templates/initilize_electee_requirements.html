@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{%block content %}
+	{% if submitted %}
+		<div class="alert alert-success">
+			<strong>Successfully initilized electee requirements</strong>
+		</div>
+	{% endif %}
+	<form method='POST' action=''>{% csrf_token %}
+		<input class='btn btn-danger' type='submit' value='Initilize Electee Requirements' />
+	</form>
+	
+{% endblock %}

@@ -127,3 +127,32 @@ def edit_electee_requirements(request):
 	context['form'] = form
 
 	return render(request, "edit_electee_requirements.html", context)
+
+def initilize_electee_requirements(request):
+	context = {
+		'submitted' : False
+	}
+
+	if request.POST:
+		a = Requirements(requirement = 'A_UG_SOCIAL', num_required = 0)
+		a.save()
+		b = Requirements(requirement = 'B_G_SOCIAL', num_required = 0)
+		b.save()
+		c = Requirements(requirement = 'C_UG_TOTAL_HOURS', num_required = 0)
+		c.save()
+		d = Requirements(requirement = 'D_G_TOTAL_HOURS', num_required = 0)
+		d.save()
+		e = Requirements(requirement = 'E_UG_DB_HOURS', num_required = 0)
+		e.save()
+		f = Requirements(requirement = 'F_G_DB_HOURS', num_required = 0)
+		f.save()
+		g = Requirements(requirement = 'G_UG_EXTERNAL_HOURS', num_required = 0)
+		g.save()
+		h = Requirements(requirement = 'H_G_EXTERNAL_HOURS', num_required = 0)
+		h.save()
+		i = Requirements(requirement = 'I_SINGLE_SERVICE_EVENT_HOURS', num_required = 0)
+		i.save()
+
+		context['submitted'] = True
+
+	return render(request, "initilize_electee_requirements.html", context)
