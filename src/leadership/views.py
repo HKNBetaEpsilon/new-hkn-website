@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from .models import Leader
-from .forms import LeaderForm, LeaderModelForm, DeleteLeaderForm
+from .forms import LeaderModelForm, DeleteLeaderForm
 # Create your views here.
 from django.forms import modelformset_factory
 
@@ -27,8 +27,8 @@ def edit_leadership(request, position_added=0):
 		}
 
 		LeaderFormSet = modelformset_factory(Leader, fields=('member',), extra=0)
-		aa = LeaderFormSet(queryset=Leader.objects.all().order_by('-display_order'))
-		context['aa'] = aa
+		leader_form = LeaderFormSet(queryset=Leader.objects.all().order_by('-display_order'))
+		context['leader_form'] = leader_form
 
 		if request.POST:
 			formset = LeaderFormSet(request.POST)

@@ -94,3 +94,7 @@ body {
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-default .navbar-nav .open .dropdown-menu {
     color: #B20317;
 }
+
+#bootstrap-overrides .table > tbody > tr:first-child > th {
+    border: none;
+}

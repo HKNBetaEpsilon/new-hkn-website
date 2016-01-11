@@ -24,8 +24,8 @@
 		<table class="table">
   			{{ service_formset.management_form }}
 	        {% for form in service_formset %}
-	        <!-- We don't know whey you need form.id -->
-	        {{form.id}}	
+	       
+	        {{form.id}}	<!-- We don't know whey you need form.id -->
 	        	<tr>
 					<td>{{form.instance.electee}}</td>
 					<td>{{form.instance.service_type}}</td>
