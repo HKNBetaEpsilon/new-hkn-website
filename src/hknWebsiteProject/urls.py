@@ -40,6 +40,7 @@ urlpatterns = [
 	url(r'^edit_leadership/', 'leadership.views.edit_leadership', name='edit_leadership'),
 	url(r'^add_leadership/', 'leadership.views.add_leadership', name='add_leadership'),
 	url(r'^delete_leader/', 'leadership.views.delete_leader', name='delete_leader'),
+	url(r'^initilize_electee_requirements/', 'electeeManagement.views.initilize_electee_requirements', name='initilize_electee_requirements'),
 
 	url('', include('social.apps.django_app.urls', namespace='social')),
 	url('', include('django.contrib.auth.urls', namespace='auth')),
