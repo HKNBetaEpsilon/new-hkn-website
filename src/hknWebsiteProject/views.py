@@ -3,10 +3,9 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login
 from utils import has_complete_profile
 
-from users.models import Member, Electee
+from users.models import Member
+from electeeManagement.models import Electee
 from users.forms import NewMemberForm
-from electeeManagement.models import Requirements
-from electeeManagement.forms import RequirementsForm
 
 class MyError(Exception):
 	def __init__(self, value):
@@ -60,28 +59,6 @@ def create_new_members(request):
 	context['form'] = form
 
 	return render(request, "create_new_members.html", context)
-
-def edit_electee_requirements(request):
-	context = {
-		'requirement_changed' : False
-	}
-
-	form = RequirementsForm(request.POST or None)
-	if form.is_valid():
-		requirement = form.cleaned_data.get('requirement')
-		num_required = form.cleaned_data.get('num_required')
-
-		# change the current instance of this requirement to the new number of required hours
-		instance = Requirements.objects.get(pk=requirement)
-		instance.num_required = num_required
-		instance.save()
-		# display message saying that the requirement was successfully changed
-		context['requirement_changed'] = True
-
-	context['req_list'] = Requirements.objects.all().order_by('requirement')
-	context['form'] = form
-
-	return render(request, "edit_electee_requirements.html", context)
 
 def login_user(request):
 	email = request.user.email

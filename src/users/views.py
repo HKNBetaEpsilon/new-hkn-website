@@ -1,8 +1,9 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Member, Electee, Social, Service_Hours
-from .forms import MemberForm, SocialForm, ServiceHoursForm
+from .models import Member
+from electeeManagement.models import Electee, Requirements
+from .forms import MemberForm
 from .status import is_officer, is_electee
 from hknWebsiteProject.resume_zip import zip_resumes
 import string
@@ -39,6 +40,8 @@ def member_list(request):
 
 
 def profile(request, uniqname):
+	context = {}
+
 	if request.user.is_anonymous():
 		context = {
 			'error' : True,
@@ -51,12 +54,25 @@ def profile(request, uniqname):
 
 		electee_progress = is_electee(uniqname) and (uniqname == request.user.username or is_officer(request.user.username))
 		
-		context = {
-			'profile': m,
-			'is_curr_user': is_curr_user,
-			'electee_progress' : electee_progress,
-			'error' : False,
-		}
+		if electee_progress:
+			e = Electee.objects.get(member_id = uniqname)
+			requirements = dict ((requirements.requirement, requirements) for requirements in Requirements.objects.all())
+
+			context = {
+				'e' : e,
+				'requirements' : requirements,
+				'submit' : False,
+			}
+
+			# if the request user is viewing their own electee progress, 
+			# 	show the buttons to submit socials and service hours
+			if (uniqname == request.user.username):
+				context['submit'] = True
+
+		context['profile'] = m
+		context['is_curr_user'] = is_curr_user
+		context['electee_progress'] = electee_progress
+		context['error'] = False
 
 	return render(request, "profile.html", context)
 
@@ -87,119 +103,3 @@ def profile_edit(request, uniqname):
 		context['form'] = form
 
 	return render(request, "profile_edit.html", context)
-
-def electee_progress(request, uniqname):
-	# if the member is not an electee, their electee progress cannot be seen
-	if not is_electee(uniqname):
-		context = {
-			'error' : True,
-			'error_msg' : 'This member is not an electee'
-		}
-	# if the request user is anonymous or they are not the electee or an officer, 
-	# 	they cannot see this electee's progress
-	elif request.user.is_anonymous() or (uniqname != request.user.username and not is_officer(request.user.username)):
-		context = {
-			'error' : True,
-			'error_msg' : 'You cannot see this electee\'s progress'
-		}
-	else:
-		e = Electee.objects.get(member_id = uniqname)
-
-		context = {
-			'error' : False,
-			'e' : e,
-			'submit' : False,
-		}
-
-		# if the request user is viewing their own electee progress, 
-		# 	show the buttons to submit socials and service hours
-		if (uniqname == request.user.username):
-			context['submit'] = True
-
-	return render(request, "electee_progress.html", context)
-
-# display all of the electee objects in a list, should only be viewable by officers
-def all_electees(request):
-	# get all of the electee objects to display
-	electee_list = Electee.objects.filter(member__status='E')
-
-	context = {
-		'electee_list' : electee_list
-	}
-
-	return render(request, "all_electees.html", context)
-
-def submit_social(request):
-	# error if the request user is anonymous or not an electee
-	if request.user.is_anonymous() or not is_electee(request.user.username):
-		context = {
-			'error' : True,
-			'error_msg' : 'You must be an electee to submit socials'
-		}
-	else:
-		context = {
-			'error' : False,
-			'social_submitted' : False
-		}
-
-		form = SocialForm(request.POST or None)
-		if request.POST:
-			if form.is_valid():
-				social = form.save(commit=False)
-				# set the electee field on the social model
-				social.electee = Electee.objects.get(member_id = request.user.username)
-				social.save()
-
-				# display a new blank form
-				form = SocialForm(None)
-
-				# show green bar at top of page saying that a social has been submitted
-				context['social_submitted'] = True
-
-		context['form'] = form
-
-	return render(request, "submit_social.html", context)
-
-def submit_service_hours(request):
-	# error if the request user is anonymous or not an electee
-	if request.user.is_anonymous() or not is_electee(request.user.username):
-		context = {
-			'error' : True,
-			'error_msg' : 'You must be an electee to submit service hours'
-		}
-	else:
-		context = {
-			'error' : False,
-			'service_hours_submitted' : False
-		}
-
-		form = ServiceHoursForm(request.POST or None)
-		if request.POST:
-			if form.is_valid():
-				social = form.save(commit=False)
-				# set the electee field on the social model
-				social.electee = Electee.objects.get(member_id = request.user.username)
-				social.save()
-
-				# display a new blank form
-				form = ServiceHoursForm(None)
-
-				# show green bar at top of page saying that a service hours have been submitted
-				context['service_hours_submitted'] = True
-
-		context['form'] = form
-
-	return render(request, "submit_service_hours.html", context)
-
-# shows a list of all unapporved socials and service hours
-def electee_submission_approval(request):
-	# get all unapproved socials and service hours
-	social_list = Social.objects.filter(approved='0')
-	service_hour_list = Service_Hours.objects.filter(approved='0')
-
-	context = {
-		'social_list' : social_list,
-		'service_hour_list' : service_hour_list,
-	}
-
-	return render(request, "electee_submission_approval.html", context)

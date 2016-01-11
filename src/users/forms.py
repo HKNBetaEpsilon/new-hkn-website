@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Member, Social, Service_Hours
+from .models import Member
 
 class MemberForm(forms.ModelForm):
 	class Meta:
@@ -34,15 +34,3 @@ class NewMemberForm(forms.Form):
 			if not str(name).isalpha():
 				raise forms.ValidationError("A Uniqname has a non alphabetical character in it")
 		return new_members
-
-# Form to submit a social model
-class SocialForm(forms.ModelForm):
-	class Meta:
-		model = Social
-		exclude = ['electee', 'approved']
-
-# Form to submit a service hours model
-class ServiceHoursForm(forms.ModelForm):
-	class Meta:
-		model = Service_Hours
-		exclude = ['electee', 'approved']
