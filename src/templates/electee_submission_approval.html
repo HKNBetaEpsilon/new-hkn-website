@@ -4,7 +4,13 @@
 {%block content %}
 <h2>Unapproved Socials</h2>
 	<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
-		<table class="table">
+		<table class="table table-hover">
+		    <tr>
+	        	<th><h3>Electee Uniqname</h3></td>
+	        	<th><h3>Social Name</h3></td>
+	        	<th><h3>Approve</h3></td>
+	        </tr>
+
 		    {{ social_formset.management_form }}
 	        {% for form in social_formset %}
 	        <!-- We don't know whey you need form.id -->
@@ -15,13 +21,25 @@
 	        	<td>{{form.approved}}</td>
 	        </tr>
 	        {% endfor %}
-	 	</table>
 
-		<input class='btn btn-primary' type='submit' value='Submit' />
+	        <tr>
+	        	<td> </td>
+	        	<td> </td>
+	        	<td><input class='btn btn-primary' type='submit' value='Submit' /></td>
+	        </tr>
+	 	</table>
 	</form>
 <h2>Unapproved Service Hours</h2>
-	<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+	<!-- <form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %} -->
 		<table class="table">
+  			<tr>
+	        	<th><h3>Electee Uniqname</h3></td>
+	        	<th><h3>Project Type</h3></td>
+	        	<th><h3>Project Name</h3></td>
+	        	<th><h3>Number of Hours</h3></td>
+	        	<th><h3>Approve</h3></td>
+	        </tr>
+
   			{{ service_formset.management_form }}
 	        {% for form in service_formset %}
 	       
@@ -34,7 +52,14 @@
 					<td>{{form.approved}}</td>
 				</tr>
 			{% endfor %}
+
+	        <tr>
+	        	<td> </td>
+	        	<td> </td>
+	        	<td> </td>
+	        	<td> </td>
+	        	<td><input class='btn btn-primary' type='submit' value='Submit' /></td>
+	        </tr>
 		</table>
-		<input class='btn btn-primary' type='submit' value='Submit' />
 	</form>
 {% endblock %}
