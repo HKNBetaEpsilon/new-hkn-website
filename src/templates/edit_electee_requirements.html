@@ -2,42 +2,36 @@
 {% load crispy_forms_tags %}
 
 {%block content %}
-<h1>Electee Requirements</h1>
+<h1>Edit Electee Requirements</h1>
 {% if requirement_changed %}
 	<div class="alert alert-success">
 		<strong>Successfully changed</strong>
 	</div>
 {% endif %}
-<table class="table">
-	{% for inst in req_list %}
-		<tr>
-			{% if inst.requirement = 'A_UG_SOCIAL' %}
-				<td>{{'Number of Undergrad Socials'}}</td>
-			{% elif inst.requirement = 'B_G_SOCIAL' %}
-				<td>{{'Number of Grad Socials'}}</td>
-			{% elif inst.requirement = 'C_UG_TOTAL_HOURS' %}
-				<td>{{'Number of Undergrad Total Service Hours'}}</td>
-			{% elif inst.requirement = 'D_G_TOTAL_HOURS' %}
-				<td>{{'Number of Grad Total Service Hours'}}</td>
-			{% elif inst.requirement = 'E_UG_DB_HOURS' %}
-				<td>{{'Max Undergrad dB Service Hours'}}</td>
-			{% elif inst.requirement = 'F_G_DB_HOURS' %}
-				<td>{{'Max Grad dB Service Hours'}}</td>
-			{% elif inst.requirement = 'G_UG_EXTERNAL_HOURS' %}
-				<td>{{'Max Undergrad External Service Hours'}}</td>
-			{% elif inst.requirement = 'H_G_EXTERNAL_HOURS' %}
-				<td>{{'Max Grad External Service Hours'}}</td>
-			{% elif inst.requirement = 'I_SINGLE_SERVICE_EVENT_HOURS' %}
-				<td>{{'Max Hours for a Single Service Event'}}</td>
-			{% endif %}
-			<td>{{inst.num_required}}</td>
-		</tr>
-	{% endfor %}
-</table>
 
-<h3>Edit Requirements</h3>
-<form method='POST' action=''>{% csrf_token %}
-	{{form|crispy}}
-	<input class='btn btn-default' type='submit' value='Submit' />
+<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+	<table class="table table-hover">
+
+		<tr>
+			<th><h3>Requirement</h3></th>
+			<th><h3>Numbers of Hours</h3></th>
+		</tr>
+
+		{{ req_formset.management_form }}
+        {% for form in req_formset %}
+       
+        {{form.requirement}}	<!-- We don't know whey you need form.id -->
+        	<tr>
+				<td>{{form.instance.get_requirement_display}}</td>
+				<td>{{form.num_required}}</td>
+			</tr>
+		{% endfor %}
+		<tr>
+			<td> </td>
+			<td><input class='btn btn-primary' type='submit' value='Submit' /></td>
+		</tr>
+	</table>
 </form>
+
+
 {% endblock %}

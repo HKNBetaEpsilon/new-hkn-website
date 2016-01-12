@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from .forms import SocialForm, ServiceHoursForm, RequirementsForm, ApproveSocialForm
+from .forms import SocialForm, ServiceHoursForm, ApproveSocialForm
 from .models import Electee, Social, Service_Hours, Requirements
 from users.status import is_officer, is_electee
 
@@ -137,24 +137,18 @@ def electee_submission_approval(request):
 	return render(request, "electee_submission_approval.html", context)
 
 def edit_electee_requirements(request):
-	context = {
+	RequirementsFormset = modelformset_factory(Requirements, fields=('num_required',), extra=0)
+	req_formset = RequirementsFormset(queryset=Requirements.objects.all())
+
+	context = { 
+		'req_formset' : req_formset,
 		'requirement_changed' : False
 	}
 
-	form = RequirementsForm(request.POST or None)
-	if form.is_valid():
-		requirement = form.cleaned_data.get('requirement')
-		num_required = form.cleaned_data.get('num_required')
-
-		# change the current instance of this requirement to the new number of required hours
-		instance = Requirements.objects.get(pk=requirement)
-		instance.num_required = num_required
-		instance.save()
-		# display message saying that the requirement was successfully changed
+	if request.POST:
+		formset = RequirementsFormset(request.POST)
+		formset.save()
 		context['requirement_changed'] = True
-
-	context['req_list'] = Requirements.objects.all().order_by('requirement')
-	context['form'] = form
 
 	return render(request, "edit_electee_requirements.html", context)
 
