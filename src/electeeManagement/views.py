@@ -21,9 +21,11 @@ def update_approved_hours():
 def all_electees(request):
 	# get all of the electee objects to display
 	electee_list = Electee.objects.filter(member__status='E')
+	requirements = dict ((requirements.requirement, requirements) for requirements in Requirements.objects.all())
 
 	context = {
-		'electee_list' : electee_list
+		'electee_list' : electee_list,
+		'requirements' : requirements
 	}
 
 	return render(request, "all_electees.html", context)

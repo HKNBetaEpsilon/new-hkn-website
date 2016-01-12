@@ -98,3 +98,8 @@ body {
 #bootstrap-overrides .table > tbody > tr:first-child > th {
     border: none;
 }
+
+.complete-req {
+	background-color: green;
+	color: white;
+}
