@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from .models import Member
-from electeeManagement.models import Electee, Requirements
+from electeeManagement.models import Electee, Requirements, Social, Service_Hours
 from .forms import MemberForm
 from .status import is_officer, is_electee
 from hknWebsiteProject.resume_zip import zip_resumes
@@ -57,11 +57,15 @@ def profile(request, uniqname):
 		if electee_progress:
 			e = Electee.objects.get(member_id = uniqname)
 			requirements = dict ((requirements.requirement, requirements) for requirements in Requirements.objects.all())
+			socials = Social.objects.filter(electee_id = uniqname)
+			projects = Service_Hours.objects.filter(electee_id = uniqname)
 
 			context = {
 				'e' : e,
 				'requirements' : requirements,
 				'submit' : False,
+				'socials' : socials,
+				'projects' : projects
 			}
 
 			# if the request user is viewing their own electee progress, 

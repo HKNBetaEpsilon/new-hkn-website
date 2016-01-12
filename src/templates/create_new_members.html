@@ -10,18 +10,25 @@
 {% endblock %}
 
 {%block content %}
-<h1>Tools.html</h1>
 {% if new_members_submitted %}
 	<div class="alert alert-success">
   		<strong>You have successfully created new members.</strong>
 	</div>
 {% endif %}
-<p>To create new members, enter there uniqnames here seperated by commas</p>
+<h1>Create New Electees</h1>
+<p>To create new electees, enter there uniqnames here seperated by commas</p>
 <form method='POST' action=''>{% csrf_token %}
-	{{form|crispy}}
-	<input class='btn btn-default' type='submit' value='Submit' />
+	{{form_electee|crispy}}
+	<input class='btn btn-primary' type='submit' value='Submit' />
 </form>
-
+<hr>
+<h1>Create New Actives</h1>
+<p>To create new actives, enter there uniqnames here seperated by commas</p>
+<form method='POST' action=''>{% csrf_token %}
+	{{form_active|crispy}}
+	<input class='btn btn-primary' type='submit' value='Submit' />
+</form>
+<hr>
 <div class='container'>
 <div class='jumbotron'>
 <h3>Todo List</h3>

@@ -29,34 +29,52 @@ def about(request):
 def corporate(request):
 	return render(request, "corporate.html", {})
 
+def make_members(form, electee):
+	uniqnames = form.cleaned_data.get('new_members').split(',')
+	try:
+		# validate each submitted uniqname to make sure that a member 
+		# 	with that uniqname does not alread exist, and that it is
+		# 	alphabetic and a valid number of characters
+		for name in uniqnames:
+			if Member.objects.filter(uniqname = name).exists():
+				raise MyError('Uniqname already exists')
+	except MyError:
+		context = {
+			'error' : True,
+			'error_msg' : 'Uniqname ' + name + ' alread exists!' 
+		}
+	else:
+		# display message saying members were successfully submitted
+		for name in uniqnames:	
+			m = Member(uniqname = name)
+			if electee:
+				m.status = 'E'
+			else:
+				m.status = 'A'
+			m.save()
+
+			if electee:
+				Electee(member = m).save()
+
 def create_new_members(request):
 	context = {}
 	context['new_members_submitted'] = False
 
-	form = NewMemberForm(request.POST or None)
-	if form.is_valid():
-		uniqnames = form.cleaned_data.get('new_members').split(',')
-		try:
-			# validate each submitted uniqname to make sure that a member 
-			# 	with that uniqname does not alread exist, and that it is
-			# 	alphabetic and a valid number of characters
-			for name in uniqnames:
-				if Member.objects.filter(uniqname = name).exists():
-					raise MyError('Uniqname already exists')
-				else:
-					m = Member(uniqname = name)
-					m.save()
-					Electee(member = m).save()
-		except MyError:
-			context = {
-				'error' : True,
-				'error_msg' : 'Uniqname ' + name + ' alread exists!' 
-			}
-		else:
-			# display message saying members were successfully submitted
-			context['new_members_submitted'] = True
-	
-	context['form'] = form
+	form_electee = NewMemberForm(request.POST or None, prefix='electee')
+	form_active = NewMemberForm(request.POST or None, prefix='active')
+
+	if form_electee.is_valid():
+		make_members(form_electee, True)
+		form_electee = NewMemberForm()	
+		context['new_members_submitted'] = True
+
+	if form_active.is_valid():
+		make_members(form_active, False)
+		form_active = NewMemberForm()	
+		context['new_members_submitted'] = True
+
+	context['form_electee'] = form_electee
+	context['form_active'] = form_active
 
 	return render(request, "create_new_members.html", context)
 

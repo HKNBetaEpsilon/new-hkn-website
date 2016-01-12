@@ -5,7 +5,7 @@
 	<table class="table">
 		{% for inst in electee_list %}
 			<tr>
-				<td><a href="{%url 'electee_progress' inst.member.uniqname %}">{{inst.member.first_name}} {{inst.member.last_name}}</a></td>
+				<td><a href="{%url 'profile' inst.member.uniqname %}">{{inst.member.first_name}} {{inst.member.last_name}}</a></td>
 			</tr>
 		{% endfor %}
 	</table>

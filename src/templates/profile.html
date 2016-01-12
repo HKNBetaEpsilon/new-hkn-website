@@ -126,5 +126,23 @@
 		</tr>
 	</table>
 	{% endif %}
+
+	<table class='table'>
+	{% for s in socials %}
+		<tr>
+			<td>{{s.social_name}}</td>
+			<td>{{s.approved}}</td>
+		<tr>
+	{% endfor %}
+	</table>
+	<table class='table'>
+	{% for p in projects %}
+		<tr>
+			<td>{{p.service_name}}</td>
+			<td>{{p.approved}}</td>
+		<tr>
+	{% endfor %}
+	</table>
+
 {% endif %}
 {% endblock %}
