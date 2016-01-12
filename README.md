@@ -18,6 +18,7 @@ development environment set up, do the following:
         $ source venv/bin/activate
 
 2. Install the dependencies:
+
         $ pip install django==1.9
         $ pip install python-social-auth
         $ pip install --upgrade django-crispy-forms
