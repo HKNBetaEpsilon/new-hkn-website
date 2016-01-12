@@ -24,11 +24,13 @@ development environment set up, do the following:
         $ pip install Pillow
 
 3. Create the database
+
         $ cd src
         $ python manage.py makemigrations
         $ python manage.py migrate
 
 4. Run the server as a Localhost
+
         $ python manage.py runserver
 
 5. Open your web browser and go to http://127.0.0.1:8000/
