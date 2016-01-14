@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 
+from users.forms import Member
 from .forms import SocialForm, ServiceHoursForm, ApproveSocialForm
 from .models import Electee, Social, Service_Hours, Requirements
 
