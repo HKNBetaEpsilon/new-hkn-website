@@ -187,3 +187,17 @@ def initilize_electee_requirements(request):
 		context['submitted'] = True
 
 	return render(request, "initilize_electee_requirements.html", context)
+
+def electee_turn_ins(request):
+	TurnInsFormset = modelformset_factory(Electee, fields=('electee_interview', 'dues', 'electee_exam' ), extra=0)
+	turnins_formset = TurnInsFormset(queryset=Electee.objects.all())
+	context = {
+		'turnins_formset': turnins_formset
+	}
+
+	if request.POST:
+		formset = TurnInsFormset(request.POST)
+		formset.save()
+		context['turnins_saved'] = True
+
+	return render(request, "electee_turn_ins.html", context)
