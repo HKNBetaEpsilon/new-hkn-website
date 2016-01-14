@@ -12,6 +12,8 @@ def update_approved_hours():
 	all_electees = Electee.objects.all()
 	for e in all_electees:
 		e.num_socials_approved = Social.objects.filter(electee=e).filter(approved='1').count()
+		
+		e.num_service_hours_approved = 0
 		service_hours = Service_Hours.objects.filter(electee=e).filter(approved='1')
 		for event in service_hours:
 			e.num_service_hours_approved += event.num_hours
