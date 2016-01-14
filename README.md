@@ -19,10 +19,7 @@ development environment set up, do the following:
 
 2. Install the dependencies:
 
-        $ pip install django==1.9
-        $ pip install python-social-auth
-        $ pip install --upgrade django-crispy-forms
-        $ pip install Pillow
+        $ pip install -r requirements.txt
 
 3. Create the database
 
