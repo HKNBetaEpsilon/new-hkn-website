@@ -2,7 +2,7 @@
 
 {%block content %}
 <h1>Electee Progess</h1>
-	<table class="table">
+	<table class="table table-hover">
 			<tr>
 				<th><h3>Electee Name</h3></th>
 				<th><h3>Number of Socials</h3></th>
@@ -15,22 +15,42 @@
 			<tr>
 				<td><a href="{%url 'profile' e.member.uniqname %}">{{e.member.first_name}} {{e.member.last_name}}</a></td>
 
-				<td class= {% if e.num_socials_approved >= requirements.A_UG_SOCIAL.num_required %}'complete-req'{% endif %} >
+				<td>
 					{{e.num_socials_approved}} / {{requirements.A_UG_SOCIAL.num_required}}
+
+					{% if e.num_socials_approved >= requirements.A_UG_SOCIAL.num_required %}
+						<span class="glyphicon glyphicon-ok green"></span>
+					{% endif %}
 				</td>
 
-				<td class={% if e.num_service_hours_approved >= requirements.C_UG_TOTAL_HOURS.num_required %}'complete-req'{% endif %} >
+				<td>
 					{{e.num_service_hours_approved}} / {{requirements.C_UG_TOTAL_HOURS.num_required}}
+					
+					{% if e.num_service_hours_approved >= requirements.C_UG_TOTAL_HOURS.num_required %}		
+						<span class="glyphicon glyphicon-ok green"></span>
+					{% endif %}
 				</td>
 
-				<td class={% if e.electee_interview %} 'complete-req'{% endif %}>
-					{{e.electee_interview}}
+				<td class='text-align-center'>
+					{% if e.electee_interview %}
+						<span class="glyphicon glyphicon-ok green"></span>
+					{% else %}
+						<span class="glyphicon glyphicon-remove red"></span>
+					{% endif %}
 				</td>
-				<td class={% if e.electee_exam %} 'complete-req'{% endif %}>
-					{{e.electee_exam}}
+				<td class='text-align-center'>
+					{% if e.electee_exam %}
+						<span class="glyphicon glyphicon-ok green"></span>
+					{% else %}
+						<span class="glyphicon glyphicon-remove red"></span>
+					{% endif %}
 				</td>
-				<td class={% if e.dues %} 'complete-req'{% endif %}>
-					{{e.dues}}
+				<td class='text-align-center'>
+					{% if e.dues %}
+						<span class="glyphicon glyphicon-ok green"></span>
+					{% else %}
+						<span class="glyphicon glyphicon-remove red"></span>
+					{% endif %}
 				</td>
 			</tr>
 		{% endfor %}

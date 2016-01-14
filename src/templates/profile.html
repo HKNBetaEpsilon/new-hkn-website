@@ -84,7 +84,7 @@
 		<hr>
 		<div id="content">
 		    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-		        <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
+		        <li class="active"><a href="#summary" data-toggle="tab">Approved</a></li>
 		        <li><a href="#socials" data-toggle="tab">Socials</a></li>
 		        <li><a href="#projects" data-toggle="tab">Projects</a></li>
 		    </ul>
@@ -99,9 +99,16 @@
 							<td><h4>{{e.num_socials_approved}} / 
 		            			{% if profile.is_undergraduate %}
 		            				{{requirements.A_UG_SOCIAL.num_required}}
+		            				{% if e.num_socials_approved >= requirements.A_UG_SOCIAL.num_required%}
+									<span class="glyphicon glyphicon-ok green"></span>
+									{% endif %}
 		            			{% else %}
 		            				{{requirements.B_G_SOCIAL.num_required}}
-		            			{% endif %}</h4>
+		            				{% if e.num_socials_approved >= requirements.B_G_SOCIAL.num_required%}
+									<span class="glyphicon glyphicon-ok green"></span>
+									{% endif %}
+		            			{% endif %}
+		            		</h4>
 		            		</td>
 						</tr>
 						<tr>
@@ -109,9 +116,16 @@
 							<td><h4>{{e.num_service_hours_approved}} / 
 		            			{% if profile.is_undergraduate %}
 		            				{{requirements.C_UG_TOTAL_HOURS.num_required}}
+		            				{% if e.num_service_hours_approved >= requirements.C_UG_TOTAL_HOURS.num_required%}
+									<span class="glyphicon glyphicon-ok green"></span>
+									{% endif %}
 		            			{% else %}
 		            				{{requirements.D_G_TOTAL_HOURS.num_required}}
-		            			{% endif %}</h4>
+		            				{% if e.num_service_hours_approved >= requirements.D_G_TOTAL_HOURS.num_required%}
+									<span class="glyphicon glyphicon-ok green"></span>
+									{% endif %}
+		            			{% endif %}
+		            		</h4>
 		            		</td>
 						</tr>
 						<tr>
@@ -136,15 +150,33 @@
 						</tr>
 						<tr>
 							<td><h4>Electee Interview Complete: </h4></td>
-							<td><h4>{{e.electee_interview}} </h4></td>
+							<td><h4>
+								{% if e.electee_interview %}
+									<span class="glyphicon glyphicon-ok green"></span>
+								{% else %}
+									<span class="glyphicon glyphicon-remove red"></span>
+								{% endif %}
+							 </h4></td>
 						</tr>
 						<tr>
 							<td><h4>Electee Exam Complete: </h4></td>
-							<td><h4>{{e.electee_exam}} </h4></td>
+							<td><h4>
+								{% if e.electee_exam %}
+									<span class="glyphicon glyphicon-ok green"></span>
+								{% else %}
+									<span class="glyphicon glyphicon-remove red"></span>
+								{% endif %}
+							 </h4></td>
 						</tr>
 						<tr>
 							<td><h4>Dues Paid: </h4></td>
-							<td><h4>{{e.dues}} </h4></td>
+							<td><h4>
+								{% if e.dues %}
+									<span class="glyphicon glyphicon-ok green"></span>
+								{% else %}
+									<span class="glyphicon glyphicon-remove red"></span>
+								{% endif %}
+							 </h4></td>
 						</tr>
 					</table>
 		        </div>
@@ -158,7 +190,13 @@
 					{% for s in socials %}
 						<tr>
 							<td>{{s.social_name}}</td>
-							<td>{{s.approved}}</td>
+							<td>
+								{% if s.approved %}
+									<span class="glyphicon glyphicon-ok green"></span>
+								{% else %}
+									<span class="glyphicon glyphicon-remove red"></span>
+								{% endif %}
+							</td>
 						<tr>
 					{% endfor %}
 					</table>		       
@@ -177,7 +215,13 @@
 								<td>{{p.service_name}}</td>
 								<td>{{p.service_type}}</td>
 								<td>{{p.num_hours}}</td>
-								<td>{{p.approved}}</td>
+								<td>
+									{% if p.approved %}
+										<span class="glyphicon glyphicon-ok green"></span>
+									{% else %}
+										<span class="glyphicon glyphicon-remove red"></span>
+									{% endif %}
+								</td>
 							<tr>
 						{% endfor %}
 					</table>

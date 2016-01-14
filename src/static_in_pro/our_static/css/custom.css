@@ -99,7 +99,10 @@ body {
     border: none;
 }
 
-.complete-req {
-	background-color: green;
-	color: white;
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
 }
