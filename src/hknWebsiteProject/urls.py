@@ -29,6 +29,7 @@ urlpatterns = [
 	url(r'^edit_electee_requirements/', 'electeeManagement.views.edit_electee_requirements', name='edit_electee_requirements'),
 	url(r'^all_electees/', 'electeeManagement.views.all_electees', name='all_electees'),
 	url(r'^login_user/', 'hknWebsiteProject.views.login_user', name='login_user'), 
+	url(r'^profile/(?P<uniqname>[a-z]{3,8})/(?P<profile_saved>[0-1])/$', 'users.views.profile', name='profile'),
 	url(r'^profile/(?P<uniqname>[a-z]{3,8})/$', 'users.views.profile', name='profile'),
 	url(r'^update/(?P<uniqname>[a-z]{3,8})/$', 'users.views.profile_edit', name='profile_edit'),
 	url(r'^submit_social/', 'electeeManagement.views.submit_social', name='submit_social'),

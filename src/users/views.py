@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from .models import Member
@@ -38,7 +38,7 @@ def member_list(request):
 	return render(request, "member_list.html", context)
 
 
-def profile(request, uniqname):
+def profile(request, uniqname, profile_saved=0):
 	context = {}
 
 	if request.user.is_anonymous():
@@ -75,6 +75,7 @@ def profile(request, uniqname):
 
 		context['profile'] = m
 		context['is_curr_user'] = is_curr_user
+		context['profile_saved'] = profile_saved
 		context['electee_progress'] = electee_progress
 		context['error'] = False
 
@@ -100,12 +101,8 @@ def profile_edit(request, uniqname):
 			if form.is_valid():
 				form.save()
 				zip_resumes()
-				context['profile_saved'] = True
-				context['profile'] = m
-				context['is_curr_user'] = is_curr_user
-				context['electee_progress'] = m.is_electee() and (is_curr_user or logged_in_as.is_officer())
 		
-				return render(request, "profile.html", context)
+				return redirect('profile', uniqname=uniqname, profile_saved=1)
 
 		context['form'] = form
 
