@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 
 from .forms import SocialForm, ServiceHoursForm, ApproveSocialForm
 from .models import Electee, Social, Service_Hours, Requirements
-from users.status import is_officer, is_electee
 
 from django.forms import modelformset_factory
 
@@ -31,8 +30,9 @@ def all_electees(request):
 	return render(request, "all_electees.html", context)
 
 def submit_social(request):
+	m = Member.objects.get(uniqname = request.user.username)
 	# error if the request user is anonymous or not an electee
-	if request.user.is_anonymous() or not is_electee(request.user.username):
+	if request.user.is_anonymous() or not m.is_electee():
 		context = {
 			'error' : True,
 			'error_msg' : 'You must be an electee to submit socials'
@@ -66,8 +66,9 @@ def submit_social(request):
 	return render(request, "submit_social.html", context)
 
 def submit_service_hours(request):
+	m = Member.objects.get(uniqname = request.user.username)
 	# error if the request user is anonymous or not an electee
-	if request.user.is_anonymous() or not is_electee(request.user.username):
+	if request.user.is_anonymous() or not m.is_electee():
 		context = {
 			'error' : True,
 			'error_msg' : 'You must be an electee to submit service hours'
