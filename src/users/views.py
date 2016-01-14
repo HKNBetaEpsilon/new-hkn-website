@@ -4,7 +4,6 @@ from django.shortcuts import render
 from .models import Member
 from electeeManagement.models import Electee, Requirements, Social, Service_Hours
 from .forms import MemberForm
-from .status import is_officer, is_electee
 from hknWebsiteProject.resume_zip import zip_resumes
 import string
 from string import ascii_uppercase
@@ -51,8 +50,9 @@ def profile(request, uniqname):
 		is_curr_user = (request.user.username == uniqname)
 
 		m = Member.objects.get(uniqname = uniqname)
+		logged_in_as = Member.objects.get(uniqname = request.user.username)
 
-		electee_progress = is_electee(uniqname) and (uniqname == request.user.username or is_officer(request.user.username))
+		electee_progress = m.is_electee() and (is_curr_user or logged_in_as.is_officer())
 		
 		if electee_progress:
 			e = Electee.objects.get(member_id = uniqname)
@@ -82,14 +82,17 @@ def profile(request, uniqname):
 
 def profile_edit(request, uniqname):
 	context = {}
-	if request.user.is_anonymous() or uniqname != request.user.username:
+	is_curr_user = (request.user.username == uniqname)
+	if request.user.is_anonymous() or not is_curr_user:
 		context = {
 			'error' : True,
 			'error_msg' : 'You cannot edit this profile'
 		}
 	else:
 		context['profile_saved'] = False
+		
 		m = Member.objects.get(uniqname = uniqname)
+		logged_in_as = Member.objects.get(uniqname = request.user.username)
 		form = MemberForm(instance = m)	
 
 		if request.POST:
@@ -99,8 +102,8 @@ def profile_edit(request, uniqname):
 				zip_resumes()
 				context['profile_saved'] = True
 				context['profile'] = m
-				context['is_curr_user'] = 'is_curr_user'
-				context['electee_progress'] = is_electee(uniqname) and (uniqname == request.user.username or is_officer(request.user.username))
+				context['is_curr_user'] = is_curr_user
+				context['electee_progress'] = m.is_electee() and (is_curr_user or logged_in_as.is_officer())
 		
 				return render(request, "profile.html", context)
 

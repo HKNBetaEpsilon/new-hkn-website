@@ -46,3 +46,19 @@ class Member(models.Model):
 
 	class Meta:
 		ordering = ["uniqname"]
+
+	def is_officer(self):
+		return self.status == 'O'
+
+	def is_electee(self):
+		return self.status == 'E'
+
+	def is_active(self):
+		return self.status == 'A'
+	
+	def is_undergraduate(self):
+		return self.edu_level == 'UG'
+	
+	def is_graduate(self):
+		return self.edu_level == 'GR'
+

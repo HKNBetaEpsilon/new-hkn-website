@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
 
 {%block content %}
-<h1>All Electees</h1>
+<h1>Electee Progess</h1>
 	<table class="table">
-		{% for inst in electee_list %}
 			<tr>
-				<td><a href="{%url 'profile' inst.member.uniqname %}">{{inst.member.first_name}} {{inst.member.last_name}}</a></td>
+				<th><h3>Electee Name</h3></th>
+				<th><h3>Number of Socials</h3></th>
+				<th><h3>Number of Projects</h3></th>
+				<th><h3>Electee Interview</h3></th>
+				<th><h3>Electee Exam</h3></th>
+				<th><h3>Dues</h3></th>
+			</tr>
+		{% for e in electee_list %}
+			<tr>
+				<td><a href="{%url 'profile' e.member.uniqname %}">{{e.member.first_name}} {{e.member.last_name}}</a></td>
+
+				<td class= {% if e.num_socials_approved >= requirements.A_UG_SOCIAL.num_required %}'complete-req'{% endif %} >
+					{{e.num_socials_approved}} / {{requirements.A_UG_SOCIAL.num_required}}
+				</td>
+
+				<td class={% if e.num_service_hours_approved >= requirements.C_UG_TOTAL_HOURS.num_required %}'complete-req'{% endif %} >
+					{{e.num_service_hours_approved}} / {{requirements.C_UG_TOTAL_HOURS.num_required}}
+				</td>
+
+				<td class={% if e.electee_interview %} 'complete-req'{% endif %}>
+					{{e.electee_interview}}
+				</td>
+				<td class={% if e.electee_exam %} 'complete-req'{% endif %}>
+					{{e.electee_exam}}
+				</td>
+				<td class={% if e.dues %} 'complete-req'{% endif %}>
+					{{e.dues}}
+				</td>
 			</tr>
 		{% endfor %}
 	</table>
