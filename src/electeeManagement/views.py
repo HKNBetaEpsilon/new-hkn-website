@@ -117,10 +117,10 @@ def electee_submission_approval(request, approved=0):
 	service_hour_list = Service_Hours.objects.filter(approved='0')
 	
 	SocialFormSet = modelformset_factory(Social, fields=('approved',), extra=0)
-	social_formset = SocialFormSet(queryset=Social.objects.filter(approved='0'))
+	social_formset = SocialFormSet(queryset=Social.objects.filter(approved='0').order_by('timestamp'))
 	
 	ServiceFormSet = modelformset_factory(Service_Hours, fields=('approved',), extra=0)
-	service_formset = ServiceFormSet(queryset=Service_Hours.objects.filter(approved='0'))
+	service_formset = ServiceFormSet(queryset=Service_Hours.objects.filter(approved='0').order_by('timestamp'))
 
 	context = {
 		'social_list' : social_list,

@@ -57,8 +57,8 @@ def profile(request, uniqname, profile_saved=0):
 		if electee_progress:
 			e = Electee.objects.get(member_id = uniqname)
 			requirements = dict ((requirements.requirement, requirements) for requirements in Requirements.objects.all())
-			socials = Social.objects.filter(electee_id = uniqname)
-			projects = Service_Hours.objects.filter(electee_id = uniqname)
+			socials = Social.objects.filter(electee_id = uniqname).order_by('-timestamp')
+			projects = Service_Hours.objects.filter(electee_id = uniqname).order_by('-timestamp')
 
 			context = {
 				'e' : e,

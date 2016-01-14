@@ -129,7 +129,7 @@
 		            		</td>
 						</tr>
 						<tr>
-							<td><h4>Approved dB Hours: </h4></td>
+							<td><h4>dB Hours Submitted: </h4></td>
 							<td><h4>{{e.num_service_hours_db}} / Maximum of  
 		            			{% if profile.is_undergraduate %}
 		            				{{requirements.E_UG_DB_HOURS.num_required}}
@@ -139,7 +139,7 @@
 		            		</td>
 						</tr>
 						<tr>
-							<td><h4>Approved External Service Hours: </h4></td>
+							<td><h4>External Service Hours Submitted: </h4></td>
 							<td><h4>{{e.num_service_hours_external}} / Maximum of  
 		            			{% if profile.is_undergraduate %}
 		            				{{requirements.G_UG_EXTERNAL_HOURS.num_required}}
@@ -185,11 +185,13 @@
 					<table class='table'>
 						<tr>
 							<th><h3>Social Name</h3></td>
+							<th><h3>Submitted On</h3></td>
 							<th><h3>Approved?</h3></td>
 						<tr>
 					{% for s in socials %}
 						<tr>
 							<td>{{s.social_name}}</td>
+							<td>{{s.timestamp}}</td>
 							<td>
 								{% if s.approved %}
 									<span class="glyphicon glyphicon-ok green"></span>
@@ -206,6 +208,7 @@
 	            	<table class='table'>
 	            		<tr>
 							<th><h3>Project Name</h3></td>
+							<th><h3>Submitted On</h3></td>
 							<th><h3>Project Type</h3></td>
 							<th><h3>Number of Hours</h3></td>
 							<th><h3>Approved?</h3></td>
@@ -213,6 +216,7 @@
 						{% for p in projects %}
 							<tr>
 								<td>{{p.service_name}}</td>
+								<td>{{p.timestamp}}</td>
 								<td>{{p.service_type}}</td>
 								<td>{{p.num_hours}}</td>
 								<td>

@@ -34,6 +34,7 @@ class Social(models.Model):
 
 	social_name = models.CharField(max_length=100)
 	approved = models.BooleanField(default=False)
+	timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
 	def __unicode__(self):
 		return self.electee.member.uniqname
@@ -55,7 +56,8 @@ class Service_Hours(models.Model):
 	service_name = models.CharField(max_length=100)
 	num_hours = models.IntegerField()
 	approved = models.BooleanField(default=False)
-	
+	timestamp = models.DateTimeField(auto_now_add=True, null=True)
+
 	def __unicode__(self):
 		return self.electee.member.uniqname
 
