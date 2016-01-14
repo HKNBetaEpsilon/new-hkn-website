@@ -17,6 +17,10 @@
 	</div>
 {% endif %}
 
+<a class="btn btn-primary btn-sm" href="{% url 'profile' request.user %}">
+	<span class="glyphicon glyphicon-arrow-left"></span> Back To Profile
+</a>
+
 <h3>Submit Service Hours</h3>
 <form method='POST' action=''>{% csrf_token %}
 	{{form|crispy}}
