@@ -2,6 +2,12 @@
 {% load crispy_forms_tags %}
 
 {%block content %}
+{% if approved %}
+	<div class="alert alert-success">
+  		<strong>Successfully Approved Submissions</strong>
+	</div>
+{% endif %}
+
 <h2>Unapproved Socials</h2>
 	<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
 		<table class="table table-hover">

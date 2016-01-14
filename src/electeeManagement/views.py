@@ -111,7 +111,7 @@ def submit_service_hours(request):
 	return render(request, "submit_service_hours.html", context)
 
 # shows a list of all unapporved socials and service hours
-def electee_submission_approval(request):
+def electee_submission_approval(request, approved=0):
 	# get all unapproved socials and service hours
 	social_list = Social.objects.filter(approved='0')
 	service_hour_list = Service_Hours.objects.filter(approved='0')
@@ -127,6 +127,7 @@ def electee_submission_approval(request):
 		'service_hour_list' : service_hour_list,
 		'social_formset' : social_formset,
 		'service_formset' : service_formset,
+		'approved': approved
 	}
 
 	if request.POST:
@@ -138,7 +139,7 @@ def electee_submission_approval(request):
 		if formset.is_valid():
 			formset.save()
 			update_approved_hours()
-		return redirect('electee_submission_approval')
+		return redirect('electee_submission_approval', approved=1)
 
 	return render(request, "electee_submission_approval.html", context)
 

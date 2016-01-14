@@ -34,6 +34,7 @@ urlpatterns = [
 	url(r'^update/(?P<uniqname>[a-z]{3,8})/$', 'users.views.profile_edit', name='profile_edit'),
 	url(r'^submit_social/', 'electeeManagement.views.submit_social', name='submit_social'),
 	url(r'^submit_service_hours/', 'electeeManagement.views.submit_service_hours', name='submit_service_hours'),
+	url(r'^electee_submission_approval/(?P<approved>[0-1])$', 'electeeManagement.views.electee_submission_approval', name='electee_submission_approval'),
 	url(r'^electee_submission_approval/', 'electeeManagement.views.electee_submission_approval', name='electee_submission_approval'),
 	url(r'^leadership/(?P<leader_saved>[0-1])/$', 'leadership.views.leadership', name='leadership'),
 	url(r'^leadership/', 'leadership.views.leadership', name='leadership'),
