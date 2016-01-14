@@ -25,8 +25,12 @@ body {
 	color: #B20317;
 }
 
-#bootstrap-overrides .navbar-inverse .navbar-brand{
+#bootstrap-overrides .navbar .navbar-brand{
 	color: #D3D3D3;
+}
+
+#bootstrap-overrides .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+	background-color: #6f6da6;
 }
 
 .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
