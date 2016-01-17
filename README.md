@@ -24,7 +24,6 @@ development environment set up, do the following:
 3. Create the database
 
         $ cd src
-        $ python manage.py makemigrations
         $ python manage.py migrate
 
 4. Run the server as a Localhost
