@@ -34,8 +34,8 @@ development environment set up, do the following:
 
 6. To set up log in with your uniqname, do the following:
   1. Run this command and follow the promts (**do not** use your uniqname as the username)
-	
-		$ python manage.py createsuperuser
+    
+        $ python manage.py createsuperuser
 
   2. Navigate to http://127.0.0.1:8000/admin and login in as the user you just created
   3. At the bottom of the page, click on "Members" under the "Users" Section
