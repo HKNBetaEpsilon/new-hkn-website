@@ -1,0 +1,88 @@
+.carousel-jumbotron{
+    background-color: rgba(0,20,36, .15);
+}
+.carousel-indicators .active {
+    background-color: #FFFFFF;
+}
+.carousel-indicators li{
+    background-color: rgba(0,0,0,.85);
+}
+#carousel-example-generic{
+    width:100%;
+}
+#carousel-example-generic img{
+    display:block;
+    max-width: 100%;
+    width:auto;
+    height: 400px;
+}
+
+.carousel-control {
+    width: 0;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    background-image: none;
+    background-repeat: no-repeat;
+    text-shadow: none;
+}
+
+.carousel-control.left span {
+    padding: 0px;
+}
+
+.carousel-control.right span {
+    padding: 0px;
+}
+
+.carousel-control .glyphicon-chevron-left, 
+.carousel-control .glyphicon-chevron-right, 
+.carousel-control .icon-prev, 
+.carousel-control .icon-next {
+    position: absolute;
+    top: 45%;
+    z-index: 5;
+    display: inline-block;
+}
+
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .icon-prev {
+    color:rgba(0,0,0,.5);
+    left: 0;
+}
+
+.carousel-control .glyphicon-chevron-right,
+.carousel-control .icon-next {
+    color:rgba(0,0,0,.5);
+    right: 0;
+}
+
+.carousel-control.left span,
+.carousel-control.right span {
+}
+
+.carousel-control.left span:hover,
+.carousel-control.right span:hover {
+    color: rgba(0,0,0, .7);
+}
+
+/* Carousel Header Styles */
+.header-text {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 50%;
+    color: #fff;
+}
+
+.header-text h2 {
+    font-size: 40px;
+}
+
+.header-text h2 span {
+    background-color: rgba(0,0,0,.7);
+    padding: 10px;
+}

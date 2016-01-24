@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
 {% block error_msg %}
 {% if has_not_complete_profile %}
 	<div class="alert alert-info">
@@ -11,49 +10,27 @@
 {% endblock %}
 
 {%block content %}
-<h1>Eta Kappa Nu</h1>
-	<div class='row'>
-		<div class='col-sm-9'>
+<div class='container'>
+	<div class='row' id="home-banner">
+		<h1 class="home-title">Eta Kappa Nu</h1>
+		<div class='col-sm-12'>
 			<!-- <p class='lead'> Eta Kappa Nu (HKN) strives to help progress the engineering student body through leadership, scholarship, and service. At the University of Michigan, the Beta-Epsilon chapter is composed of electrical, computer, and computer science engineers. As an organization, we bring services to the greater student body and community through the dB Cafe, service project, and community events, and we help our own members by providing networking and educational opportunities.</p> -->
 			<p class='lead'> The Beta-Epsilon chapter of Eta Kappa Nu (HKN) is composed of the top electrical, computer, and computer science engineers at the University of Michigan. We serve our community by operating the fully student-run dB Cafe, holding community service projects around Ann Arbor, and orginizing community events to encourage collaboration amoung the students and faculty. In addition, we collabortate with companies to speak at our meetings, as well as, host tech talks for the general campus community. Lastly, we like to have fun! So we have plenty of game nights and trips to whirlyball and lasertag.</p>
 		</div>
-		<div class='col-sm-3'>
-			<img class="img-responsive center-block" src="{%static 'img/logo-small.png'%}">
-			<!-- <img class="img-responsive center-block" src="{%static 'img/eecs_logo.png'%}"> -->
-		</div>
-	</div>
-	<div class='jumbotron pictures'>
-	<div class='row top-pictures-row'>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic1.jpg'%}">
-		</div>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic2.jpg'%}">
-		</div>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic6.jpg'%}">
-		</div>
-	</div>
-	<div class='row'>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic3.jpg'%}">
-		</div>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic4.jpg'%}">
-		</div>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic5.jpg'%}">
-		</div>
 	</div>
 </div>
+
+{% include 'picture_carousel.html' %}
+<div class='container'>
 	<div class='row'>
 		<div class='col-sm-12'>
-			<h2>Upcoming Events</h2>
+			<h2 class="events-title">Event Calendar</h2>
 			<div class="embed-responsive embed-responsive-16by9">
 				<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=690&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;
 				src=3fek7mnb9nbp4fbubo611u5uns%40group.calendar.google.com&amp;color=%236B3304&amp;src=77pcfkn2qivvtvvkgacu58bf00%40group.calendar.google.com&amp;color=%23711616&amp;src=7djnp36aq6lj3robnsied6htc4%40group.calendar.google.com&amp;color=%23AB8B00&amp;src=cm8srqsl1no2hdl90oh14s0ao8%40group.calendar.google.com&amp;color=%23125A12&amp;src=ja0cqsoik9kks8qsppctjmrj8c%40group.calendar.google.com&amp;color=%2328754E&amp;src=f2rgcm1h48jmdloql1hfel7vuk%40group.calendar.google.com&amp;color=%23333333&amp;src=ig3go5tuho3j3p7vtj17q0fgv0%40group.calendar.google.com&amp;color=%23B1365F&amp;src=jhjbjs9j2k0pa1qc4b462ob39o%40group.calendar.google.com&amp;color=%2323164E&amp;ctz=America%2FNew_York">
 			</iframe>
 		</div>
 	</div>
+</div>
 </div>
 {% endblock %}
