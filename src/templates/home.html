@@ -10,17 +10,66 @@
 {% endblock %}
 
 {%block content %}
-<div class='container'>
-	<div class='row' id="home-banner">
+<section class="header">
+	<div class='jumbotron' id="home-banner">
+		<div class="container home-title-container">
 		<h1 class="home-title">Eta Kappa Nu</h1>
-		<div class='col-sm-12'>
-			<!-- <p class='lead'> Eta Kappa Nu (HKN) strives to help progress the engineering student body through leadership, scholarship, and service. At the University of Michigan, the Beta-Epsilon chapter is composed of electrical, computer, and computer science engineers. As an organization, we bring services to the greater student body and community through the dB Cafe, service project, and community events, and we help our own members by providing networking and educational opportunities.</p> -->
-			<p class='lead'> The Beta-Epsilon chapter of Eta Kappa Nu (HKN) is composed of the top electrical, computer, and computer science engineers at the University of Michigan. We serve our community by operating the fully student-run dB Cafe, holding community service projects around Ann Arbor, and orginizing community events to encourage collaboration amoung the students and faculty. In addition, we collabortate with companies to speak at our meetings, as well as, host tech talks for the general campus community. Lastly, we like to have fun! So we have plenty of game nights and trips to whirlyball and lasertag.</p>
+		<h2 class="home-title-2">Beta-Epsilon Chapter at the University of Michigan</h2>
+		</div>
+	</div>
+</section>
+<section class="main">
+	<a class="arrow-wrap scroll-down-arrow-wrap" href="#content">
+	    <span class="arrow scroll-down-arrow"></span>
+	</a>
+</section>
+<section id="content">
+
+<div class='container text-center second-banner'>
+	
+	<div class='row'>
+		<div class='col-sm-4 col1'>
+			<img class="img-responsive rounded-img center-block" src="{%static 'img/ic_school_black_24px.svg'%}" alt="">
+		</div>
+		<div class='col-sm-4 col2'>
+			<img class="img-responsive rounded-img center-block" src="{%static 'img/ic_business_center_black_24px.svg'%}" alt="">
+		</div>
+		<div class='col-sm-4 col3'>
+			<img class="img-responsive rounded-img center-block" src="{%static 'img/ic_people_black_24px.svg'%}" alt="">
+		</div>
+	</div>
+
+	<div class='row'>
+		<div class='col-sm-4 col1'>
+			<h1 class='three-col-header'>Scholarship</h1>
+		</div>
+		<div class='col-sm-4 col2'>
+			<h1 class='three-col-header'>Professionalism</h1>
+		</div>
+		<div class='col-sm-4 col3'>
+			<h1 class='three-col-header'>Character</h1>
+		</div>
+	</div>
+
+	<div class='row'>
+		<div class='col-sm-4 col1'>
+			<h2 class='three-col-subheader'>The Beta-Epsilon chapter of Eta Kappa Nu (HKN) is composed of the top electrical, computer, and computer science engineers at the University of Michigan.</h2>
+		</div>
+		<div class='col-sm-4 col2'>
+			<h2 class='three-col-subheader'>We collabortate with companies to speak at our meetings, as well as, host tech talks for the general campus community. </h2>
+		</div>
+		<div class='col-sm-4 col3'>
+			<h2 class='three-col-subheader'>We serve our community by operating the fully student-run dB Cafe, holding community service projects around Ann Arbor, and orginizing community events to encourage collaboration amoung the students and faculty.</h2>
 		</div>
 	</div>
 </div>
 
-{% include 'picture_carousel.html' %}
+<div class='container'>
+	{% include 'picture_carousel.html' %}
+</div>
+</section>
+
+<section id="calendar">
 <div class='container'>
 	<div class='row'>
 		<div class='col-sm-12'>
@@ -33,4 +82,72 @@
 	</div>
 </div>
 </div>
+</section>
+
+<script>
+//this is where we apply opacity to the arrow
+$(window).scroll( function(){
+
+  //get scroll position
+  var topWindow = $(window).scrollTop();
+  //multiply by 1.5 so the arrow will become transparent half-way up the page
+  var topWindow = topWindow * 1.5;
+  
+  //get height of window
+  var windowHeight = $(window).height();
+      
+  //set position as percentage of how far the user has scrolled 
+  var position = topWindow / windowHeight;
+  //invert the percentage
+  position = 1 - position;
+
+  //define arrow opacity as based on how far up the page the user has scrolled
+  //no scrolling = 1, half-way up the page = 0
+  $('.scroll-down-arrow-wrap').css('opacity', position);
+
+});
+
+$(function() {
+  $('.scroll-down-arrow-wrap').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top - 50 /*added 50 here for fixed nav bar*/
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+
+// $(function() {
+//   $('.col1').hover(function() {
+//     $('.col1').css('background-color', '#1E1F24');
+//   }, function() {
+//     // on mouseout, reset the background colour
+//     $('.col1').css('background-color', '');
+//   });
+// });
+
+// $(function() {
+//   $('.col2').hover(function() {
+//     $('.col2').css('background-color', '#1E1F24');
+//   }, function() {
+//     // on mouseout, reset the background colour
+//     $('.col2').css('background-color', '');
+//   });
+// });
+
+// $(function() {
+//   $('.col3').hover(function() {
+//     $('.col3').css('background-color', '#1E1F24');
+//   }, function() {
+//     // on mouseout, reset the background colour
+//     $('.col3').css('background-color', '');
+//   });
+// });
+
+</script>
 {% endblock %}
