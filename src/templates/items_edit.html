@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if not error %}
+<h1>Item Edit</h1>
+
+<form method='POST' action=''>{% csrf_token %}
+	{{form|crispy}}
+	<input class='btn btn-default' type='submit' value='Submit' />
+</form>
+{% endif %}
+{% endblock %}
