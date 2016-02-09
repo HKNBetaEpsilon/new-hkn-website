@@ -10,6 +10,13 @@ class MemberForm(forms.ModelForm):
 			'expected_grad_date': forms.SelectDateWidget(),
 		}
 
+	# Scketchy way of making all fields required in form
+	def __init__(self, *args, **kwargs):
+	    super(MemberForm, self).__init__(*args, **kwargs)
+
+	    for key in self.fields:
+	        self.fields[key].required = True
+
 	def clean_resume(self):
 		resume = self.cleaned_data.get('resume')
 		if resume == None or resume == False:
