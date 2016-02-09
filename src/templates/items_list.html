@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{%block content %}
+<h1>dBCafe Inventory</h1>
+<a class="btn btn-primary" href="{% url 'items_add' %}">Add Item</a>
+<table class='table table-hover'>
+	<tr>
+		<th><h3>Item Name</h3></td>
+		<th><h3>Quantity</h3></td>
+		<th><h3>Price</h3></td>
+	<tr>
+	{% for i in items %}
+		<tr>
+			<td>{{i.name}}</td>
+			<td>{{i.quantity}}</td>
+			<td>{{i.price}}</td>
+			<td><a class="btn btn-primary" href="{% url 'items_edit' i.name %}">Edit Item</a></td>
+		<tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

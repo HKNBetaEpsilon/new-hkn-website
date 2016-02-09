@@ -114,3 +114,7 @@ body {
 .star {
 	margin-right: 5px;
 }
+
+.big {
+	font-size: 1000%;
+}

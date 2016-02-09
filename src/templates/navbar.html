@@ -41,6 +41,18 @@
                   <li><a href="{% url 'electee_turn_ins' %}">Mark Electee Turn Ins</a></li>
                 </ul>
               </li>
+               <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  dBCafe
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                     <li><a href="{% url 'items_list' %}">Items</a></li>
+                     <li><a href="{% url 'sales' %}">Sales</a></li>
+                     <li><a href="{% url 'stats' %}">Stats</a></li>
+                </ul>
+              </li>
+
             {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">

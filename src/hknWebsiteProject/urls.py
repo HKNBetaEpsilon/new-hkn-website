@@ -44,6 +44,12 @@ urlpatterns = [
 	url(r'^delete_leader/', 'leadership.views.delete_leader', name='delete_leader'),
 	url(r'^initilize_electee_requirements/', 'electeeManagement.views.initilize_electee_requirements', name='initilize_electee_requirements'),
 	url(r'^electee_turn_ins/', 'electeeManagement.views.electee_turn_ins', name='electee_turn_ins'),
+	url(r'^db_cafe/items_list', 'dbcafe.views.items_list', name='items_list'),
+	url(r'^db_cafe/items_edit/(?P<item>[a-z A-Z]{1,120})/$', 'dbcafe.views.items_edit', name='items_edit'),
+	url(r'^db_cafe/items_add', 'dbcafe.views.items_add', name='items_add'),
+	url(r'^db_cafe/sales', 'dbcafe.views.sales', name='sales'),
+	url(r'^db_cafe/stats', 'dbcafe.views.stats', name='stats'),
+	url(r'^db_cafe/reset', 'dbcafe.views.reset', name='reset'),
 
 	url('', include('social.apps.django_app.urls', namespace='social')),
 	url('', include('django.contrib.auth.urls', namespace='auth')),

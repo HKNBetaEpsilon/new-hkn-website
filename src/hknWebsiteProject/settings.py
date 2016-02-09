@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'users',
     'electeeManagement',
     'crispy_forms',
-    'leadership'
+    'leadership',
+    'dbcafe'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 

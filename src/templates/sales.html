@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{%block content %}
+<h1 class='text-align-center'>dBCafe Sales</h1>
+<h2 class='text-align-center green big'>{{item_scanned}}</h2>
+<form class='text-align-center' method='POST' action=''>{% csrf_token %}
+	{{form.item_id}}
+</form>
+
+<table class='table table-hover'>
+	<tr>
+		<th><h3>Item</h3></td>
+		<th><h3>Timestamp</h3></td>
+	<tr>
+	{% for t in transactions %}
+		<tr>
+			<td>{{t.item.name}}</td>
+			<td>{{t.timestamp}}</td>
+		<tr>
+	{% endfor %}
+</table>
+{% endblock %}
