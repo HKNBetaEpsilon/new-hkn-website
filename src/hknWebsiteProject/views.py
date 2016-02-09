@@ -31,6 +31,9 @@ def corporate(request):
 	return render(request, "corporate.html", {})
 
 def make_members(form, electee):
+	context = {
+		'error' : False
+	}
 	uniqnames = form.cleaned_data.get('new_members').split(',')
 	try:
 		# validate each submitted uniqname to make sure that a member 
@@ -67,23 +70,25 @@ def make_members(form, electee):
 					  from_email, 
 					  to_email,
 					  fail_silently=False)
+	return context
 
 def create_new_members(request):
 	context = {}
-	context['new_members_submitted'] = False
 
 	form_electee = NewMemberForm(request.POST or None, prefix='electee')
 	form_active = NewMemberForm(request.POST or None, prefix='active')
 
 	if form_electee.is_valid():
-		make_members(form_electee, True)
+		context = make_members(form_electee, True)
 		form_electee = NewMemberForm()	
-		context['new_members_submitted'] = True
+		if not context['error']:
+			context['new_members_submitted'] = True
 
 	if form_active.is_valid():
-		make_members(form_active, False)
+		context = make_members(form_active, False)
 		form_active = NewMemberForm()	
-		context['new_members_submitted'] = True
+		if not context['error']:
+			context['new_members_submitted'] = True
 
 	context['form_electee'] = form_electee
 	context['form_active'] = form_active
