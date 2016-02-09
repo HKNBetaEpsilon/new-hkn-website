@@ -171,6 +171,11 @@ LOGIN_REDIRECT_URL = '/login_user'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '679385948585-g8t1tohno3f2s0gdnuialb2nhq8svc4d.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1F8Y0RfM_Z1xwNMCtGp50D6L'
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'hkn.website@gmail.com'
+EMAIL_HOST_PASSWORD = 'hknwebsite'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 

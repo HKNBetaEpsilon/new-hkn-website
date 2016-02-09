@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login
 from utils import has_complete_profile
+from django.core.mail import send_mail
 
 from users.models import Member
 from electeeManagement.models import Electee
 from users.forms import NewMemberForm
-
+from hknWebsiteProject import settings
 class MyError(Exception):
 	def __init__(self, value):
 		self.value = value
@@ -56,6 +57,17 @@ def make_members(form, electee):
 			if electee:
 				Electee(member = m).save()
 
+			subject = '[HKN] Welcome to the HKN Beta Epsilon Website'
+			message = welcome_msg
+			from_email = settings.EMAIL_HOST_USER
+			to_email = [name + '@umich.edu']
+
+			send_mail(subject, 
+					  message, 
+					  from_email, 
+					  to_email,
+					  fail_silently=False)
+
 def create_new_members(request):
 	context = {}
 	context['new_members_submitted'] = False
@@ -102,3 +114,13 @@ def login_user(request):
 def badUser(request):
 	User.objects.get(username__exact=request.user).delete()
 	return AnonymousUser()
+
+
+welcome_msg = '''
+Welcome to the HKN website! An accout has been created for you.
+
+Please go to hkn.eecs.umich.edu and log in with your umich account to complete your profile. Once you complete your profile, you will appear in the memeber list and you resume will be included in the resume book.
+
+Thanks,
+HKN Website
+'''
