@@ -122,9 +122,9 @@ def badUser(request):
 
 
 welcome_msg = '''
-Welcome to the HKN website! An accout has been created for you.
+Welcome to the HKN website! An account has been created for you.
 
-Please go to hkn.eecs.umich.edu and log in with your umich account to complete your profile. Once you complete your profile, you will appear in the memeber list and you resume will be included in the resume book.
+Please go to hkn.eecs.umich.edu and log in with your umich account to complete your profile. Once you complete your profile, you will appear in the memeber list and you're resume will be included in the resume book.
 
 Thanks,
 HKN Website
