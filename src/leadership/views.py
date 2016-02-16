@@ -7,8 +7,12 @@ from django.forms import modelformset_factory
 
 def leadership(request, leader_saved=0):
 	context = {}
-	leaders = Leader.objects.all().filter(member__isnull=False).order_by('-display_order')
-	context['leaders'] = leaders
+	officers = Leader.objects.all().filter(position_type__exact='O').filter(member__isnull=False).order_by('-display_order')
+	advisors = Leader.objects.all().filter(position_type__exact='A').filter(member__isnull=False).order_by('-display_order')
+	chairs = Leader.objects.all().filter(position_type__exact='C').filter(member__isnull=False).order_by('-display_order')
+	context['officers'] = officers
+	context['advisors'] = advisors
+	context['chairs'] = chairs
 	context['leader_saved'] = leader_saved
 	return render(request, "leadership.html", context)
 
