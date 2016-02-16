@@ -120,7 +120,6 @@ def badUser(request):
 	User.objects.get(username__exact=request.user).delete()
 	return AnonymousUser()
 
-
 welcome_msg = '''
 Welcome to the HKN website! An account has been created for you.
 
@@ -129,3 +128,7 @@ Please go to hkn.eecs.umich.edu and log in with your umich account to complete y
 Thanks,
 HKN Website
 '''
+
+def awesome_actives(request):
+	return render(request, "awesome_actives.html", {})
+

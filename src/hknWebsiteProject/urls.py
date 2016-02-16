@@ -50,6 +50,7 @@ urlpatterns = [
 	url(r'^db_cafe/sales', 'dbcafe.views.sales', name='sales'),
 	url(r'^db_cafe/stats', 'dbcafe.views.stats', name='stats'),
 	url(r'^db_cafe/reset', 'dbcafe.views.reset', name='reset'),
+	url(r'^/awesome_actives', 'hknWebsiteProject.views.awesome_actives', name='awesome_actives'),
 
 	url('', include('social.apps.django_app.urls', namespace='social')),
 	url('', include('django.contrib.auth.urls', namespace='auth')),
