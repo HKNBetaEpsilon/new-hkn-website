@@ -14,7 +14,7 @@ class MyError(Exception):
 	def __str__(self):
 		return repr(self.value)
 
-def home(request):
+def home(request, bad_user = False):
 	context = {}
 	if not request.user.is_anonymous():
 		# display prompt to ask member to complete their profile
@@ -22,6 +22,13 @@ def home(request):
 			context = {
 				'has_not_complete_profile' : True
 			}
+
+	elif bad_user:
+		# Anonymous with an username:
+		# The user tries to login but not a member
+		context = {
+			'not_member' : True
+		}
 	return render(request, "home.html", context)
 	
 def about(request):
@@ -98,8 +105,10 @@ def create_new_members(request):
 def login_user(request):
 	email = request.user.email
 	email_base, provider = email.split('@')
+	bad_user = False
 	if not provider == 'umich.edu':
-		request = badUser(request)
+		request.user = badUser(request)
+		bad_user = True
 	else:
 		try:
 			m = Member.objects.get(uniqname = email_base)
@@ -112,14 +121,14 @@ def login_user(request):
 				m.last_name = request.user.last_name
 			m.save()
 		except Member.DoesNotExist:
-			request = badUser(request)
+			request.user = badUser(request)
+			bad_user = True
 
-	return redirect('/')
+	return home(request, bad_user)
 
 def badUser(request):
 	User.objects.get(username__exact=request.user).delete()
 	return AnonymousUser()
-
 
 welcome_msg = '''
 Welcome to the HKN website! An account has been created for you.
