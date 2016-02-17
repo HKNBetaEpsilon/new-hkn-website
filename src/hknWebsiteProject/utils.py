@@ -19,3 +19,11 @@ def get_members_with_complete_profile():
 	members_comp_prof = members_comp_prof.filter(resume__isnull=False)
 	members_comp_prof = members_comp_prof.exclude(resume__exact="")
 	return members_comp_prof
+
+def get_members_with_uncomplete_profile():
+	members = Member.objects.all()
+	members_uncomp_prof = []
+	for m in members:
+		if not (m.first_name and m.last_name and m.resume and m.profile_pic and m.major and m.edu_level and m.expected_grad_date):
+			members_uncomp_prof.append(m)
+	return members_uncomp_prof

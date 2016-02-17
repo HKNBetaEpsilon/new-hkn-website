@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login
-from utils import has_complete_profile
+from utils import has_complete_profile, get_members_with_complete_profile, get_members_with_uncomplete_profile
 from django.core.mail import send_mail, send_mass_mail
 
 from users.models import Member
@@ -141,3 +141,29 @@ HKN Website
 def awesome_actives(request):
 	return render(request, "awesome_actives.html", {})
 
+def misc_tools(request, success = False):
+	total_num_users = Member.objects.count()
+	num_members_comp_prof = get_members_with_complete_profile().count()
+	context = {
+		'success' : success,
+		'total_num_users' : total_num_users,
+		'num_members_comp_prof' : num_members_comp_prof
+	}
+	return render(request, "misc_tools.html", context)
+
+def email_uncompleted_profiles(request):
+	members_wo_profile = get_members_with_uncomplete_profile()
+	mail_list = []
+
+	for m in members_wo_profile:	
+		subject = '[HKN] Reminder: Welcome to the HKN Beta Epsilon Website'
+		message = 'Don\'t forget to complete your website profile!\n' + welcome_msg
+		from_email = settings.EMAIL_HOST_USER
+		to_email = [m.uniqname + '@umich.edu']
+		# to_email = ['hkn.website@gmail.com']
+		mail_inst = (subject, message, from_email, to_email)
+		mail_list.append(mail_inst)
+
+	send_mass_mail(mail_list)
+
+	return misc_tools(request, True)

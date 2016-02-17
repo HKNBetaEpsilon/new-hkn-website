@@ -51,7 +51,9 @@ urlpatterns = [
 	url(r'^db_cafe/stats', 'dbcafe.views.stats', name='stats'),
 	url(r'^db_cafe/reset', 'dbcafe.views.reset', name='reset'),
 	url(r'^/awesome_actives', 'hknWebsiteProject.views.awesome_actives', name='awesome_actives'),
-
+	url(r'^/misc_tools/(?P<success>[0-1])/$', 'hknWebsiteProject.views.misc_tools', name='misc_tools'),
+	url(r'^/misc_tools', 'hknWebsiteProject.views.misc_tools', name='misc_tools'),
+	url(r'^/email_uncompleted_profiles', 'hknWebsiteProject.views.email_uncompleted_profiles', name='email_uncompleted_profiles'),
 	url('', include('social.apps.django_app.urls', namespace='social')),
 	url('', include('django.contrib.auth.urls', namespace='auth')),
 ]

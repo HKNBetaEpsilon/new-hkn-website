@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block error_msg %}
+{% if success %}
+	<div class="alert alert-success">
+  		<strong>Success!</strong>
+	</div>
+{% endif %}
+{% endblock %}
+
+{%block content %}
+<h1>Misc Tools</h1>
+<h3>{{num_members_comp_prof}} out of {{total_num_users}} members have completed their profile</h3>
+<a class="btn btn-danger" href="{% url 'email_uncompleted_profiles' %}">Email everyone with uncompleted profiles!</a>
+{% endblock %}
