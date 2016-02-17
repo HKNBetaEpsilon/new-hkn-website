@@ -16,5 +16,14 @@
 	{{form|crispy}}
 	<input class='btn btn-primary' type='submit' value='Submit' />
 </form>
+
+<script type="text/javascript">
+  $(function(){
+    $('.datepicker').datepicker({
+        viewMode: 'months',
+        minViewMode: 'months',
+    });
+  });
+</script>
 {% endif %}
 {% endblock %}
