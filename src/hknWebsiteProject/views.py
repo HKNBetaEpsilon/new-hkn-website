@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login
 from utils import has_complete_profile
-from django.core.mail import send_mail
+from django.core.mail import send_mail, send_mass_mail
 
 from users.models import Member
 from electeeManagement.models import Electee
@@ -56,6 +56,7 @@ def make_members(form, electee):
 		}
 	else:
 		# display message saying members were successfully submitted
+		mail_list = []
 		for name in uniqnames:	
 			m = Member(uniqname = name)
 			if electee:
@@ -71,12 +72,10 @@ def make_members(form, electee):
 			message = welcome_msg
 			from_email = settings.EMAIL_HOST_USER
 			to_email = [name + '@umich.edu']
+			mail_inst = (subject, message, from_email, to_email)
+			mail_list.append(mail_inst)
 
-			send_mail(subject, 
-					  message, 
-					  from_email, 
-					  to_email,
-					  fail_silently=False)
+		send_mass_mail(mail_list)
 	return context
 
 def create_new_members(request):
