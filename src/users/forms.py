@@ -7,7 +7,7 @@ class MemberForm(forms.ModelForm):
 		model = Member
 		exclude = ['uniqname', 'status']
 		widgets = {
-			'expected_grad_date': forms.SelectDateWidget(),
+			'expected_grad_date': forms.TextInput(attrs={'class':'datepicker'}),
 		}
 
 	# Scketchy way of making all fields required in form
@@ -26,6 +26,9 @@ class MemberForm(forms.ModelForm):
 		if extension != 'pdf' and extension != 'PDF':
 			raise forms.ValidationError("Resumes must be a PDF document")
 		return resume
+
+	def clean_expected_grad_date(self):
+		return self.cleaned_data.get('expected_grad_date')
 
 # Form to submit a comma separated list of new member to create member objects for
 class NewMemberForm(forms.Form):
