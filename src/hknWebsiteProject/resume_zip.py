@@ -43,6 +43,8 @@ def zip_resumes():
 	resumes_major_dir = os.path.join(settings.MEDIA_ROOT, 'resume_major')
 
 	members_with_resumes = get_current_members_with_completed_profile()
+	members_with_resumes = members_with_resumes.filter(resume__isnull=False)
+  	members_with_resumes = members_with_resumes.exclude(resume__exact="")
 
 	aggregate_resumes('year', members_with_resumes, resumes_year_dir)
 	aggregate_resumes('major', members_with_resumes, resumes_major_dir)

@@ -16,7 +16,7 @@ class MemberForm(forms.ModelForm):
 
 	    for key in self.fields:
 	        self.fields[key].required = True
-	    self.fields['graduation_date'].required = False
+	    self.fields['resume'].required = False
 
 	def clean_resume(self):
 		resume = self.cleaned_data.get('resume')
