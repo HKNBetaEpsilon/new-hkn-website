@@ -52,7 +52,7 @@ def make_members(form, electee):
 	except MyError:
 		context = {
 			'error' : True,
-			'error_msg' : 'Uniqname ' + name + ' alread exists!' 
+			'error_msg' : 'Uniqname ' + name + ' alread exists! None added.' 
 		}
 	else:
 		# display message saying members were successfully submitted

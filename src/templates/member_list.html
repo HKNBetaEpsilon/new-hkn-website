@@ -10,7 +10,8 @@
 
 {%block content %}
 {% if not error %}
-	<h1>Members of HKN</h1>
+{% if member_list %}
+	<h1>Current Members of HKN</h1>
 	<hr>
 	{% for alpha, members in member_list.items %}
 		<h1>{{alpha}}</h1>
@@ -30,5 +31,28 @@
 			{% endfor %}
 		</table>
 	{% endfor %}
+{% endif %}
+{% if alumni_list %}
+	<h1>Alumni of HKN</h1>
+	<hr>
+	{% for alpha, members in alumni_list.items %}
+		<h1>{{alpha}}</h1>
+		<table class="table borderless">
+			{% for mem in members %}
+				{% if forloop.counter0|divisibleby:5 %}
+				<tr>
+					<td class='member-list-data' id="left-padding-0">
+				{% else %}
+					<td class='member-list-data'>
+				{% endif %}
+						<p><a href="{%url 'profile' mem.uniqname %}">{{mem.first_name}} {{mem.last_name}}</a></p>
+					</td>
+				{% if forloop.counter|divisibleby:5 %}
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	{% endfor %}
+{% endif %}
 {% endif %}
 {% endblock %}

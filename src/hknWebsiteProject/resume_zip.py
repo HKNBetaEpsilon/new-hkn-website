@@ -2,7 +2,7 @@ import os, zipfile, shutil
 
 from django.conf import settings
 from users.models import Member
-from utils import get_members_with_complete_profile
+from utils import get_current_members_with_completed_profile
 
 def zipdir(path,zipf):
 	for root,dirs,files in os.walk(path):
@@ -27,7 +27,7 @@ def aggregate_resumes(type, members_with_resumes, resumes_dir):
 
 	for member in members_with_resumes:
 		if type == 'year':
-			curr_attr = member.expected_grad_date.year
+			curr_attr = member.graduation_date.year
 			attr_dir = os.path.join(resumes_dir, 'Graduating_'+str(curr_attr))
 		else:
 			curr_attr = member.get_major_display()
@@ -42,7 +42,7 @@ def zip_resumes():
 	resumes_year_dir = os.path.join(settings.MEDIA_ROOT, 'resume_year')
 	resumes_major_dir = os.path.join(settings.MEDIA_ROOT, 'resume_major')
 
-	members_with_resumes = get_members_with_complete_profile()
+	members_with_resumes = get_current_members_with_completed_profile()
 
 	aggregate_resumes('year', members_with_resumes, resumes_year_dir)
 	aggregate_resumes('major', members_with_resumes, resumes_major_dir)

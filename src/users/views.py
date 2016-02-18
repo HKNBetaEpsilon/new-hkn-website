@@ -8,7 +8,19 @@ from hknWebsiteProject.resume_zip import zip_resumes
 import string
 from string import ascii_uppercase
 import collections
-from hknWebsiteProject.utils import get_members_with_complete_profile
+from hknWebsiteProject.utils import get_members_with_complete_profile, get_current_members_with_completed_profile, get_alumni_with_completed_profile
+
+def make_alpha_dict(members):
+	alpha_list = collections.OrderedDict()
+	# separate member list by letter first name starts with in order to display 
+	# 	members in these groupings
+	for letter in ascii_uppercase:
+		member_list = members.filter(first_name__startswith=letter)
+		member_list = member_list.order_by('first_name','last_name')
+		if member_list:
+			alpha_list[letter] = member_list
+
+	return alpha_list
 
 def member_list(request):
 	if request.user.is_anonymous():
@@ -17,22 +29,14 @@ def member_list(request):
 			'error_msg' : 'You must be a member to see member\'s profiles'
 		}
 	else :
-		alpha_list = collections.OrderedDict()
-
 		# displays the list of all members who have a complete profile
-		members_with_completed_profile = get_members_with_complete_profile()
-
-		# separate member list by letter first name starts with in order to display 
-		# 	members in these groupings
-		for letter in ascii_uppercase:
-			member_list = members_with_completed_profile.filter(first_name__startswith=letter)
-			member_list = member_list.order_by('first_name','last_name')
-			if member_list:
-				alpha_list[letter] = member_list
+		member_list = make_alpha_dict(get_current_members_with_completed_profile())
+		alumni_list = make_alpha_dict(get_alumni_with_completed_profile())
 
 		context = {
-			'member_list' : alpha_list,
-			'error' : False,
+			'member_list' : member_list,
+			'alumni_list' : alumni_list,
+			'error' : False
 		}
 
 	return render(request, "member_list.html", context)

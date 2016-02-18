@@ -37,7 +37,7 @@ class Member(models.Model):
 	status = models.CharField(max_length=1, choices=STATUS, default='E') # default status is electee
 	major = models.CharField(max_length=2, choices=MAJOR, null=True, blank=True)
 	edu_level = models.CharField(max_length=2, choices=EDU_LEVEL, null=True, blank=True)
-	expected_grad_date = models.DateField(auto_now=False, auto_now_add=False, null=True,  blank=True)
+	graduation_date = models.DateField(auto_now=False, auto_now_add=False, null=True,  blank=True)
 	profile_pic =  models.ImageField(upload_to=user_directory_path, height_field=None, width_field=None, max_length=100, null=True,  blank=True)
 	resume =  models.FileField(upload_to=user_directory_path, max_length=100, null=True,  blank=True)
 
