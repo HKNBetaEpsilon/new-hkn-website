@@ -114,9 +114,10 @@ def profile_edit(request, uniqname):
 			form = MemberForm(request.POST, request.FILES, instance = m)
 
 			if form.is_valid():
+				# import ipdb; ipdb.set_trace()
 				if request.FILES.get('profile_pic') and old_pic_url:
 					os.remove(old_pic_url)
-				if request.FILES.get('resume') and old_resume_url:
+				if (request.FILES.get('resume') or request.POST.get('resume-clear') == 'on') and old_resume_url:
 					os.remove(old_resume_url)
 
 				form.save()
