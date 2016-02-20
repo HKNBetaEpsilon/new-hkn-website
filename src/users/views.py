@@ -1,13 +1,14 @@
+import collections, string, os
+from string import ascii_uppercase
+
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 # Create your views here.
 from .models import Member
-from electeeManagement.models import Electee, Requirements, Social, Service_Hours
 from .forms import MemberForm
+from electeeManagement.models import Electee, Requirements, Social, Service_Hours
 from hknWebsiteProject.resume_zip import zip_resumes
-import string
-from string import ascii_uppercase
-import collections
 from hknWebsiteProject.utils import get_members_with_complete_profile, get_current_members_with_completed_profile, get_alumni_with_completed_profile
 
 def make_alpha_dict(members):
@@ -100,9 +101,24 @@ def profile_edit(request, uniqname):
 		logged_in_as = Member.objects.get(uniqname = request.user.username)
 		form = MemberForm(instance = m)	
 
+		old_pic_url = None
+		old_resume_url = None
+
+		if m.profile_pic:
+			old_pic_url = settings.MEDIA_ROOT + '/' + '/'.join(m.profile_pic.url.split('/')[2:])
+
+		if m.resume:
+			old_resume_url = settings.MEDIA_ROOT + '/' + '/'.join(m.resume.url.split('/')[2:])
+
 		if request.POST:
 			form = MemberForm(request.POST, request.FILES, instance = m)
+
 			if form.is_valid():
+				if request.FILES.get('profile_pic') and old_pic_url:
+					os.remove(old_pic_url)
+				if request.FILES.get('resume') and old_resume_url:
+					os.remove(old_resume_url)
+
 				form.save()
 				zip_resumes()
 		
