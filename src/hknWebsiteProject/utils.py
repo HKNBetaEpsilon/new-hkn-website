@@ -28,17 +28,11 @@ def get_members_with_uncomplete_profile():
 	return members_uncomp_prof
 
 def get_current_members_with_completed_profile():
-	so_old = date(1900, 1, 1)
-	just_graduated = date.today()
-
 	member_list = get_members_with_complete_profile()
-	member_list = member_list.exclude(graduation_date__range=(so_old, just_graduated))
+	member_list = member_list.exclude(edu_level__exact='AL')
 	return member_list
 
 def get_alumni_with_completed_profile():
-	so_old = date(1900, 1, 1)
-	just_graduated = date.today()
-
 	member_list = get_members_with_complete_profile()
-	member_list = member_list.filter(graduation_date__range=(so_old, just_graduated))
+	member_list = member_list.filter(edu_level__exact='AL')
 	return member_list
