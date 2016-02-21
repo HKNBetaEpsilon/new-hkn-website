@@ -8,6 +8,8 @@ from users.models import Member
 from electeeManagement.models import Electee
 from users.forms import NewMemberForm
 from hknWebsiteProject import settings
+from datetime import date
+
 class MyError(Exception):
 	def __init__(self, value):
 		self.value = value
@@ -165,5 +167,15 @@ def email_uncompleted_profiles(request):
 		mail_list.append(mail_inst)
 
 	send_mass_mail(mail_list)
+
+	return misc_tools(request, True)
+
+def make_alumni(request):
+	so_old = date(1900, 1, 1)
+	current_members = Member.objects.exclude(edu_level__exact='AL')
+	current_members = current_members.filter(graduation_date__range=(so_old, date.today()))
+	for m in current_members:
+		m.edu_level = 'AL'
+		m.save()
 
 	return misc_tools(request, True)

@@ -1,5 +1,4 @@
 from users.models import Member
-from datetime import date
 
 def has_complete_profile(uniqname):
 	# check all aspects of a profile to make sure that it is complete

@@ -54,6 +54,7 @@ urlpatterns = [
 	url(r'^/misc_tools/(?P<success>[0-1])/$', 'hknWebsiteProject.views.misc_tools', name='misc_tools'),
 	url(r'^/misc_tools', 'hknWebsiteProject.views.misc_tools', name='misc_tools'),
 	url(r'^/email_uncompleted_profiles', 'hknWebsiteProject.views.email_uncompleted_profiles', name='email_uncompleted_profiles'),
+	url(r'^/make_alumni', 'hknWebsiteProject.views.make_alumni', name='make_alumni'),
 	url('', include('social.apps.django_app.urls', namespace='social')),
 	url('', include('django.contrib.auth.urls', namespace='auth')),
 ]
