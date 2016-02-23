@@ -118,3 +118,7 @@ body {
 .big {
 	font-size: 1000%;
 }
+
+.slc-header {
+	margin-top: 0em;
+}
