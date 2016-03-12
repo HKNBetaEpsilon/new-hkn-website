@@ -1,0 +1,6 @@
+{{electee.num_service_hours_db}} / Maximum of  
+{% if profile.is_undergraduate %}
+	{{requirements.E_UG_DB_HOURS.num_required}}
+{% else %}
+	{{requirements.F_G_DB_HOURS.num_required}}
+{% endif %}

@@ -15,42 +15,18 @@
 			<tr>
 				<td><a href="{%url 'profile' e.member.uniqname %}">{{e.member.first_name}} {{e.member.last_name}}</a></td>
 
-				<td>
-					{{e.num_socials_approved}} / {{requirements.A_UG_SOCIAL.num_required}}
+				<td>{% include 'electee_social_progress.html' with electee=e requirements=requirements%}</td>
 
-					{% if e.num_socials_approved >= requirements.A_UG_SOCIAL.num_required %}
-						<span class="glyphicon glyphicon-ok green"></span>
-					{% endif %}
-				</td>
-
-				<td>
-					{{e.num_service_hours_approved}} / {{requirements.C_UG_TOTAL_HOURS.num_required}}
-					
-					{% if e.num_service_hours_approved >= requirements.C_UG_TOTAL_HOURS.num_required %}		
-						<span class="glyphicon glyphicon-ok green"></span>
-					{% endif %}
-				</td>
+				<td>{% include 'electee_service_hours_progress.html' with electee=e requirements=requirements%}</td>
 
 				<td class='text-align-center'>
-					{% if e.electee_interview %}
-						<span class="glyphicon glyphicon-ok green"></span>
-					{% else %}
-						<span class="glyphicon glyphicon-remove red"></span>
-					{% endif %}
+				{% include 'electee_interview_complete.html' with electee=e%}
 				</td>
 				<td class='text-align-center'>
-					{% if e.electee_exam %}
-						<span class="glyphicon glyphicon-ok green"></span>
-					{% else %}
-						<span class="glyphicon glyphicon-remove red"></span>
-					{% endif %}
+				{% include 'electee_exam_complete.html' with electee=e%}
 				</td>
 				<td class='text-align-center'>
-					{% if e.dues %}
-						<span class="glyphicon glyphicon-ok green"></span>
-					{% else %}
-						<span class="glyphicon glyphicon-remove red"></span>
-					{% endif %}
+				{% include 'electee_dues_complete.html' with electee=e%}
 				</td>
 			</tr>
 		{% endfor %}

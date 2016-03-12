@@ -96,87 +96,36 @@
 	            			<th><h3>Amount Completed</h3></th>
 						<tr>
 							<td><h4>Number of Socials Approved: </h4></td>
-							<td><h4>{{e.num_socials_approved}} / 
-		            			{% if profile.is_undergraduate %}
-		            				{{requirements.A_UG_SOCIAL.num_required}}
-		            				{% if e.num_socials_approved >= requirements.A_UG_SOCIAL.num_required%}
-									<span class="glyphicon glyphicon-ok green"></span>
-									{% endif %}
-		            			{% else %}
-		            				{{requirements.B_G_SOCIAL.num_required}}
-		            				{% if e.num_socials_approved >= requirements.B_G_SOCIAL.num_required%}
-									<span class="glyphicon glyphicon-ok green"></span>
-									{% endif %}
-		            			{% endif %}
-		            		</h4>
+							<td><h4>{% include 'electee_social_progress.html' with electee=e requirements=requirements%}</h4>
 		            		</td>
 						</tr>
 						<tr>
 							<td><h4>Number of Service Hours Approved: </h4></td>
-							<td><h4>{{e.num_service_hours_approved}} / 
-		            			{% if profile.is_undergraduate %}
-		            				{{requirements.C_UG_TOTAL_HOURS.num_required}}
-		            				{% if e.num_service_hours_approved >= requirements.C_UG_TOTAL_HOURS.num_required%}
-									<span class="glyphicon glyphicon-ok green"></span>
-									{% endif %}
-		            			{% else %}
-		            				{{requirements.D_G_TOTAL_HOURS.num_required}}
-		            				{% if e.num_service_hours_approved >= requirements.D_G_TOTAL_HOURS.num_required%}
-									<span class="glyphicon glyphicon-ok green"></span>
-									{% endif %}
-		            			{% endif %}
+							<td><h4>{% include 'electee_service_hours_progress.html' with electee=e requirements=requirements%}
 		            		</h4>
 		            		</td>
 						</tr>
 						<tr>
 							<td><h4>dB Hours Submitted: </h4></td>
-							<td><h4>{{e.num_service_hours_db}} / Maximum of  
-		            			{% if profile.is_undergraduate %}
-		            				{{requirements.E_UG_DB_HOURS.num_required}}
-		            			{% else %}
-		            				{{requirements.F_G_DB_HOURS.num_required}}
-		            			{% endif %}</h4>
+							<td><h4>{% include 'electee_db_hours_progress.html' with electee=e requirements=requirements%}</h4>
 		            		</td>
 						</tr>
 						<tr>
 							<td><h4>External Service Hours Submitted: </h4></td>
-							<td><h4>{{e.num_service_hours_external}} / Maximum of  
-		            			{% if profile.is_undergraduate %}
-		            				{{requirements.G_UG_EXTERNAL_HOURS.num_required}}
-		            			{% else %}
-		            				{{requirements.H_G_EXTERNAL_HOURS.num_required}}
-		            			{% endif %}</h4>
+							<td><h4>{% include 'electee_external_hours_progress.html' with electee=e requirements=requirements%}</h4>
 		            		</td>
 						</tr>
 						<tr>
 							<td><h4>Electee Interview Complete: </h4></td>
-							<td><h4>
-								{% if e.electee_interview %}
-									<span class="glyphicon glyphicon-ok green"></span>
-								{% else %}
-									<span class="glyphicon glyphicon-remove red"></span>
-								{% endif %}
-							 </h4></td>
+							<td><h4>{% include 'electee_interview_complete.html' with electee=e%}</h4></td>
 						</tr>
 						<tr>
 							<td><h4>Electee Exam Complete: </h4></td>
-							<td><h4>
-								{% if e.electee_exam %}
-									<span class="glyphicon glyphicon-ok green"></span>
-								{% else %}
-									<span class="glyphicon glyphicon-remove red"></span>
-								{% endif %}
-							 </h4></td>
+							<td><h4>{% include 'electee_exam_complete.html' with electee=e%}</h4></td>
 						</tr>
 						<tr>
 							<td><h4>Dues Paid: </h4></td>
-							<td><h4>
-								{% if e.dues %}
-									<span class="glyphicon glyphicon-ok green"></span>
-								{% else %}
-									<span class="glyphicon glyphicon-remove red"></span>
-								{% endif %}
-							 </h4></td>
+							<td><h4>{% include 'electee_dues_complete.html' with electee=e%}</h4></td>
 						</tr>
 					</table>
 		        </div>
@@ -243,19 +192,6 @@
 		</script>    
 </div> 
 {% endif %}
-<!-- 							<tr>
-								<td>Number of Service Hours Total: </td>
-								<td>{{e.num_service_hours_total}} </td>
-								<td>{{requirements.C_UG_TOTAL_HOURS.num_required}}</td>
-							</tr>
-							<tr>
-								<td>Number of General Meetings Missed: </td>
-								<td>{{e.general_meetings_missed}} </td>
-							</tr>
 
-							<tr>
-								<td>Number of Service Hours HKN: </td>
-								<td>{{e.num_service_hours_hkn}} </td>
-							</tr> -->
 {% endif %}
 {% endblock %}
