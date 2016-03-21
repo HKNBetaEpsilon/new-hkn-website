@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'electeeManagement',
     'crispy_forms',
     'leadership',
-    'dbcafe'
+    'dbcafe',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -178,6 +179,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-
-
-
+THUMBNAIL_DEBUG = True

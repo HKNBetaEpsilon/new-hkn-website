@@ -18,7 +18,7 @@
 	{% endif %}
 		<div class='col-sm-4'>
 			{% if leader.member.profile_pic %}
-			<img class="img-responsive img-rounded center-block profile-pic" src="{{leader.member.profile_pic.url}}">
+				{% include 'leadership_thumbnail.html' with leader_pic=leader.member.profile_pic%}
 			{% else %}
 			<img class="img-responsive center-block profile-pic" src="{%static 'img/default_profile_pic.jpg'%}">
 			{% endif %}		
@@ -45,7 +45,7 @@
 	{% endif %}
 		<div class='col-sm-4'>
 			{% if chair.member.profile_pic %}
-			<img class="img-responsive img-rounded center-block profile-pic" src="{{chair.member.profile_pic.url}}">
+				{% include 'leadership_thumbnail.html' with leader_pic=chair.member.profile_pic%}
 			{% else %}
 			<img class="img-responsive center-block profile-pic" src="{%static 'img/default_profile_pic.jpg'%}">
 			{% endif %}		
@@ -72,7 +72,7 @@
 	{% endif %}
 		<div class='col-sm-4'>
 			{% if advisor.member.profile_pic %}
-			<img class="img-responsive img-rounded center-block profile-pic" src="{{advisor.member.profile_pic.url}}">
+				{% include 'leadership_thumbnail.html' with leader_pic=advisor.member.profile_pic%}
 			{% else %}
 			<img class="img-responsive center-block profile-pic" src="{%static 'img/default_profile_pic.jpg'%}">
 			{% endif %}		
