@@ -45,12 +45,13 @@ def make_members(form, electee):
 	}
 	uniqnames = form.cleaned_data.get('new_members').split(',')
 	try:
+		pass
 		# validate each submitted uniqname to make sure that a member 
 		# 	with that uniqname does not alread exist, and that it is
 		# 	alphabetic and a valid number of characters
-		for name in uniqnames:
-			if Member.objects.filter(uniqname = name).exists():
-				raise MyError('Uniqname already exists')
+		# for name in uniqnames:
+		# 	if Member.objects.filter(uniqname = name).exists():
+		# 		raise MyError('Uniqname already exists')
 	except MyError:
 		context = {
 			'error' : True,
@@ -146,10 +147,12 @@ def awesome_actives(request):
 def misc_tools(request, success = False):
 	total_num_users = Member.objects.count()
 	num_members_comp_prof = get_members_with_complete_profile().count()
+	members = Member.objects.all()
 	context = {
 		'success' : success,
 		'total_num_users' : total_num_users,
-		'num_members_comp_prof' : num_members_comp_prof
+		'num_members_comp_prof' : num_members_comp_prof,
+		'members' : members
 	}
 	return render(request, "misc_tools.html", context)
 
