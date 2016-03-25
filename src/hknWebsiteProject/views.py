@@ -142,7 +142,7 @@ Please go to hkn.eecs.umich.edu and log in with your umich account to complete y
 Thanks,
 HKN Website
 
-This is an automated message please do not reply as this email is not checked.
+This is an automated message please do not reply as this email is not checked. If you need assistance, please email hkn-webmaster@umich.edu
 '''
 
 def awesome_actives(request):
