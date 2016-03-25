@@ -49,9 +49,9 @@ def make_members(form, electee):
 		# validate each submitted uniqname to make sure that a member 
 		# 	with that uniqname does not alread exist, and that it is
 		# 	alphabetic and a valid number of characters
-		# for name in uniqnames:
-		# 	if Member.objects.filter(uniqname = name).exists():
-		# 		raise MyError('Uniqname already exists')
+		for name in uniqnames:
+			if Member.objects.filter(uniqname = name).exists():
+				raise MyError('Uniqname already exists')
 	except MyError:
 		context = {
 			'error' : True,
