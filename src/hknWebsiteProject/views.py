@@ -77,7 +77,7 @@ def make_members(form, electee):
 			to_email = [name + '@umich.edu']
 
 			email = EmailMessage(subject, message, from_email)
-			email.to = [to_email]
+			email.to = to_email
 			email.cc = [from_email]
 			email.send()
 
@@ -171,7 +171,7 @@ def email_uncompleted_profiles(request):
 		to_email = [m.uniqname + '@umich.edu']
 		
 		email = EmailMessage(subject, message, from_email)
-		email.to = [to_email]
+		email.to = to_email
 		email.cc = [from_email]
 		email.send()
 
