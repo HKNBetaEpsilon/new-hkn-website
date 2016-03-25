@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login
 from utils import has_complete_profile, get_members_with_complete_profile, get_members_with_uncomplete_profile
-from django.core.mail import send_mail, send_mass_mail
+from django.core.mail import EmailMessage
 
 from users.models import Member
 from electeeManagement.models import Electee
@@ -75,10 +75,12 @@ def make_members(form, electee):
 			message = welcome_msg
 			from_email = settings.EMAIL_HOST_USER
 			to_email = [name + '@umich.edu']
-			mail_inst = (subject, message, from_email, to_email)
-			mail_list.append(mail_inst)
 
-		send_mass_mail(mail_list)
+			email = EmailMessage(subject, message, from_email)
+			email.to = [to_email]
+			email.cc = [from_email]
+			email.send()
+
 	return context
 
 def create_new_members(request):
@@ -139,6 +141,8 @@ Please go to hkn.eecs.umich.edu and log in with your umich account to complete y
 
 Thanks,
 HKN Website
+
+This is an automated message please do not reply as this email is not checked.
 '''
 
 def awesome_actives(request):
@@ -165,11 +169,11 @@ def email_uncompleted_profiles(request):
 		message = 'Don\'t forget to complete your website profile!\n' + welcome_msg
 		from_email = settings.EMAIL_HOST_USER
 		to_email = [m.uniqname + '@umich.edu']
-		# to_email = ['hkn.website@gmail.com']
-		mail_inst = (subject, message, from_email, to_email)
-		mail_list.append(mail_inst)
-
-	send_mass_mail(mail_list)
+		
+		email = EmailMessage(subject, message, from_email)
+		email.to = [to_email]
+		email.cc = [from_email]
+		email.send()
 
 	return misc_tools(request, True)
 
