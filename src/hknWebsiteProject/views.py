@@ -110,7 +110,7 @@ def login_user(request):
 	email = request.user.email
 	email_base, provider = email.split('@')
 	bad_user = False
-	if not provider == 'umich.edu':
+	if not provider == 'umich.edu' or not email == 'dbcafehi@gmail.com':
 		request.user = badUser(request)
 		bad_user = True
 	else:
