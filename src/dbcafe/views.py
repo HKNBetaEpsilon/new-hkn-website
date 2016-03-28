@@ -39,25 +39,28 @@ def items_add(request):
 	return render(request, "items_add.html", context)
 
 def sales(request):
+	context = {}
 	form = SalesForm(request.POST or None)
 	drawer = Drawer.objects.all()[0]
 	item_scanned = ''
 	if form.is_valid():
-		item_scanned = Item.objects.get(id_number = form.cleaned_data.get('item_id'))
-		t = Transaction(item=item_scanned)
-		item_scanned.quantity -= 1
-		item_scanned.save()
-		drawer.amount += item_scanned.price
-		drawer.save()
-		t.save()
+		try:
+			item_scanned = Item.objects.get(id_number = form.cleaned_data.get('item_id'))
+			t = Transaction(item=item_scanned)
+			item_scanned.quantity -= 1
+			item_scanned.save()
+			drawer.amount += item_scanned.price
+			drawer.save()
+			t.save()
+		except Item.DoesNotExist:
+			context['error'] = True
+
 		form = SalesForm(None)
 
 	transactions = Transaction.objects.all().order_by('-timestamp')
-	context = {
-		'form' : form,
-		'item_scanned' : item_scanned,
-		'transactions' : transactions,
-	}
+	context['form'] = form
+	context['item_scanned'] = item_scanned
+	context['transactions'] = transactions
 	return render(request, "sales.html", context)
 
 def stats(request):
