@@ -75,3 +75,8 @@ def reset(request):
 	drawer.amount = 300
 	drawer.save()
 	return redirect('stats')
+
+def undo(request):
+	transaction = Transaction.objects.all().order_by('-timestamp')[0]
+	transaction.delete()
+	return redirect('sales')
