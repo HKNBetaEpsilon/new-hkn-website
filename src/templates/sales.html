@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load tz %}
 
 {%block content %}
 <h1 class='text-align-center'>dBCafe Sales</h1>
@@ -21,7 +22,7 @@
 	{% for t in transactions %}
 		<tr>
 			<td>{{t.item.name}}</td>
-			<td>{{t.timestamp}}</td>
+			<td>{{t.timestamp |timezone:"America/Detroit"}}</td>
 		<tr>
 	{% endfor %}
 </table>
