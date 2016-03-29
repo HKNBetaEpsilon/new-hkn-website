@@ -9,7 +9,7 @@ from .models import Member
 from .forms import MemberForm
 from electeeManagement.models import Electee, Requirements, Social, Service_Hours
 from hknWebsiteProject.resume_zip import zip_resumes
-from hknWebsiteProject.utils import get_members_with_complete_profile, get_current_members_with_completed_profile, get_alumni_with_completed_profile
+from hknWebsiteProject.utils import get_members_with_complete_profile, get_current_members_with_completed_profile, get_alumni_with_completed_profile, has_complete_profile
 
 def make_alpha_dict(members):
 	alpha_list = collections.OrderedDict()
@@ -75,7 +75,7 @@ def profile(request, uniqname, profile_saved=0):
 
 			# if the request user is viewing their own electee progress, 
 			# 	show the buttons to submit socials and service hours
-			if (uniqname == request.user.username):
+			if (uniqname == request.user.username) and has_complete_profile(uniqname) :
 				context['submit'] = True
 
 		context['profile'] = m

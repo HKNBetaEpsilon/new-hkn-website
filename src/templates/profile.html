@@ -81,9 +81,9 @@
 
 		{% if submit %}
 			<a class="btn btn-primary" href="{% url 'submit_service_hours' %}">Submit Service Hours</a>
-		{% endif %}
-		{% if submit %}
 			<a class="btn btn-primary" href="{% url 'submit_social' %}">Submit Social</a>
+		{% else %}
+			<h2 class='red'>Complete your profile! You cannot submit service hours or socials until you complete your profile</h2>
 		{% endif %}
 		<hr>
 		<div id="content">
