@@ -18,6 +18,7 @@
             {% if request.user.is_authenticated %}
               <li><a href="{% url 'member_list' %}">Members</a></li>
               <li><a href="{% url 'awesome_actives' %}">Awesome Actives</a></li>
+              <li><a href="{% url 'elections' %}">Elections</a></li>
             {% endif %}
             {% if request.user.is_superuser %}
               <li class="dropdown">

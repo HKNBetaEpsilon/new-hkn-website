@@ -147,7 +147,23 @@ This is an automated message please do not reply as this email is not checked. I
 '''
 
 def awesome_actives(request):
-	return render(request, "awesome_actives.html", {})
+	context = {}
+	if request.user.is_anonymous():
+		context = {
+			'error' : True,
+			'error_msg' : 'You must be a member to see member\'s profiles'
+		}
+	return render(request, "awesome_actives.html", context)
+
+def elections(request):
+	context = {}
+	if request.user.is_anonymous():
+		context = {
+			'error' : True,
+			'error_msg' : 'You must be a member to see member\'s profiles'
+		}
+
+	return render(request, "elections.html", context)
 
 def misc_tools(request, success = False):
 	total_num_users = Member.objects.count()
