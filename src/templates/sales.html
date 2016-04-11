@@ -13,7 +13,8 @@
 <form class='text-align-center' method='POST' action=''>{% csrf_token %}
 	{{form.item_id}}
 </form>
-<a class="btn btn-danger" href="{% url 'undo' %}">Undo Last Scan</a>
+<a class="btn btn-lg btn-danger" href="{% url 'undo' %}">Undo Last Scan</a>
+<h2>10 Most Recent Transactions</h2>
 <table class='table table-hover'>
 	<tr>
 		<th><h3>Item</h3></td>
