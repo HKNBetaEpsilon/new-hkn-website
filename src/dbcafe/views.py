@@ -19,10 +19,13 @@ def items_edit(request, item):
 		'form' : form
 	}
 	if request.POST:
-			form = ItemForm(request.POST, instance = i)
-			if form.is_valid():
-				form.save()
-				return redirect('items_list')
+		form = ItemForm(request.POST, instance = i)
+		print item
+		print i
+		print form
+		if form.is_valid():
+			form.save()
+			return redirect('items_list')
 
 	return render(request, "items_edit.html", context)
 
@@ -57,7 +60,7 @@ def sales(request):
 
 		form = SalesForm(None)
 
-	transactions = Transaction.objects.all().order_by('-timestamp')
+	transactions = Transaction.objects.order_by('-timestamp')[:10]
 	context['form'] = form
 	context['item_scanned'] = item_scanned
 	context['transactions'] = transactions
