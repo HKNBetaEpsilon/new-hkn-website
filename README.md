@@ -8,4 +8,4 @@ https://hkn.eecs.umich.edu.
 
 There is an awesome [Wiki page]
 (https://github.com/HKNBetaEpsilon/new-hkn-website/wiki/Local-Set-Up-Instructions)
-! Heads over there if you are using a Unix-like environment.
+! Head over there if you are using a Unix-like environment.
