@@ -2,3 +2,13 @@ venv
 static_in_env
 *.pyc
 .DS_store
+
+# Ignore IDE files
+.idea
+.idea/
+
+# Ignore DB file
+*.sqlite3
+
+# Ignore my notes
+notes.txt
