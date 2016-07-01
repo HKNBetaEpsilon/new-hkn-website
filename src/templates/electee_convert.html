@@ -1,0 +1,21 @@
+{% if electee.electee_interview and electee.electee_exam and electee.dues %}
+    {% if electee.member.is_undergraduate %}
+        {% if electee.num_service_hours_approved >= requirements.C_UG_TOTAL_HOURS.num_required and electee.num_socials_approved >= requirements.A_UG_SOCIAL.num_required %}
+            <form action="{% url 'electee_convert' e.member.uniqname %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Convert" class="btn btn-primary"/>
+            </form>
+        {% else %}
+            <button type="button" class="btn btn-secondary" disabled>Convert</button>
+        {% endif %}
+    {% elif electee.num_service_hours_approved >= requirements.D_G_TOTAL_HOURS.num_required and electee.num_socials_approved >= requirements.B_G_SOCIAL.num_required %}
+        <form action="{% url 'electee_convert' e.member.uniqname %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Convert" class="btn btn-primary"/>
+        </form>
+    {% else %}
+        <button type="button" class="btn btn-secondary" disabled>Convert</button>
+    {% endif %}
+{% else %}
+    <button type="button" class="btn btn-secondary" disabled>Convert</button>
+{% endif %}

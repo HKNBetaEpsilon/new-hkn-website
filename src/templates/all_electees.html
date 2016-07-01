@@ -10,6 +10,7 @@
 				<th><h3>Electee Interview</h3></th>
 				<th><h3>Electee Exam</h3></th>
 				<th><h3>Dues</h3></th>
+                <th><h3>Convert</h3></th>
 			</tr>
 		{% for e in electee_list %}
 			<tr>
@@ -28,6 +29,9 @@
 				<td class='text-align-center'>
 				{% include 'electee_dues_complete.html' with electee=e%}
 				</td>
+                <td class="text-align-center">
+                {% include 'electee_convert.html' with electee=e requirements=requirements %}
+                </td>
 			</tr>
 		{% endfor %}
 	</table>
