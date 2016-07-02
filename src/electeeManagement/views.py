@@ -214,3 +214,12 @@ def electee_turn_ins(request):
         context['turnins_saved'] = True
 
     return render(request, "electee_turn_ins.html", context)
+
+
+def convert(request, uniqname):
+    if request.POST:
+        member = Member.objects.get(uniqname=uniqname)
+        if member.status == 'E':
+            member.status = 'A'
+            member.save()
+    return redirect(request.META.get('HTTP_REFERER'), None, None)

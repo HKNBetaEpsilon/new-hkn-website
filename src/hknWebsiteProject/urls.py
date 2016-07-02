@@ -71,6 +71,8 @@ urlpatterns = [
     url(r'^/make_alumni', 'hknWebsiteProject.views.make_alumni', name='make_alumni'),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
+    url(r'^electee_convert/(?P<uniqname>[a-z]{3,8})$', 'electeeManagement.views.convert',
+        name='electee_convert'),
 ]
 
 if settings.DEBUG:
