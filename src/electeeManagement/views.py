@@ -1,4 +1,3 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -223,4 +222,4 @@ def convert(request, uniqname):
         if member.status == 'E':
             member.status = 'A'
             member.save()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER'), None, None)
