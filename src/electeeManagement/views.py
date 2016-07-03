@@ -222,4 +222,6 @@ def convert(request, uniqname):
         if member.status == 'E':
             member.status = 'A'
             member.save()
+            electee = Electee.objects.get(member=member)
+            electee.delete()
     return redirect(request.META.get('HTTP_REFERER'), None, None)
