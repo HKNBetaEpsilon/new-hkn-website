@@ -1,37 +1,37 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{%block content %}
-{% if requirement_changed %}
-	<div class="alert alert-success">
-		<strong>Successfully changed</strong>
-	</div>
-{% endif %}
+{% block content %}
+    {% if requirement_changed %}
+        <div class="alert alert-success">
+            <strong>Successfully changed</strong>
+        </div>
+    {% endif %}
 
-<h1>Edit Electee Requirements</h1>
-<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
-	<table class="table table-hover">
+    <h1>Edit Electee Requirements</h1>
+    <form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+        <table class="table table-hover">
 
-		<tr>
-			<th><h3>Requirement</h3></th>
-			<th><h3>Numbers of Hours</h3></th>
-		</tr>
+            <tr>
+                <th><h3>Requirement</h3></th>
+                <th><h3>Numbers of Hours</h3></th>
+            </tr>
 
-		{{ req_formset.management_form }}
-        {% for form in req_formset %}
-       
-        {{form.requirement}}	<!-- We don't know whey you need form.id -->
-        	<tr>
-				<td>{{form.instance.get_requirement_display}}</td>
-				<td>{{form.num_required}}</td>
-			</tr>
-		{% endfor %}
-		<tr>
-			<td> </td>
-			<td><input class='btn btn-primary' type='submit' value='Submit' /></td>
-		</tr>
-	</table>
-</form>
+            {{ req_formset.management_form }}
+            {% for form in req_formset %}
+
+                {{ form.requirement }}    <!-- We don't know whey you need form.id -->
+                <tr>
+                    <td>{{ form.instance.get_requirement_display }}</td>
+                    <td>{{ form.num_required }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td><input class='btn btn-primary' type='submit' value='Submit'/></td>
+            </tr>
+        </table>
+    </form>
 
 
 {% endblock %}

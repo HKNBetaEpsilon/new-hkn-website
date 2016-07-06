@@ -2,76 +2,93 @@
 {% load staticfiles %}
 
 {% block error_msg %}
-{% if has_not_complete_profile %}
-	<div class="alert alert-info">
-  		<a class="btn btn-primary btn-sm btn-uncomplete-profile" href="{% url 'profile_edit' request.user.username %}">Edit Profile</a>
-  		<strong>Your profile is incomplete, update your profile now!</strong> Your profile will not appear in the members list until you complete your profile.
-	</div>
-{% elif not_member %}
-    <div class="alert alert-warning">
-  		<strong>Login only open to members!</strong> Members, make sure you use your umich email address.
-	</div>
-{% endif %}
+    {% if has_not_complete_profile %}
+        <div class="alert alert-info">
+            <a class="btn btn-primary btn-sm btn-uncomplete-profile"
+               href="{% url 'profile_edit' request.user.username %}">Edit Profile</a>
+            <strong>Your profile is incomplete, update your profile now!</strong> Your profile will
+            not appear in the members list until you complete your profile.
+        </div>
+    {% elif not_member %}
+        <div class="alert alert-warning">
+            <strong>Login only open to members!</strong> Members, make sure you use your umich email
+            address.
+        </div>
+    {% endif %}
 {% endblock %}
 
-{%block content %}
-<h1>Eta Kappa Nu</h1>
-	<div class='row'>
-		<div class='col-sm-9'>
-			<p class='lead'> The Beta-Epsilon chapter of Eta Kappa Nu (HKN) is composed of the top electrical, computer, and computer science engineers at the University of Michigan. We serve our community by operating the fully student-run dB Cafe, holding community service projects around Ann Arbor, and organizing community events to encourage collaboration among the students and faculty. In addition, we collaborate with companies to speak at our meetings, as well as host tech talks for the general campus community. Lastly, we like to have fun! So we have plenty of game nights and trips to Whirlyball and laser tag.</p>
-		</div>
-		<div class='col-sm-3'>
-			<img class="img-responsive center-block" src="{%static 'img/logo-small.png'%}">
-		</div>
-	</div>
-	<div class='jumbotron pictures'>
-		<div class='row'>
-			<h2 class='text-center slc-header'>We are hosting the IEEE-HKN Student Leadership Conference!</h2>
-		</div>
-		<div class='row'>
-			<div class='col-sm-8'>
-				<img class="img-responsive" src="{%static 'img/slc.jpg'%}">
-			</div>
-			<div class='col-sm-4'>
-				<h3>HKN SLC 2016: The Balanced Engineer</h3>
-				<h4>April 1 - 3, 2016</h4>
-				<p>The Beta Epsilon chapter at the University of Michigan is thrilled to welcome you to historic Ann Arbor. We'll be hearing from many amazing speakers, taking a tour of Michigan Stadium, and having many fun activities around town! Find out more at <a href='http://hkn2016.com'>hkn2016.com</a><p>
-			</div>
-		</div>
-	</div>
-	<div class='jumbotron pictures'>
-	<div class='row top-pictures-row'>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic10.jpg'%}">
-		</div>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic8.jpg'%}">
-		</div>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic5.jpg'%}">
-		</div>
-	</div>
-	<div class='row'>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic9.jpg'%}">
-		</div>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic4.jpg'%}">
-		</div>
-		<div class='col-sm-4'>
-			<img class="img-responsive" src="{%static 'img/pic3.jpg'%}">
-		</div>
-	</div>
-</div>
-	<div class='row'>
-		<div class='col-sm-12'>
-			<h2>Upcoming Events  </h2>
-			<h4><span class="glyphicon glyphicon-star star"></span>To conveniently access these events from your personal calendar, click the button on the bottom right corner of the calendar.</h4>
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=690&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;
+{% block content %}
+    <h1>Eta Kappa Nu</h1>
+    <div class='row'>
+        <div class='col-sm-9'>
+            <p class='lead'> The Beta-Epsilon chapter of Eta Kappa Nu (HKN) is composed of the top
+                electrical, computer, and computer science engineers at the University of Michigan.
+                We serve our community by operating the fully student-run dB Cafe, holding community
+                service projects around Ann Arbor, and organizing community events to encourage
+                collaboration among the students and faculty. In addition, we collaborate with
+                companies to speak at our meetings, as well as host tech talks for the general
+                campus community. Lastly, we like to have fun! So we have plenty of game nights and
+                trips to Whirlyball and laser tag.</p>
+        </div>
+        <div class='col-sm-3'>
+            <img class="img-responsive center-block" src="{% static 'img/logo-small.png' %}">
+        </div>
+    </div>
+    <div class='jumbotron pictures'>
+        <div class='row'>
+            <h2 class='text-center slc-header'>We are hosting the IEEE-HKN Student Leadership
+                Conference!</h2>
+        </div>
+        <div class='row'>
+            <div class='col-sm-8'>
+                <img class="img-responsive" src="{% static 'img/slc.jpg' %}">
+            </div>
+            <div class='col-sm-4'>
+                <h3>HKN SLC 2016: The Balanced Engineer</h3>
+                <h4>April 1 - 3, 2016</h4>
+                <p>The Beta Epsilon chapter at the University of Michigan is thrilled to welcome you
+                    to historic Ann Arbor. We'll be hearing from many amazing speakers, taking a
+                    tour of Michigan Stadium, and having many fun activities around town! Find out
+                    more at <a href='http://hkn2016.com'>hkn2016.com</a>
+                <p>
+            </div>
+        </div>
+    </div>
+    <div class='jumbotron pictures'>
+        <div class='row top-pictures-row'>
+            <div class='col-sm-4'>
+                <img class="img-responsive" src="{% static 'img/pic10.jpg' %}">
+            </div>
+            <div class='col-sm-4'>
+                <img class="img-responsive" src="{% static 'img/pic8.jpg' %}">
+            </div>
+            <div class='col-sm-4'>
+                <img class="img-responsive" src="{% static 'img/pic5.jpg' %}">
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-sm-4'>
+                <img class="img-responsive" src="{% static 'img/pic9.jpg' %}">
+            </div>
+            <div class='col-sm-4'>
+                <img class="img-responsive" src="{% static 'img/pic4.jpg' %}">
+            </div>
+            <div class='col-sm-4'>
+                <img class="img-responsive" src="{% static 'img/pic3.jpg' %}">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-sm-12'>
+            <h2>Upcoming Events </h2>
+            <h4><span class="glyphicon glyphicon-star star"></span>To conveniently access these
+                events from your personal calendar, click the button on the bottom right corner of
+                the calendar.</h4>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=690&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;
 				src=3fek7mnb9nbp4fbubo611u5uns%40group.calendar.google.com&amp;color=%236B3304&amp;src=77pcfkn2qivvtvvkgacu58bf00%40group.calendar.google.com&amp;color=%23711616&amp;src=7djnp36aq6lj3robnsied6htc4%40group.calendar.google.com&amp;color=%23AB8B00&amp;src=cm8srqsl1no2hdl90oh14s0ao8%40group.calendar.google.com&amp;color=%23125A12&amp;src=ja0cqsoik9kks8qsppctjmrj8c%40group.calendar.google.com&amp;color=%2328754E&amp;src=f2rgcm1h48jmdloql1hfel7vuk%40group.calendar.google.com&amp;color=%23333333&amp;src=ig3go5tuho3j3p7vtj17q0fgv0%40group.calendar.google.com&amp;color=%23B1365F&amp;src=jhjbjs9j2k0pa1qc4b462ob39o%40group.calendar.google.com&amp;color=%2323164E&amp;ctz=America%2FNew_York">
-			</iframe>
-		</div>
-	</div>
-</div>
+                </iframe>
+            </div>
+        </div>
+    </div>
 {% endblock %}

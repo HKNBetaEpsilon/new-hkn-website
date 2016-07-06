@@ -2,30 +2,30 @@
 {% load crispy_forms_tags %}
 
 {% block error_msg %}
-{% if error %}
-	<div class="alert alert-warning">
-  		<strong>{{error_msg}}</strong>
-	</div>
-{% endif %}
+    {% if error %}
+        <div class="alert alert-warning">
+            <strong>{{ error_msg }}</strong>
+        </div>
+    {% endif %}
 {% endblock %}
 
-{%block content %}
-{% if not error %}
-{% if social_submitted %}
-	<div class="alert alert-success">
-		<strong>Successfully submitted social</strong>
-	</div>
-{% endif %}
+{% block content %}
+    {% if not error %}
+        {% if social_submitted %}
+            <div class="alert alert-success">
+                <strong>Successfully submitted social</strong>
+            </div>
+        {% endif %}
 
 
-<a class="btn btn-primary btn-sm" href="{% url 'profile' request.user %}">
-	<span class="glyphicon glyphicon-arrow-left"></span> Back To Profile
-</a>
+        <a class="btn btn-primary btn-sm" href="{% url 'profile' request.user %}">
+            <span class="glyphicon glyphicon-arrow-left"></span> Back To Profile
+        </a>
 
-<h3>Submit Social</h3>
-<form method='POST' action=''>{% csrf_token %}
-	{{form|crispy}}
-	<input class='btn btn-default' type='submit' value='Submit' />
-</form>
-{% endif %}
+        <h3>Submit Social</h3>
+        <form method='POST' action=''>{% csrf_token %}
+            {{ form|crispy }}
+            <input class='btn btn-default' type='submit' value='Submit'/>
+        </form>
+    {% endif %}
 {% endblock %}

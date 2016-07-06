@@ -1,7 +1,9 @@
 {% comment %}
-This is super ugly because I couldn't figure out a way for Django to use multi-line if-statement.
-If I add line break in the middle of if ... and ... the template will be interpreted as something
- weird.
+    This is super ugly because I couldn't figure out a way for Django to use multi-line
+    if-statement.
+    If I add line break in the middle of if ... and ... the template will be interpreted as
+    something
+    weird.
 {% endcomment %}
 {% if electee.electee_interview and electee.electee_exam and electee.dues %}
     {% if electee.member.is_undergraduate %}

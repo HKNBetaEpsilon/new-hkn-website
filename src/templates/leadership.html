@@ -1,92 +1,95 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{%block content %}
-{% if leader_saved %}
-	<div class="alert alert-success">
-  		<strong>You have successfully updated leadership</strong>
-	</div>
-{% endif %}
-<h1>Current Leadership</h1>
-<hr>
-{% if officers %}
-<h2>Officers</h2>
-<div class='container'>
-{% for leader in officers %}
-	{% if forloop.counter0|divisibleby:3 %}
-	<div class='row top-pictures-row'>
-	{% endif %}
-		<div class='col-sm-4'>
-			{% if leader.member.profile_pic %}
-				{% include 'leadership_thumbnail.html' with leader_pic=leader.member.profile_pic%}
-			{% else %}
-			<img class="img-responsive center-block profile-pic" src="{%static 'img/default_profile_pic.jpg'%}">
-			{% endif %}		
+{% block content %}
+    {% if leader_saved %}
+        <div class="alert alert-success">
+            <strong>You have successfully updated leadership</strong>
+        </div>
+    {% endif %}
+    <h1>Current Leadership</h1>
+    <hr>
+    {% if officers %}
+        <h2>Officers</h2>
+        <div class='container'>
+            {% for leader in officers %}
+                {% if forloop.counter0|divisibleby:3 %}
+                    <div class='row top-pictures-row'>
+                {% endif %}
+            <div class='col-sm-4'>
+                {% if leader.member.profile_pic %}
+                    {% include 'leadership_thumbnail.html' with leader_pic=leader.member.profile_pic %}
+                {% else %}
+                    <img class="img-responsive center-block profile-pic"
+                         src="{% static 'img/default_profile_pic.jpg' %}">
+                {% endif %}
 
-			<h3 class='text-center'>
-				<a href="{%url 'profile' leader.member.uniqname %}">{{leader.member.first_name}} {{leader.member.last_name}}</a>
-			</h3>
-			<h4 class='text-center'>{{leader.position}}</h4>
-			<h4 class='text-center'>{{leader.email}}</h4>
-		</div>
-	{% if forloop.counter|divisibleby:3 %}
-	</div>
-	{% endif %}
-{% endfor %}
-</div>
-{% endif %}
+                <h3 class='text-center'>
+                    <a href="{% url 'profile' leader.member.uniqname %}">{{ leader.member.first_name }} {{ leader.member.last_name }}</a>
+                </h3>
+                <h4 class='text-center'>{{ leader.position }}</h4>
+                <h4 class='text-center'>{{ leader.email }}</h4>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
 
-{% if chairs %}
-<div class='container'>
-<h2>Chairs</h2>
-{% for chair in chairs %}
-	{% if forloop.counter0|divisibleby:3 %}
-	<div class='row top-pictures-row'>
-	{% endif %}
-		<div class='col-sm-4'>
-			{% if chair.member.profile_pic %}
-				{% include 'leadership_thumbnail.html' with leader_pic=chair.member.profile_pic%}
-			{% else %}
-			<img class="img-responsive center-block profile-pic" src="{%static 'img/default_profile_pic.jpg'%}">
-			{% endif %}		
+    {% if chairs %}
+        <div class='container'>
+            <h2>Chairs</h2>
+            {% for chair in chairs %}
+                {% if forloop.counter0|divisibleby:3 %}
+                    <div class='row top-pictures-row'>
+                {% endif %}
+            <div class='col-sm-4'>
+                {% if chair.member.profile_pic %}
+                    {% include 'leadership_thumbnail.html' with leader_pic=chair.member.profile_pic %}
+                {% else %}
+                    <img class="img-responsive center-block profile-pic"
+                         src="{% static 'img/default_profile_pic.jpg' %}">
+                {% endif %}
 
-			<h3 class='text-center'>
-				<a href="{%url 'profile' chair.member.uniqname %}">{{chair.member.first_name}} {{chair.member.last_name}}</a>
-			</h3>
-			<h4 class='text-center'>{{chair.position}}</h4>
-			<h4 class='text-center'>{{chair.email}}</h4>
-		</div>
-	{% if forloop.counter|divisibleby:3 %}
-	</div>
-	{% endif %}
-{% endfor %}
-</div>
-{% endif %}
+                <h3 class='text-center'>
+                    <a href="{% url 'profile' chair.member.uniqname %}">{{ chair.member.first_name }} {{ chair.member.last_name }}</a>
+                </h3>
+                <h4 class='text-center'>{{ chair.position }}</h4>
+                <h4 class='text-center'>{{ chair.email }}</h4>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
 
-{% if advisors %}
-<div class='container'>
-<h2>Advisors</h2>
-{% for advisor in advisors %}
-	{% if forloop.counter0|divisibleby:3 %}
-	<div class='row top-pictures-row'>
-	{% endif %}
-		<div class='col-sm-4'>
-			{% if advisor.member.profile_pic %}
-				{% include 'leadership_thumbnail.html' with leader_pic=advisor.member.profile_pic%}
-			{% else %}
-			<img class="img-responsive center-block profile-pic" src="{%static 'img/default_profile_pic.jpg'%}">
-			{% endif %}		
+    {% if advisors %}
+        <div class='container'>
+            <h2>Advisors</h2>
+            {% for advisor in advisors %}
+                {% if forloop.counter0|divisibleby:3 %}
+                    <div class='row top-pictures-row'>
+                {% endif %}
+            <div class='col-sm-4'>
+                {% if advisor.member.profile_pic %}
+                    {% include 'leadership_thumbnail.html' with leader_pic=advisor.member.profile_pic %}
+                {% else %}
+                    <img class="img-responsive center-block profile-pic"
+                         src="{% static 'img/default_profile_pic.jpg' %}">
+                {% endif %}
 
-			<h3 class='text-center'>
-				<a href="{%url 'profile' advisor.member.uniqname %}">{{advisor.member.first_name}} {{advisor.member.last_name}}</a>
-			</h3>
-			<h4 class='text-center'>{{advisor.position}}</h4>
-			<h4 class='text-center'>{{advisor.email}}</h4>
-		</div>
-	{% if forloop.counter|divisibleby:3 %}
-	</div>
-	{% endif %}
-{% endfor %}
-</div>
-{% endif %}
+                <h3 class='text-center'>
+                    <a href="{% url 'profile' advisor.member.uniqname %}">{{ advisor.member.first_name }} {{ advisor.member.last_name }}</a>
+                </h3>
+                <h4 class='text-center'>{{ advisor.position }}</h4>
+                <h4 class='text-center'>{{ advisor.email }}</h4>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}

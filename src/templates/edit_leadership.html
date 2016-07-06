@@ -2,48 +2,49 @@
 {% load crispy_forms_tags %}
 
 {% block error_msg %}
-{% if error %}
-	<div class="alert alert-warning">
-  		<strong>{{error_msg}}</strong>
-	</div>
-{% endif %}
+    {% if error %}
+        <div class="alert alert-warning">
+            <strong>{{ error_msg }}</strong>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-{% if not error %}
-{% if position_added %}
-	<div class="alert alert-success">
-  		<strong>You have successfully added/removed a position</strong>
-	</div>
-{% endif %}
-<h1>Change Leadership</h1>
-<a class='btn btn-success' href='{% url 'add_leadership' %}'>Add New Position</a>
-<a class='btn btn-danger' href='{% url 'delete_leader' %}'>Remove Position</a>
+    {% if not error %}
+        {% if position_added %}
+            <div class="alert alert-success">
+                <strong>You have successfully added/removed a position</strong>
+            </div>
+        {% endif %}
+        <h1>Change Leadership</h1>
+        <a class='btn btn-success' href='{% url 'add_leadership' %}'>Add New Position</a>
+        <a class='btn btn-danger' href='{% url 'delete_leader' %}'>Remove Position</a>
 
-<form method='POST' action=''>{% csrf_token %}
-	<table class="table table-hover">
-		<tr>
-			<th><h3>Postition</h3></th>
-			<th><h3>Current Leader</h3></th>
-			<th><h3>New Leader</h3></th>
-		</tr>
+        <form method='POST' action=''>{% csrf_token %}
+            <table class="table table-hover">
+                <tr>
+                    <th><h3>Postition</h3></th>
+                    <th><h3>Current Leader</h3></th>
+                    <th><h3>New Leader</h3></th>
+                </tr>
 
-    {{ leader_form.management_form }}
-    {% for form in leader_form %}
-    	{{form.id}} <!-- We don't know whey you need form.id -->
-		<tr>
-			<td>{{form.instance.position}}</td>
-			<td>{{form.instance.member.uniqname}}</td>
-			<td>{{form.member}}</td>
-		</tr>
-    {% endfor %}
-	    <tr>
-	    	<td></td>
-	    	<td></td>
-			<td><input class='btn btn-default btn-primary' type='submit' value='Submit' /></td>
-		</tr>
-	</table>
-</form>
+                {{ leader_form.management_form }}
+                {% for form in leader_form %}
+                    {{ form.id }} <!-- We don't know whey you need form.id -->
+                    <tr>
+                        <td>{{ form.instance.position }}</td>
+                        <td>{{ form.instance.member.uniqname }}</td>
+                        <td>{{ form.member }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input class='btn btn-default btn-primary' type='submit' value='Submit'/>
+                    </td>
+                </tr>
+            </table>
+        </form>
 
-{% endif %}
+    {% endif %}
 {% endblock %}

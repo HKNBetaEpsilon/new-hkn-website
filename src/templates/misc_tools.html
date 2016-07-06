@@ -1,38 +1,45 @@
 {% extends 'base.html' %}
 
 {% block error_msg %}
-{% if success %}
-	<div class="alert alert-success">
-  		<strong>Success!</strong>
-	</div>
-{% endif %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Success!</strong>
+        </div>
+    {% endif %}
 {% endblock %}
 
-{%block content %}
-<h1>Misc Tools</h1>
-<h3>{{num_members_comp_prof}} out of {{total_num_users}} members have completed their profile</h3>
-<table class="table">
-	<tr>
-		<th><h3>Descritpion</h3></th>
-		<th><h3>Action</h3></th>
-	</tr>
-	<tr>
-		<td><p>Do you want to bug everyone who has not completed thier profile? This buttion will email everyone who has been added to the website but has not filled out their profile. Note: a resume is not required for a completed profile. Everyone witha completed profile will appear in the members list.
-		</td>
-		<td>
-			<a class="btn btn-danger" href="{% url 'email_uncompleted_profiles' %}">Email everyone with uncompleted profiles!</a>
-		</td>
-	</tr>
-	<tr>
-		<td>This buttion will go though all of the members on the website and convert them to alumni status if they have graduated. It uses the graduation date on the profile to determine if someone has graduated or not.
-		</td>
-		<td>
-			<a class="btn btn-warning" href="{% url 'make_alumni' %}">Make Alumni</a>
-		</td>
-	</tr>
-</table>
-<h3>Uniqnames that have accounts in the website</h3>
-{% for m in members %}
-{{m}}<br>
-{% endfor %}
+{% block content %}
+    <h1>Misc Tools</h1>
+    <h3>{{ num_members_comp_prof }} out of {{ total_num_users }} members have completed their
+        profile</h3>
+    <table class="table">
+        <tr>
+            <th><h3>Descritpion</h3></th>
+            <th><h3>Action</h3></th>
+        </tr>
+        <tr>
+            <td><p>Do you want to bug everyone who has not completed thier profile? This buttion
+                will email everyone who has been added to the website but has not filled out their
+                profile. Note: a resume is not required for a completed profile. Everyone witha
+                completed profile will appear in the members list.
+            </td>
+            <td>
+                <a class="btn btn-danger" href="{% url 'email_uncompleted_profiles' %}">Email
+                    everyone with uncompleted profiles!</a>
+            </td>
+        </tr>
+        <tr>
+            <td>This buttion will go though all of the members on the website and convert them to
+                alumni status if they have graduated. It uses the graduation date on the profile to
+                determine if someone has graduated or not.
+            </td>
+            <td>
+                <a class="btn btn-warning" href="{% url 'make_alumni' %}">Make Alumni</a>
+            </td>
+        </tr>
+    </table>
+    <h3>Uniqnames that have accounts in the website</h3>
+    {% for m in members %}
+        {{ m }}<br>
+    {% endfor %}
 {% endblock %}
