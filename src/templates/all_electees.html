@@ -1,40 +1,38 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1>Electee Progess</h1>
-    <table class="table table-hover">
-        <tr>
-            <th><h3>Electee Name</h3></th>
-            <th><h3>Number of Socials</h3></th>
-            <th><h3>Number of Projects</h3></th>
-            <th><h3>Electee Interview</h3></th>
-            <th><h3>Electee Exam</h3></th>
-            <th><h3>Dues</h3></th>
-            <th><h3>Convert</h3></th>
-        </tr>
-        {% for e in electee_list %}
-            <tr>
-                <td>
-                    <a href="{% url 'profile' e.member.uniqname %}">{{ e.member.first_name }} {{ e.member.last_name }}
-                        ({{ e.member.uniqname }})</a></td>
+{%block content %}
+<h1>Electee Progess</h1>
+	<table class="table table-hover">
+			<tr>
+				<th><h3>Electee Name</h3></th>
+				<th><h3>Number of Socials</h3></th>
+				<th><h3>Number of Projects</h3></th>
+				<th><h3>Electee Interview</h3></th>
+				<th><h3>Electee Exam</h3></th>
+				<th><h3>Dues</h3></th>
+                <th><h3>Convert</h3></th>
+			</tr>
+		{% for e in electee_list %}
+			<tr>
+				<td><a href="{%url 'profile' e.member.uniqname %}">{{e.member.first_name}} {{e.member.last_name}} ({{e.member.uniqname}})</a></td>
 
-                <td>{% include 'electee_social_progress.html' with electee=e requirements=requirements %}</td>
+				<td>{% include 'electee_social_progress.html' with electee=e requirements=requirements%}</td>
 
-                <td>{% include 'electee_service_hours_progress.html' with electee=e requirements=requirements %}</td>
+				<td>{% include 'electee_service_hours_progress.html' with electee=e requirements=requirements%}</td>
 
-                <td class='text-align-center'>
-                    {% include 'electee_interview_complete.html' with electee=e %}
-                </td>
-                <td class='text-align-center'>
-                    {% include 'electee_exam_complete.html' with electee=e %}
-                </td>
-                <td class='text-align-center'>
-                    {% include 'electee_dues_complete.html' with electee=e %}
-                </td>
+				<td class='text-align-center'>
+				{% include 'electee_interview_complete.html' with electee=e%}
+				</td>
+				<td class='text-align-center'>
+				{% include 'electee_exam_complete.html' with electee=e%}
+				</td>
+				<td class='text-align-center'>
+				{% include 'electee_dues_complete.html' with electee=e%}
+				</td>
                 <td class="text-align-center">
-                    {% include 'electee_convert.html' with electee=e requirements=requirements %}
+                {% include 'electee_convert.html' with electee=e requirements=requirements %}
                 </td>
-            </tr>
-        {% endfor %}
-    </table>
+			</tr>
+		{% endfor %}
+	</table>
 {% endblock %}

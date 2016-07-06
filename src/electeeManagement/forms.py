@@ -1,23 +1,26 @@
 from django import forms
 
-from .models import Social, Service_Hours, Requirements
+from .models import Social, Service_Hours
+
 
 # Form to submit a social model
 class SocialForm(forms.ModelForm):
-	class Meta:
-		model = Social
-		exclude = ['electee', 'approved']
+    class Meta:
+        model = Social
+        exclude = ['electee', 'approved']
+
 
 class ApproveSocialForm(forms.ModelForm):
-	class Meta:
-		model = Social
-		exclude = []
+    class Meta:
+        model = Social
+        exclude = []
+
 
 # Form to submit a service hours model
 class ServiceHoursForm(forms.ModelForm):
-	class Meta:
-		model = Service_Hours
-		exclude = ['electee', 'approved']
+    class Meta:
+        model = Service_Hours
+        exclude = ['electee', 'approved']
 
 # # form to set Requirements Model
 # class RequirementsForm(forms.Form):
