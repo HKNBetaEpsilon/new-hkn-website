@@ -94,23 +94,16 @@ def make_members(form, electee):
 def create_new_members(request):
     context = {}
 
-    form_electee = NewMemberForm(request.POST or None, prefix='electee')
-    form_active = NewMemberForm(request.POST or None, prefix='active')
+    form = NewMemberForm(request.POST or None)
 
-    if form_electee.is_valid():
-        context = make_members(form_electee, True)
-        form_electee = NewMemberForm()
+    if form.is_valid():
+        context = make_members(form,
+                               form.cleaned_data.get('type') == 'E')
+        form = NewMemberForm()
         if not context['error']:
             context['new_members_submitted'] = True
 
-    if form_active.is_valid():
-        context = make_members(form_active, False)
-        form_active = NewMemberForm()
-        if not context['error']:
-            context['new_members_submitted'] = True
-
-    context['form_electee'] = form_electee
-    context['form_active'] = form_active
+    context['form'] = form
 
     return render(request, "create_new_members.html", context)
 

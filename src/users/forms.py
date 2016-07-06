@@ -33,6 +33,9 @@ class MemberForm(forms.ModelForm):
 # Form to submit a comma separated list of new member to create member objects for
 class NewMemberForm(forms.Form):
     new_members = forms.CharField()
+    status = (('E', 'Electee'),
+              ('A', 'Active'))
+    type = forms.ChoiceField(choices=status)
 
     def clean_new_members(self):
         new_members = self.cleaned_data.get('new_members')
