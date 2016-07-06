@@ -1,12 +1,12 @@
-{{electee.num_socials_approved}} / 
+{{ electee.num_socials_approved }} /
 {% if electee.member.is_undergraduate %}
-	{{requirements.A_UG_SOCIAL.num_required}}
-	{% if electee.num_socials_approved >= requirements.A_UG_SOCIAL.num_required%}
-		<span class="glyphicon glyphicon-ok green"></span>
-	{% endif %}
+    {{ requirements.A_UG_SOCIAL.num_required }}
+    {% if electee.num_socials_approved >= requirements.A_UG_SOCIAL.num_required %}
+        <span class="glyphicon glyphicon-ok green"></span>
+    {% endif %}
 {% else %}
-	{{requirements.B_G_SOCIAL.num_required}}
-	{% if electee.num_socials_approved >= requirements.B_G_SOCIAL.num_required%}
-		<span class="glyphicon glyphicon-ok green"></span>
-	{% endif %}
+    {{ requirements.B_G_SOCIAL.num_required }}
+    {% if electee.num_socials_approved >= requirements.B_G_SOCIAL.num_required %}
+        <span class="glyphicon glyphicon-ok green"></span>
+    {% endif %}
 {% endif %}

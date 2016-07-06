@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{%block content %}
-<h1>dBCafe Stats</h1>
-<h2>{{drawer.amount}}</h2>
-<a class="btn btn-warning" href="{% url 'reset' %}">Reset Money Drawer to $300</a>
+{% block content %}
+    <h1>dBCafe Stats</h1>
+    <h2>{{ drawer.amount }}</h2>
+    <a class="btn btn-warning" href="{% url 'reset' %}">Reset Money Drawer to $300</a>
 
 {% endblock %}

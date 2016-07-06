@@ -52,7 +52,6 @@ def make_members(form, electee):
     }
     uniqnames = form.cleaned_data.get('new_members').split(',')
     try:
-        pass
         # validate each submitted uniqname to make sure that a member
         # 	with that uniqname does not alread exist, and that it is
         # 	alphabetic and a valid number of characters

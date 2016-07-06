@@ -1,41 +1,43 @@
 {% extends 'base.html' %}
 
-{%block content %}
+{% block content %}
 
-{% if turnins_saved %}
-	<div class="alert alert-success">
-		<strong>Successfully changed turn ins</strong>
-	</div>
-{% endif %}
+    {% if turnins_saved %}
+        <div class="alert alert-success">
+            <strong>Successfully changed turn ins</strong>
+        </div>
+    {% endif %}
 
-<h1>Electee Turn Ins</h1>
-<form method='POST' action=''>{% csrf_token %}
-	<table class="table table-hover">
+    <h1>Electee Turn Ins</h1>
+    <form method='POST' action=''>{% csrf_token %}
+        <table class="table table-hover">
 
-		<tr>
-			<th><h3>Name</h3></th>
-			<th><h3>Electee Interview</h3></th>
-			<th><h3>Electee Exam</h3></th>
-			<th><h3>Dues</h3></th>
-		</tr>
+            <tr>
+                <th><h3>Name</h3></th>
+                <th><h3>Electee Interview</h3></th>
+                <th><h3>Electee Exam</h3></th>
+                <th><h3>Dues</h3></th>
+            </tr>
 
-		{{ turnins_formset.management_form }}
-        {% for form in turnins_formset %}
-       
-        {{form.member}}	<!-- We don't know whey you need form.id -->
-        	<tr>
-				<td>{{form.instance.member.first_name}} {{form.instance.member.last_name}} ({{form.instance.member.uniqname}})</td>
-				<td>{{form.electee_interview}}</td>
-				<td>{{form.electee_exam}}</td>
-				<td>{{form.dues}}</td>
-			</tr>
-		{% endfor %}
-		<tr>
-			<td> </td>
-			<td> </td>
-			<td> </td>
-			<td><input class='btn btn-primary' type='submit' value='Submit' /></td>
-		</tr>
-	</table>
-</form>
+            {{ turnins_formset.management_form }}
+            {% for form in turnins_formset %}
+
+                {{ form.member }}    <!-- We don't know whey you need form.id -->
+                <tr>
+                    <td>{{ form.instance.member.first_name }} {{ form.instance.member.last_name }}
+                        ({{ form.instance.member.uniqname }})
+                    </td>
+                    <td>{{ form.electee_interview }}</td>
+                    <td>{{ form.electee_exam }}</td>
+                    <td>{{ form.dues }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input class='btn btn-primary' type='submit' value='Submit'/></td>
+            </tr>
+        </table>
+    </form>
 {% endblock %}

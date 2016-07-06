@@ -1,71 +1,79 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{%block content %}
-{% if approved %}
-	<div class="alert alert-success">
-  		<strong>Successfully Approved Submissions</strong>
-	</div>
-{% endif %}
+{% block content %}
+    {% if approved %}
+        <div class="alert alert-success">
+            <strong>Successfully Approved Submissions</strong>
+        </div>
+    {% endif %}
 
-<h2>Unapproved Socials</h2>
-	<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
-		<table class="table table-hover">
-		    <tr>
-	        	<th><h3>Electee Uniqname</h3></td>
-	        	<th><h3>Social Name</h3></td>
-	        	<th><h3>Approve</h3></td>
-	        </tr>
+    <h2>Unapproved Socials</h2>
+    <form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+        <table class="table table-hover">
+            <tr>
+                <th><h3>Electee Uniqname</h3>
+                </td>
+                <th><h3>Social Name</h3>
+                </td>
+                <th><h3>Approve</h3>
+                </td>
+            </tr>
 
-		    {{ social_formset.management_form }}
-	        {% for form in social_formset %}
-	        <!-- We don't know whey you need form.id -->
-	        {{form.id}}
-	        <tr>
-	        	<td>{{form.instance.electee}}</td>
-	        	<td>{{form.instance.social_name}}</td>
-	        	<td>{{form.approved}}</td>
-	        </tr>
-	        {% endfor %}
+            {{ social_formset.management_form }}
+            {% for form in social_formset %}
+                <!-- We don't know whey you need form.id -->
+                {{ form.id }}
+                <tr>
+                    <td>{{ form.instance.electee }}</td>
+                    <td>{{ form.instance.social_name }}</td>
+                    <td>{{ form.approved }}</td>
+                </tr>
+            {% endfor %}
 
-	        <tr>
-	        	<td> </td>
-	        	<td> </td>
-	        	<td><input class='btn btn-primary' type='submit' value='Submit' /></td>
-	        </tr>
-	 	</table>
-	</form>
-<h2>Unapproved Service Hours</h2>
-	<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
-		<table class="table table-hover">
-  			<tr>
-	        	<th><h3>Electee Uniqname</h3></td>
-	        	<th><h3>Project Type</h3></td>
-	        	<th><h3>Project Name</h3></td>
-	        	<th><h3>Number of Hours</h3></td>
-	        	<th><h3>Approve</h3></td>
-	        </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><input class='btn btn-primary' type='submit' value='Submit'/></td>
+            </tr>
+        </table>
+    </form>
+    <h2>Unapproved Service Hours</h2>
+    <form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+        <table class="table table-hover">
+            <tr>
+                <th><h3>Electee Uniqname</h3>
+                </td>
+                <th><h3>Project Type</h3>
+                </td>
+                <th><h3>Project Name</h3>
+                </td>
+                <th><h3>Number of Hours</h3>
+                </td>
+                <th><h3>Approve</h3>
+                </td>
+            </tr>
 
-  			{{ service_formset.management_form }}
-	        {% for form in service_formset %}
-	       
-	        {{form.id}}	<!-- We don't know whey you need form.id -->
-	        	<tr>
-					<td>{{form.instance.electee}}</td>
-					<td>{{form.instance.service_type}}</td>
-					<td>{{form.instance.service_name}}</td>
-					<td>{{form.instance.num_hours}}</td>
-					<td>{{form.approved}}</td>
-				</tr>
-			{% endfor %}
+            {{ service_formset.management_form }}
+            {% for form in service_formset %}
 
-	        <tr>
-	        	<td> </td>
-	        	<td> </td>
-	        	<td> </td>
-	        	<td> </td>
-	        	<td><input class='btn btn-primary' type='submit' value='Submit' /></td>
-	        </tr>
-		</table>
-	</form>
+                {{ form.id }}    <!-- We don't know whey you need form.id -->
+                <tr>
+                    <td>{{ form.instance.electee }}</td>
+                    <td>{{ form.instance.service_type }}</td>
+                    <td>{{ form.instance.service_name }}</td>
+                    <td>{{ form.instance.num_hours }}</td>
+                    <td>{{ form.approved }}</td>
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input class='btn btn-primary' type='submit' value='Submit'/></td>
+            </tr>
+        </table>
+    </form>
 {% endblock %}

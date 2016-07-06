@@ -2,26 +2,26 @@
 {% load crispy_forms_tags %}
 
 {% block error_msg %}
-{% if error %}
-	<div class="alert alert-warning">
-  		<strong>{{error_msg}}</strong>
-	</div>
-{% endif %}
+    {% if error %}
+        <div class="alert alert-warning">
+            <strong>{{ error_msg }}</strong>
+        </div>
+    {% endif %}
 {% endblock %}
 
-{%block content %}
-{% if new_members_submitted %}
-	<div class="alert alert-success">
-  		<strong>You have successfully created new members.</strong>
-	</div>
-{% endif %}
-<h1>Create New Members</h1>
-<p>To create new members, enter there uniqnames here seperated by commas and 
-   select wheather to make then actives or electees.</p>
-<form method='POST' action=''>{% csrf_token %}
-	{{form|crispy}}
-	<hr>
-	<input class='btn btn-primary' type='submit' value='Submit' />
-</form>
+{% block content %}
+    {% if new_members_submitted %}
+        <div class="alert alert-success">
+            <strong>You have successfully created new members.</strong>
+        </div>
+    {% endif %}
+    <h1>Create New Members</h1>
+    <p>To create new members, enter there uniqnames here seperated by commas and
+        select wheather to make then actives or electees.</p>
+    <form method='POST' action=''>{% csrf_token %}
+        {{ form|crispy }}
+        <hr>
+        <input class='btn btn-primary' type='submit' value='Submit'/>
+    </form>
 
 {% endblock %}

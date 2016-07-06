@@ -2,28 +2,28 @@
 {% load crispy_forms_tags %}
 
 {% block error_msg %}
-{% if error %}
-	<div class="alert alert-warning">
-  		<strong>{{error_msg}}</strong>
-	</div>
-{% endif %}
+    {% if error %}
+        <div class="alert alert-warning">
+            <strong>{{ error_msg }}</strong>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-{% if not error %}
-<h1>Edit Profile</h4>
-<form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
-	{{form|crispy}}
-	<input class='btn btn-primary' type='submit' value='Submit' />
-</form>
+    {% if not error %}
+        <h1>Edit Profile</h4>
+        <form enctype="multipart/form-data" method='POST' action=''>{% csrf_token %}
+            {{ form|crispy }}
+            <input class='btn btn-primary' type='submit' value='Submit'/>
+        </form>
 
-<script type="text/javascript">
-  $(function(){
-    $('.datepicker').datepicker({
-        viewMode: 'months',
-        minViewMode: 'months',
-    });
-  });
-</script>
-{% endif %}
+        <script type="text/javascript">
+            $(function () {
+                $('.datepicker').datepicker({
+                    viewMode: 'months',
+                    minViewMode: 'months',
+                });
+            });
+        </script>
+    {% endif %}
 {% endblock %}
