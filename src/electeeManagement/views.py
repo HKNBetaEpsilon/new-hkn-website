@@ -29,24 +29,25 @@ def all_electees(request):
         (requirements.requirement, requirements) for requirements in Requirements.objects.all())
 
     # process the electee progress, so that wo don't have to run those if-else in template html
-    print type(electee_list)
     electee_list_plain = []
     for electee in electee_list:
-        progress = {}
-        progress['uniqname'] = electee.member.uniqname
-        progress['first_name'] = electee.member.first_name
-        progress['last_name'] = electee.member.last_name
         is_undergraduate = electee.member.is_undergraduate()
 
-        progress['num_socials_approved'] = electee.num_socials_approved
-        progress['num_service_hours_approved'] = electee.num_service_hours_approved
-        progress['electee_interview'] = electee.electee_interview
-        progress['electee_exam'] = electee.electee_exam
-        progress['dues'] = electee.dues
+        progress = {
+            'uniqname': electee.member.uniqname,
+            'first_name': electee.member.first_name,
+            'last_name': electee.member.last_name,
+
+            'num_socials_approved': electee.num_socials_approved,
+            'num_service_hours_approved': electee.num_service_hours_approved,
+            'electee_interview': electee.electee_interview,
+            'electee_exam': electee.electee_exam,
+            'dues': electee.dues,
+        }
 
         # check for if requirement meets
-        req_social = 'A_UG_SOCIAL' if is_undergraduate else 'B_G_SOCIAL'
-        req_service = 'C_UG_TOTAL_HOURS' if is_undergraduate else 'D_G_TOTAL_HOURS'
+        req_social, req_service = ('A_UG_SOCIAL', 'C_UG_TOTAL_HOURS') if \
+            electee.member.is_undergraduate() else ('B_G_SOCIAL', 'D_G_TOTAL_HOURS')
 
         progress['social_req'] = requirements[req_social].num_required
         progress['service_req'] = requirements[req_service].num_required
