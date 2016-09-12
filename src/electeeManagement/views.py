@@ -31,8 +31,6 @@ def all_electees(request):
     # process the electee progress, so that wo don't have to run those if-else in template html
     electee_list_plain = []
     for electee in electee_list:
-        is_undergraduate = electee.member.is_undergraduate()
-
         progress = {
             'uniqname': electee.member.uniqname,
             'first_name': electee.member.first_name,
