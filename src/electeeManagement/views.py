@@ -28,9 +28,41 @@ def all_electees(request):
     requirements = dict(
         (requirements.requirement, requirements) for requirements in Requirements.objects.all())
 
+    # process the electee progress, so that wo don't have to run those if-else in template html
+    electee_list_plain = []
+    for electee in electee_list:
+        progress = {
+            'uniqname': electee.member.uniqname,
+            'first_name': electee.member.first_name,
+            'last_name': electee.member.last_name,
+
+            'num_socials_approved': electee.num_socials_approved,
+            'num_service_hours_approved': electee.num_service_hours_approved,
+            'electee_interview': electee.electee_interview,
+            'electee_exam': electee.electee_exam,
+            'dues': electee.dues,
+        }
+
+        # check for if requirement meets
+        req_social, req_service = ('A_UG_SOCIAL', 'C_UG_TOTAL_HOURS') if \
+            electee.member.is_undergraduate() else ('B_G_SOCIAL', 'D_G_TOTAL_HOURS')
+
+        progress['social_req'] = requirements[req_social].num_required
+        progress['service_req'] = requirements[req_service].num_required
+
+        progress['social_done'] = (
+            progress['num_socials_approved'] >= progress['social_req'])
+        progress['service_done'] = (
+            progress['num_service_hours_approved'] >= progress['service_req'])
+
+        # decide if the electee are able to convert to active
+        progress['convert'] = progress['social_done'] and progress['service_done'] and progress[
+            'electee_interview'] and progress['electee_exam'] and progress['dues']
+
+        electee_list_plain.append(progress)
+
     context = {
-        'electee_list': electee_list,
-        'requirements': requirements
+        'electee_list': electee_list_plain,
     }
 
     return render(request, "all_electees.html", context)

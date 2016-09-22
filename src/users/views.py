@@ -66,17 +66,42 @@ def profile(request, uniqname, profile_saved=0):
 
         if electee_progress:
             e = Electee.objects.get(member_id=uniqname)
+
+            progress = {
+                'uniqname': e.member.uniqname,
+                'first_name': e.member.first_name,
+                'last_name': e.member.last_name,
+
+                'num_socials_approved': e.num_socials_approved,
+                'num_socials_total' : e.num_socials_total,
+                'num_service_hours_approved': e.num_service_hours_approved,
+                'num_service_hours_total' : e.num_service_hours_total,
+                'num_service_hours_db' : e.num_service_hours_db,
+                'num_service_hours_hkn' : e.num_service_hours_hkn,
+                'num_service_hours_external' : e.num_service_hours_external,
+                'electee_interview': e.electee_interview,
+                'electee_exam': e.electee_exam,
+                'dues': e.dues,
+                'general_meetings_missed' : e.general_meetings_missed,
+            }
+
             requirements = dict((requirements.requirement, requirements) for requirements in
                                 Requirements.objects.all())
             socials = Social.objects.filter(electee_id=uniqname).order_by('-timestamp')
             projects = Service_Hours.objects.filter(electee_id=uniqname).order_by('-timestamp')
 
+            req_social, req_service = ('A_UG_SOCIAL', 'C_UG_TOTAL_HOURS') if \
+                e.member.is_undergraduate() else ('B_G_SOCIAL', 'D_G_TOTAL_HOURS')
+
+            progress['social_req'] = requirements[req_social].num_required
+            progress['service_req'] = requirements[req_service].num_required
+
             context = {
-                'e': e,
+                'e': progress,
                 'requirements': requirements,
                 'submit': False,
                 'socials': socials,
-                'projects': projects
+                'projects': projects,
             }
 
             # if the request user is viewing their own electee progress,
