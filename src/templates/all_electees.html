@@ -15,12 +15,12 @@
         {% for e in electee_list %}
             <tr>
                 <td>
-                    <a href="{% url 'profile' e.member.uniqname %}">{{ e.member.first_name }} {{ e.member.last_name }}
-                        ({{ e.member.uniqname }})</a></td>
+                    <a href="{% url 'profile' e.uniqname %}">{{ e.first_name }} {{ e.last_name }}
+                        ({{ e.uniqname }})</a></td>
 
-                <td>{% include 'electee_social_progress.html' with electee=e requirements=requirements %}</td>
+                <td>{% include 'electee_social_progress.html' with electee=e %}</td>
 
-                <td>{% include 'electee_service_hours_progress.html' with electee=e requirements=requirements %}</td>
+                <td>{% include 'electee_service_hours_progress.html' with electee=e %}</td>
 
                 <td class='text-align-center'>
                     {% include 'electee_interview_complete.html' with electee=e %}
@@ -32,7 +32,7 @@
                     {% include 'electee_dues_complete.html' with electee=e %}
                 </td>
                 <td class="text-align-center">
-                    {% include 'electee_convert.html' with electee=e requirements=requirements %}
+                    {% include 'electee_convert.html' with electee=e %}
                 </td>
             </tr>
         {% endfor %}
