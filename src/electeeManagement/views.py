@@ -257,3 +257,9 @@ def convert(request, uniqname):
             electee = Electee.objects.get(member=member)
             electee.delete()
     return redirect(request.META.get('HTTP_REFERER'), None, None)
+
+def remove_electee(request, uniqname):
+    if request.POST:
+        member = Member.objects.get(uniqname=uniqname)
+        member.delete()
+    return redirect(request.META.get('HTTP_REFERER'), None, None)

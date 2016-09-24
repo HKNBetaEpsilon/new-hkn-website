@@ -73,6 +73,8 @@ urlpatterns = [
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^electee_convert/(?P<uniqname>[a-z]{3,8})$', 'electeeManagement.views.convert',
         name='electee_convert'),
+    url(r'^electee_remove/(?P<uniqname>[a-z]{3,8})$', 'electeeManagement.views.remove_electee',
+        name='electee_remove'),
 ]
 
 if settings.DEBUG:

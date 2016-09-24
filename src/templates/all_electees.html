@@ -4,13 +4,14 @@
     <h1>Electee Progess</h1>
     <table class="table table-hover">
         <tr>
-            <th><h3>Electee Name</h3></th>
-            <th><h3>Number of Socials</h3></th>
-            <th><h3>Number of Projects</h3></th>
+            <th><h3>Name</h3></th>
+            <th><h3>Socials</h3></th>
+            <th><h3>Projects</h3></th>
             <th><h3>Electee Interview</h3></th>
             <th><h3>Electee Exam</h3></th>
             <th><h3>Dues</h3></th>
-            <th><h3>Convert</h3></th>
+            <th><h3>Convert to Active</h3></th>
+            <th><h3>Remove Electee</h3></th>
         </tr>
         {% for e in electee_list %}
             <tr>
@@ -33,6 +34,12 @@
                 </td>
                 <td class="text-align-center">
                     {% include 'electee_convert.html' with electee=e %}
+                </td>
+                <td class="text-align-center">
+                    <form action="{% url 'electee_remove' e.uniqname %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Remove" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove the electee with uniqname {{ e.uniqname }} from the website?')"/>
+                    </form>
                 </td>
             </tr>
         {% endfor %}
