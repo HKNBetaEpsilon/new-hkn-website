@@ -1,3 +1,6 @@
+from hknWebsiteProject import settings
+from django.contrib.auth.decorators import login_required
+
 import collections
 from string import ascii_uppercase
 
@@ -28,100 +31,90 @@ def make_alpha_dict(members):
     return alpha_list
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def member_list(request):
-    if request.user.is_anonymous():
-        context = {
-            'error': True,
-            'error_msg': 'You must be a member to see member\'s profiles'
-        }
-    else:
-        # displays the list of all members who have a complete profile
-        member_list = make_alpha_dict(get_current_members_with_completed_profile())
-        alumni_list = make_alpha_dict(get_alumni_with_completed_profile())
+    # displays the list of all members who have a complete profile
+    member_list = make_alpha_dict(get_current_members_with_completed_profile())
+    alumni_list = make_alpha_dict(get_alumni_with_completed_profile())
 
-        context = {
-            'member_list': member_list,
-            'alumni_list': alumni_list,
-            'error': False
-        }
+    context = {
+        'member_list': member_list,
+        'alumni_list': alumni_list,
+        'error': False
+    }
 
     return render(request, "users/member_list.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def profile(request, uniqname, profile_saved=0):
     context = {}
+    is_curr_user = (request.user.username == uniqname)
 
-    if request.user.is_anonymous():
-        context = {
-            'error': True,
-            'error_msg': 'You must be a member to see member\'s profiles'
+    m = Member.objects.get(uniqname=uniqname)
+    logged_in_as = Member.objects.get(uniqname=request.user.username)
+
+    electee_progress = m.is_electee() and (is_curr_user or logged_in_as.is_officer())
+
+    if electee_progress:
+        e = Electee.objects.get(member_id=uniqname)
+
+        progress = {
+            'uniqname': e.member.uniqname,
+            'first_name': e.member.first_name,
+            'last_name': e.member.last_name,
+
+            'num_socials_approved': e.num_socials_approved,
+            'num_socials_total' : e.num_socials_total,
+            'num_service_hours_approved': e.num_service_hours_approved,
+            'num_service_hours_total' : e.num_service_hours_total,
+            'num_service_hours_db' : e.num_service_hours_db,
+            'num_service_hours_hkn' : e.num_service_hours_hkn,
+            'num_service_hours_external' : e.num_service_hours_external,
+            'electee_interview': e.electee_interview,
+            'electee_exam': e.electee_exam,
+            'dues': e.dues,
+            'general_meetings_missed' : e.general_meetings_missed,
         }
-    else:
-        is_curr_user = (request.user.username == uniqname)
 
-        m = Member.objects.get(uniqname=uniqname)
-        logged_in_as = Member.objects.get(uniqname=request.user.username)
+        requirements = dict((requirements.requirement, requirements) for requirements in
+                            Requirements.objects.all())
+        socials = Social.objects.filter(electee_id=uniqname).order_by('-timestamp')
+        projects = Service_Hours.objects.filter(electee_id=uniqname).order_by('-timestamp')
 
-        electee_progress = m.is_electee() and (is_curr_user or logged_in_as.is_officer())
+        req_social, req_service = ('A_UG_SOCIAL', 'C_UG_TOTAL_HOURS') if \
+            e.member.is_undergraduate() else ('B_G_SOCIAL', 'D_G_TOTAL_HOURS')
 
-        if electee_progress:
-            e = Electee.objects.get(member_id=uniqname)
+        progress['social_req'] = requirements[req_social].num_required
+        progress['service_req'] = requirements[req_service].num_required
 
-            progress = {
-                'uniqname': e.member.uniqname,
-                'first_name': e.member.first_name,
-                'last_name': e.member.last_name,
+        context = {
+            'e': progress,
+            'requirements': requirements,
+            'submit': False,
+            'socials': socials,
+            'projects': projects,
+        }
 
-                'num_socials_approved': e.num_socials_approved,
-                'num_socials_total' : e.num_socials_total,
-                'num_service_hours_approved': e.num_service_hours_approved,
-                'num_service_hours_total' : e.num_service_hours_total,
-                'num_service_hours_db' : e.num_service_hours_db,
-                'num_service_hours_hkn' : e.num_service_hours_hkn,
-                'num_service_hours_external' : e.num_service_hours_external,
-                'electee_interview': e.electee_interview,
-                'electee_exam': e.electee_exam,
-                'dues': e.dues,
-                'general_meetings_missed' : e.general_meetings_missed,
-            }
+        # if the request user is viewing their own electee progress,
+        # 	show the buttons to submit socials and service hours
+        if (uniqname == request.user.username) and has_complete_profile(uniqname):
+            context['submit'] = True
 
-            requirements = dict((requirements.requirement, requirements) for requirements in
-                                Requirements.objects.all())
-            socials = Social.objects.filter(electee_id=uniqname).order_by('-timestamp')
-            projects = Service_Hours.objects.filter(electee_id=uniqname).order_by('-timestamp')
-
-            req_social, req_service = ('A_UG_SOCIAL', 'C_UG_TOTAL_HOURS') if \
-                e.member.is_undergraduate() else ('B_G_SOCIAL', 'D_G_TOTAL_HOURS')
-
-            progress['social_req'] = requirements[req_social].num_required
-            progress['service_req'] = requirements[req_service].num_required
-
-            context = {
-                'e': progress,
-                'requirements': requirements,
-                'submit': False,
-                'socials': socials,
-                'projects': projects,
-            }
-
-            # if the request user is viewing their own electee progress,
-            # 	show the buttons to submit socials and service hours
-            if (uniqname == request.user.username) and has_complete_profile(uniqname):
-                context['submit'] = True
-
-        context['profile'] = m
-        context['is_curr_user'] = is_curr_user
-        context['profile_saved'] = profile_saved
-        context['electee_progress'] = electee_progress
-        context['error'] = False
+    context['profile'] = m
+    context['is_curr_user'] = is_curr_user
+    context['profile_saved'] = profile_saved
+    context['electee_progress'] = electee_progress
+    context['error'] = False
 
     return render(request, "users/profile.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def profile_edit(request, uniqname):
     context = {}
     is_curr_user = (request.user.username == uniqname)
-    if request.user.is_anonymous() or not is_curr_user:
+    if not is_curr_user:
         context = {
             'error': True,
             'error_msg': 'You cannot edit this profile'

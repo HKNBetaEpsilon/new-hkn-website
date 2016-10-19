@@ -1,3 +1,5 @@
+from hknWebsiteProject import settings
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -5,6 +7,7 @@ from .models import Item, Transaction, Drawer
 from .forms import ItemForm, SalesForm
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def items_list(request):
     items = Item.objects.all()
     context = {
@@ -13,6 +16,7 @@ def items_list(request):
     return render(request, "dbcafe/items_list.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def items_edit(request, item):
     i = Item.objects.get(name=item)
     form = ItemForm(instance=i)
@@ -31,6 +35,7 @@ def items_edit(request, item):
     return render(request, "dbcafe/items_edit.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def items_add(request):
     form = ItemForm(request.POST or None)
     context = {
@@ -44,6 +49,7 @@ def items_add(request):
     return render(request, "dbcafe/items_add.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def sales(request):
     context = {}
     form = SalesForm(request.POST or None)
@@ -70,6 +76,7 @@ def sales(request):
     return render(request, "dbcafe/sales.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def stats(request):
     drawer = Drawer.objects.all()[0]
     context = {
@@ -78,6 +85,7 @@ def stats(request):
     return render(request, "dbcafe/stats.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def reset(request):
     drawer = Drawer.objects.all()[0]
     drawer.amount = 300
@@ -85,6 +93,7 @@ def reset(request):
     return redirect('stats')
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def undo(request):
     transaction = Transaction.objects.all().order_by('-timestamp')[0]
     transaction.delete()

@@ -2,6 +2,7 @@ from datetime import date
 
 from electeeManagement.models import Electee
 from hknWebsiteProject import settings
+from django.contrib.auth.decorators import login_required
 from users.forms import NewMemberForm
 from users.models import Member
 
@@ -46,6 +47,7 @@ def corporate(request):
     return render(request, "hknWebsiteProject/corporate.html", {})
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def make_members(form, electee):
     context = {
         'error': False
@@ -90,6 +92,7 @@ def make_members(form, electee):
     return context
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def create_new_members(request):
     context = {}
 
@@ -150,27 +153,19 @@ This is an automated message please do not reply as this email is not checked. I
 '''
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def awesome_actives(request):
     context = {}
-    if request.user.is_anonymous():
-        context = {
-            'error': True,
-            'error_msg': 'You must be a member to see member\'s profiles'
-        }
     return render(request, "hknWebsiteProject/awesome_actives.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def elections(request):
     context = {}
-    if request.user.is_anonymous():
-        context = {
-            'error': True,
-            'error_msg': 'You must be a member to see member\'s profiles'
-        }
-
     return render(request, "hknWebsiteProject/elections.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def misc_tools(request, success=False):
     total_num_users = Member.objects.count()
     num_members_comp_prof = get_members_with_complete_profile().count()
@@ -184,6 +179,7 @@ def misc_tools(request, success=False):
     return render(request, "hknWebsiteProject/misc_tools.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def email_uncompleted_profiles(request):
     members_wo_profile = get_members_with_uncomplete_profile()
     mail_list = []
@@ -202,6 +198,7 @@ def email_uncompleted_profiles(request):
     return misc_tools(request, True)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def make_alumni(request):
     so_old = date(1900, 1, 1)
     current_members = Member.objects.exclude(edu_level__exact='AL')

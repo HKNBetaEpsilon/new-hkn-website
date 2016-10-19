@@ -1,3 +1,5 @@
+from hknWebsiteProject import settings
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import LeaderModelForm, DeleteLeaderForm
 from .models import Leader
@@ -20,9 +22,10 @@ def leadership(request, leader_saved=0):
     return render(request, "leadership/leadership.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def edit_leadership(request, position_added=0):
     context = {}
-    if request.user.is_anonymous() or not request.user.is_superuser:
+    if not request.user.is_superuser:
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -52,9 +55,10 @@ def edit_leadership(request, position_added=0):
     return render(request, "leadership/edit_leadership.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def add_leadership(request):
     context = {}
-    if request.user.is_anonymous() or not request.user.is_superuser:
+    if not request.user.is_superuser:
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -70,7 +74,7 @@ def add_leadership(request):
 
     return render(request, "leadership/add_leadership.html", context)
 
-
+@login_required(login_url=settings.LOGIN_URL)
 def delete_leader(request):
     context = {}
     form = DeleteLeaderForm()

@@ -1,3 +1,5 @@
+from hknWebsiteProject import settings
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -9,6 +11,7 @@ from .models import Electee, Social, Service_Hours, Requirements
 from django.forms import modelformset_factory
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def update_approved_hours():
     all_electees = Electee.objects.all()
     for e in all_electees:
@@ -21,7 +24,7 @@ def update_approved_hours():
         e.save()
 
 
-# display all of the electee objects in a list, should only be viewable by officers
+@login_required(login_url=settings.LOGIN_URL)
 def all_electees(request):
     # get all of the electee objects to display
     electee_list = Electee.objects.filter(member__status='E')
@@ -68,10 +71,11 @@ def all_electees(request):
     return render(request, "electeeManagement/all_electees.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def submit_social(request):
     m = Member.objects.get(uniqname=request.user.username)
     # error if the request user is anonymous or not an electee
-    if request.user.is_anonymous() or not m.is_electee():
+    if not m.is_electee():
         context = {
             'error': True,
             'error_msg': 'You must be an electee to submit socials'
@@ -105,10 +109,11 @@ def submit_social(request):
     return render(request, "electeeManagement/submit_social.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def submit_service_hours(request):
     m = Member.objects.get(uniqname=request.user.username)
     # error if the request user is anonymous or not an electee
-    if request.user.is_anonymous() or not m.is_electee():
+    if not m.is_electee():
         context = {
             'error': True,
             'error_msg': 'You must be an electee to submit service hours'
@@ -149,6 +154,7 @@ def submit_service_hours(request):
 
 
 # shows a list of all unapporved socials and service hours
+@login_required(login_url=settings.LOGIN_URL)
 def electee_submission_approval(request, approved=0):
     # get all unapproved socials and service hours
     social_list = Social.objects.filter(approved='0')
@@ -184,6 +190,7 @@ def electee_submission_approval(request, approved=0):
     return render(request, "electeeManagement/electee_submission_approval.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def edit_electee_requirements(request):
     RequirementsFormset = modelformset_factory(Requirements, fields=('num_required',), extra=0)
     req_formset = RequirementsFormset(queryset=Requirements.objects.all())
@@ -201,6 +208,7 @@ def edit_electee_requirements(request):
     return render(request, "electeeManagement/edit_electee_requirements.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def initilize_electee_requirements(request):
     context = {
         'submitted': False
@@ -231,6 +239,7 @@ def initilize_electee_requirements(request):
     return render(request, "electeeManagement/initilize_electee_requirements.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def electee_turn_ins(request):
     TurnInsFormset = modelformset_factory(Electee,
                                           fields=('electee_interview', 'dues', 'electee_exam'),
@@ -248,6 +257,7 @@ def electee_turn_ins(request):
     return render(request, "electeeManagement/electee_turn_ins.html", context)
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def convert(request, uniqname):
     if request.POST:
         member = Member.objects.get(uniqname=uniqname)
@@ -258,6 +268,8 @@ def convert(request, uniqname):
             electee.delete()
     return redirect(request.META.get('HTTP_REFERER'), None, None)
 
+
+@login_required(login_url=settings.LOGIN_URL)
 def remove_electee(request, uniqname):
     if request.POST:
         member = Member.objects.get(uniqname=uniqname)
