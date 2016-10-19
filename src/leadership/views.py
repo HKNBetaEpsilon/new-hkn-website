@@ -41,6 +41,12 @@ def edit_leadership(request, position_added=0):
         if request.POST:
             formset = LeaderFormSet(request.POST)
             formset.save()
+
+            all_leaders = Leader.objects.all()
+            for l in all_leaders:
+                l.member.status = 'O'
+                l.member.save()
+
             return redirect('leadership', leader_saved=1)
 
     return render(request, "leadership/edit_leadership.html", context)
