@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
+    'hknWebsiteProject', # SO Urls decode correctly
     'users',
     'electeeManagement',
     'crispy_forms',
@@ -55,7 +56,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'hknWebsiteProject.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {

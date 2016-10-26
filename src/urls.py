@@ -19,22 +19,16 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from . import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^about/', views.about, name='about'),
-    url(r'^corporate/', views.corporate, name='corporate'),
-    url(r'^create_new_members/', views.create_new_members, name='create_new_members'),
-    url(r'^login_user/', views.login_user, name='login_user'),
-    url(r'^profile/(?P<uniqname>[a-z]{3,8})/(?P<profile_saved>[0-1])/$', 'users.views.profile',
-        name='profile'),
-    url(r'^/awesome_actives', views.awesome_actives, name='awesome_actives'),
-    url(r'^/elections', views.elections, name='elections'),
-    url(r'^/misc_tools/(?P<success>[0-1])/$', views.misc_tools, name='misc_tools'),
-    url(r'^/misc_tools', views.misc_tools, name='misc_tools'),
-    url(r'^/email_uncompleted_profiles', views.email_uncompleted_profiles, name='email_uncompleted_profiles'),
-    url(r'^/make_alumni', views.make_alumni, name='make_alumni'),
+    url(r'^', include('hknWebsiteProject.urls')),
+    url(r'^dbcafe/', include('dbcafe.urls')),
+    url(r'^electeeManagement/', include('electeeManagement.urls')),
+    url(r'^leadership/', include('leadership.urls')),
+    url(r'^users/', include('users.urls')),
+    url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('django.contrib.auth.urls', namespace='auth')),
+    url(r'^admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:

@@ -35,15 +35,15 @@ def home(request, bad_user=False):
         context = {
             'not_member': True
         }
-    return render(request, "home.html", context)
+    return render(request, "hknWebsiteProject/home.html", context)
 
 
 def about(request):
-    return render(request, "about.html", {})
+    return render(request, "hknWebsiteProject/about.html", {})
 
 
 def corporate(request):
-    return render(request, "corporate.html", {})
+    return render(request, "hknWebsiteProject/corporate.html", {})
 
 
 def make_members(form, electee):
@@ -104,7 +104,7 @@ def create_new_members(request):
 
     context['form'] = form
 
-    return render(request, "create_new_members.html", context)
+    return render(request, "hknWebsiteProject/create_new_members.html", context)
 
 
 def login_user(request):
@@ -157,7 +157,7 @@ def awesome_actives(request):
             'error': True,
             'error_msg': 'You must be a member to see member\'s profiles'
         }
-    return render(request, "awesome_actives.html", context)
+    return render(request, "hknWebsiteProject/awesome_actives.html", context)
 
 
 def elections(request):
@@ -168,7 +168,7 @@ def elections(request):
             'error_msg': 'You must be a member to see member\'s profiles'
         }
 
-    return render(request, "elections.html", context)
+    return render(request, "hknWebsiteProject/elections.html", context)
 
 
 def misc_tools(request, success=False):
@@ -181,7 +181,7 @@ def misc_tools(request, success=False):
         'num_members_comp_prof': num_members_comp_prof,
         'members': members
     }
-    return render(request, "misc_tools.html", context)
+    return render(request, "hknWebsiteProject/misc_tools.html", context)
 
 
 def email_uncompleted_profiles(request):

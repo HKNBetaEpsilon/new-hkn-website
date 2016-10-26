@@ -18,7 +18,7 @@
                 {% endif %}
             <div class='col-sm-4'>
                 {% if leader.member.profile_pic %}
-                    {% include 'leadership_thumbnail.html' with leader_pic=leader.member.profile_pic %}
+                    {% include 'leadership/leadership_thumbnail.html' with leader_pic=leader.member.profile_pic %}
                 {% else %}
                     <img class="img-responsive center-block profile-pic"
                          src="{% static 'img/default_profile_pic.jpg' %}">

@@ -10,7 +10,7 @@ def items_list(request):
     context = {
         'items': items
     }
-    return render(request, "items_list.html", context)
+    return render(request, "dbcafe/items_list.html", context)
 
 
 def items_edit(request, item):
@@ -28,7 +28,7 @@ def items_edit(request, item):
             form.save()
             return redirect('items_list')
 
-    return render(request, "items_edit.html", context)
+    return render(request, "dbcafe/items_edit.html", context)
 
 
 def items_add(request):
@@ -41,7 +41,7 @@ def items_add(request):
         form.save()
         return redirect('items_list')
 
-    return render(request, "items_add.html", context)
+    return render(request, "dbcafe/items_add.html", context)
 
 
 def sales(request):
@@ -67,7 +67,7 @@ def sales(request):
     context['form'] = form
     context['item_scanned'] = item_scanned
     context['transactions'] = transactions
-    return render(request, "sales.html", context)
+    return render(request, "dbcafe/sales.html", context)
 
 
 def stats(request):
@@ -75,7 +75,7 @@ def stats(request):
     context = {
         'drawer': drawer
     }
-    return render(request, "stats.html", context)
+    return render(request, "dbcafe/stats.html", context)
 
 
 def reset(request):

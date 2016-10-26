@@ -17,7 +17,7 @@ def leadership(request, leader_saved=0):
     context['advisors'] = advisors
     context['chairs'] = chairs
     context['leader_saved'] = leader_saved
-    return render(request, "leadership.html", context)
+    return render(request, "leadership/leadership.html", context)
 
 
 def edit_leadership(request, position_added=0):
@@ -43,7 +43,7 @@ def edit_leadership(request, position_added=0):
             formset.save()
             return redirect('leadership', leader_saved=1)
 
-    return render(request, "edit_leadership.html", context)
+    return render(request, "leadership/edit_leadership.html", context)
 
 
 def add_leadership(request):
@@ -62,7 +62,7 @@ def add_leadership(request):
             form.save()
             return redirect('edit_leadership', position_added=1)
 
-    return render(request, "add_leadership.html", context)
+    return render(request, "leadership/add_leadership.html", context)
 
 
 def delete_leader(request):
@@ -77,4 +77,4 @@ def delete_leader(request):
             leader = Leader.objects.get(position__exact=position)
             leader.delete()
             return redirect('edit_leadership', position_added=1)
-    return render(request, "delete_leader.html", context)
+    return render(request, "leadership/delete_leader.html", context)

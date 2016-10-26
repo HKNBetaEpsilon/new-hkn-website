@@ -19,21 +19,21 @@
                     <a href="{% url 'profile' e.uniqname %}">{{ e.first_name }} {{ e.last_name }}
                         ({{ e.uniqname }})</a></td>
 
-                <td>{% include 'electee_social_progress.html' with electee=e %}</td>
+                <td>{% include 'electeeManagement/electee_social_progress.html' with electee=e %}</td>
 
-                <td>{% include 'electee_service_hours_progress.html' with electee=e %}</td>
+                <td>{% include 'electeeManagement/electee_service_hours_progress.html' with electee=e %}</td>
 
                 <td class='text-align-center'>
-                    {% include 'electee_interview_complete.html' with electee=e %}
+                    {% include 'electeeManagement/electee_interview_complete.html' with electee=e %}
                 </td>
                 <td class='text-align-center'>
-                    {% include 'electee_exam_complete.html' with electee=e %}
+                    {% include 'electeeManagement/electee_exam_complete.html' with electee=e %}
                 </td>
                 <td class='text-align-center'>
-                    {% include 'electee_dues_complete.html' with electee=e %}
+                    {% include 'electeeManagement/electee_dues_complete.html' with electee=e %}
                 </td>
                 <td class="text-align-center">
-                    {% include 'electee_convert.html' with electee=e %}
+                    {% include 'electeeManagement/electee_convert.html' with electee=e %}
                 </td>
                 <td class="text-align-center">
                     <form action="{% url 'electee_remove' e.uniqname %}" method="post">
