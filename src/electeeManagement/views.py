@@ -65,7 +65,7 @@ def all_electees(request):
         'electee_list': electee_list_plain,
     }
 
-    return render(request, "all_electees.html", context)
+    return render(request, "electeeManagement/all_electees.html", context)
 
 
 def submit_social(request):
@@ -102,7 +102,7 @@ def submit_social(request):
 
         context['form'] = form
 
-    return render(request, "submit_social.html", context)
+    return render(request, "electeeManagement/submit_social.html", context)
 
 
 def submit_service_hours(request):
@@ -145,7 +145,7 @@ def submit_service_hours(request):
 
         context['form'] = form
 
-    return render(request, "submit_service_hours.html", context)
+    return render(request, "electeeManagement/submit_service_hours.html", context)
 
 
 # shows a list of all unapporved socials and service hours
@@ -181,7 +181,7 @@ def electee_submission_approval(request, approved=0):
             update_approved_hours()
         return redirect('electee_submission_approval', approved=1)
 
-    return render(request, "electee_submission_approval.html", context)
+    return render(request, "electeeManagement/electee_submission_approval.html", context)
 
 
 def edit_electee_requirements(request):
@@ -198,7 +198,7 @@ def edit_electee_requirements(request):
         formset.save()
         context['requirement_changed'] = True
 
-    return render(request, "edit_electee_requirements.html", context)
+    return render(request, "electeeManagement/edit_electee_requirements.html", context)
 
 
 def initilize_electee_requirements(request):
@@ -228,7 +228,7 @@ def initilize_electee_requirements(request):
 
         context['submitted'] = True
 
-    return render(request, "initilize_electee_requirements.html", context)
+    return render(request, "electeeManagement/initilize_electee_requirements.html", context)
 
 
 def electee_turn_ins(request):
@@ -245,7 +245,7 @@ def electee_turn_ins(request):
         formset.save()
         context['turnins_saved'] = True
 
-    return render(request, "electee_turn_ins.html", context)
+    return render(request, "electeeManagement/electee_turn_ins.html", context)
 
 
 def convert(request, uniqname):

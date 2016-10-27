@@ -45,7 +45,7 @@ def member_list(request):
             'error': False
         }
 
-    return render(request, "member_list.html", context)
+    return render(request, "users/member_list.html", context)
 
 
 def profile(request, uniqname, profile_saved=0):
@@ -115,7 +115,7 @@ def profile(request, uniqname, profile_saved=0):
         context['electee_progress'] = electee_progress
         context['error'] = False
 
-    return render(request, "profile.html", context)
+    return render(request, "users/profile.html", context)
 
 
 def profile_edit(request, uniqname):
@@ -160,4 +160,4 @@ def profile_edit(request, uniqname):
 
         context['form'] = form
 
-    return render(request, "profile_edit.html", context)
+    return render(request, "users/profile_edit.html", context)
