@@ -40,7 +40,6 @@ def member_list(request):
     context = {
         'member_list': member_list,
         'alumni_list': alumni_list,
-        'error': False
     }
 
     return render(request, "users/member_list.html", context)
@@ -105,7 +104,6 @@ def profile(request, uniqname, profile_saved=0):
     context['is_curr_user'] = is_curr_user
     context['profile_saved'] = profile_saved
     context['electee_progress'] = electee_progress
-    context['error'] = False
 
     return render(request, "users/profile.html", context)
 

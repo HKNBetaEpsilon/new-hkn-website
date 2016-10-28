@@ -49,9 +49,7 @@ def corporate(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def make_members(form, electee):
-    context = {
-        'error': False
-    }
+    context = {}
     uniqnames = form.cleaned_data.get('new_members').split(',')
     try:
         # validate each submitted uniqname to make sure that a member
