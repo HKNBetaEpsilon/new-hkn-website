@@ -31,7 +31,7 @@ def make_alpha_dict(members):
     return alpha_list
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def member_list(request):
     # displays the list of all members who have a complete profile
     member_list = make_alpha_dict(get_current_members_with_completed_profile())
@@ -45,7 +45,7 @@ def member_list(request):
     return render(request, "users/member_list.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def profile(request, uniqname, profile_saved=0):
     context = {}
     is_curr_user = (request.user.username == uniqname)
@@ -108,7 +108,7 @@ def profile(request, uniqname, profile_saved=0):
     return render(request, "users/profile.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def profile_edit(request, uniqname):
     context = {}
     is_curr_user = (request.user.username == uniqname)

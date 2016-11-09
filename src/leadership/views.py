@@ -22,7 +22,7 @@ def leadership(request, leader_saved=0):
     return render(request, "leadership/leadership.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def edit_leadership(request, position_added=0):
     context = {}
     if not request.user.is_superuser:
@@ -55,7 +55,7 @@ def edit_leadership(request, position_added=0):
     return render(request, "leadership/edit_leadership.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def add_leadership(request):
     context = {}
     if not request.user.is_superuser:
@@ -74,7 +74,7 @@ def add_leadership(request):
 
     return render(request, "leadership/add_leadership.html", context)
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def delete_leader(request):
     context = {}
     form = DeleteLeaderForm()

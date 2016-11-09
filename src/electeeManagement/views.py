@@ -11,7 +11,7 @@ from .models import Electee, Social, Service_Hours, Requirements
 from django.forms import modelformset_factory
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def update_approved_hours():
     all_electees = Electee.objects.all()
     for e in all_electees:
@@ -24,7 +24,7 @@ def update_approved_hours():
         e.save()
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def all_electees(request):
     context = {}
     if not request.user.is_superuser:
@@ -76,7 +76,7 @@ def all_electees(request):
     return render(request, "electeeManagement/all_electees.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def submit_social(request):
     m = Member.objects.get(uniqname=request.user.username)
     # error if the request user is anonymous or not an electee
@@ -114,7 +114,7 @@ def submit_social(request):
     return render(request, "electeeManagement/submit_social.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def submit_service_hours(request):
     m = Member.objects.get(uniqname=request.user.username)
     # error if the request user is anonymous or not an electee
@@ -159,7 +159,7 @@ def submit_service_hours(request):
 
 
 # shows a list of all unapporved socials and service hours
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def electee_submission_approval(request, approved=0):
     context = {}
     if not request.user.is_superuser:
@@ -202,7 +202,7 @@ def electee_submission_approval(request, approved=0):
     return render(request, "electeeManagement/electee_submission_approval.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def edit_electee_requirements(request):
     context = {}
     if not request.user.is_superuser:
@@ -227,7 +227,7 @@ def edit_electee_requirements(request):
     return render(request, "electeeManagement/edit_electee_requirements.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def initilize_electee_requirements(request):
     context = {}
     if not request.user.is_superuser:
@@ -265,7 +265,7 @@ def initilize_electee_requirements(request):
     return render(request, "electeeManagement/initilize_electee_requirements.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def electee_turn_ins(request):
     context = {}
     if not request.user.is_superuser:
@@ -290,7 +290,7 @@ def electee_turn_ins(request):
     return render(request, "electeeManagement/electee_turn_ins.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def convert(request, uniqname):
     if request.user.is_superuser:
         if request.POST:
@@ -303,7 +303,7 @@ def convert(request, uniqname):
     return redirect(request.META.get('HTTP_REFERER'), None, None)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def remove_electee(request, uniqname):
     if request.user.is_superuser:
         if request.POST:

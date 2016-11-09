@@ -7,7 +7,7 @@ from .models import Item, Transaction, Drawer
 from .forms import ItemForm, SalesForm
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def items_list(request):
     context = {}
     if not request.user.is_superuser:
@@ -23,7 +23,7 @@ def items_list(request):
     return render(request, "dbcafe/items_list.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def items_edit(request, item):
     context = {}
     if not request.user.is_superuser:
@@ -46,7 +46,7 @@ def items_edit(request, item):
     return render(request, "dbcafe/items_edit.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def items_add(request):
     context = {}
     if not request.user.is_superuser:
@@ -67,7 +67,7 @@ def items_add(request):
     return render(request, "dbcafe/items_add.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def sales(request):
     context = {}
     if not request.user.is_superuser:
@@ -100,7 +100,7 @@ def sales(request):
     return render(request, "dbcafe/sales.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def stats(request):
     context = {}
     if not request.user.is_superuser:
@@ -116,7 +116,7 @@ def stats(request):
     return render(request, "dbcafe/stats.html", context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def reset(request):
     context = {}
     if not request.user.is_superuser:
@@ -131,7 +131,7 @@ def reset(request):
     return redirect('stats')
 
 
-@login_required(login_url=settings.LOGIN_URL)
+@login_required()
 def undo(request):
     context = {}
     if not request.user.is_superuser:
