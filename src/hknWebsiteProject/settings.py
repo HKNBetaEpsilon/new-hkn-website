@@ -161,6 +161,7 @@ PIPELINE = (
     'social.pipeline.user.user_details'
 )
 
+LOGIN_URL = '/login/google-oauth2'
 LOGIN_REDIRECT_URL = '/login_user'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '679385948585-g8t1tohno3f2s0gdnuialb2nhq8svc4d.apps.googleusercontent.com'

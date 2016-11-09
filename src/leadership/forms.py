@@ -1,14 +1,7 @@
 from django import forms
+from django.forms.formsets import BaseFormSet
 
 from .models import Leader
-
-
-# class LeaderForm(forms.Form):
-# 	new_leader = forms.ModelChoiceField(queryset=Member.objects.all())
-# 	position = forms.CharField(max_length=100)
-# 	widgets = {
-# 			'new_leader': forms.Select(),
-# 	}
 
 class LeaderModelForm(forms.ModelForm):
     class Meta:

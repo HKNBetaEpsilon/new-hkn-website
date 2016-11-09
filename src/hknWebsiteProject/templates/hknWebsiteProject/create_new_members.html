@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block error_msg %}
-    {% if error %}
-        <div class="alert alert-warning">
-            <strong>{{ error_msg }}</strong>
-        </div>
-    {% endif %}
-{% endblock %}
-
 {% block content %}
     {% if new_members_submitted %}
         <div class="alert alert-success">
@@ -23,5 +15,4 @@
         <hr>
         <input class='btn btn-primary' type='submit' value='Submit'/>
     </form>
-
 {% endblock %}

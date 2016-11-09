@@ -1,22 +1,10 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block error_msg %}
-    {% if error %}
-        <div class="alert alert-warning">
-            <strong>{{ error_msg }}</strong>
-        </div>
-    {% endif %}
-{% endblock %}
-
 {% block content %}
-    {% if not error %}
-        <h1>Delete Leader</h1>
-        <form method='POST' action=''>{% csrf_token %}
-            {{ form|crispy }}
-            <input class='btn btn-default' type='submit' value='Submit'/>
-        </form>
-
-    {% endif %}
-
+    <h1>Delete Leader</h1>
+    <form method='POST' action=''>{% csrf_token %}
+        {{ form|crispy }}
+        <input class='btn btn-default' type='submit' value='Submit'/>
+    </form>
 {% endblock %}
