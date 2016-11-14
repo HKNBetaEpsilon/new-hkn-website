@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import LeaderModelForm, DeleteLeaderForm
 from .models import Leader
+from users.models import Member
 # Create your views here.
 from django.forms import modelformset_factory
 
@@ -45,10 +46,18 @@ def edit_leadership(request, position_added=0):
             formset = LeaderFormSet(request.POST)
             formset.save()
 
+            # Remove officer status from old leaders
+            old_leaders = Member.objects.filter(status__exact='O');
+            for m in old_leaders:
+                m.status = 'A'
+                m.save()
+
+            # Add officer status to new leaders
             all_leaders = Leader.objects.all()
             for l in all_leaders:
-                l.member.status = 'O'
-                l.member.save()
+                if l.member is not None:
+                    l.member.status = 'O'
+                    l.member.save()
 
             return redirect('leadership', leader_saved=1)
 
