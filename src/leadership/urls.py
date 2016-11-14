@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^', views.leadership, name='leadership'),
+    url(r'^$', views.leadership, name='leadership'),
     url(r'^(?P<leader_saved>[0-1])/$', views.leadership, name='leadership'),
     url(r'^edit_leadership/(?P<position_added>[0-1])$', views.edit_leadership,
         name='edit_leadership'),

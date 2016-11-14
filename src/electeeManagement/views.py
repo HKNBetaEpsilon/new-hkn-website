@@ -11,7 +11,6 @@ from .models import Electee, Social, Service_Hours, Requirements
 from django.forms import modelformset_factory
 
 
-@login_required()
 def update_approved_hours():
     all_electees = Electee.objects.all()
     for e in all_electees:
