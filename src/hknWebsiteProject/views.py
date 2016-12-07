@@ -47,7 +47,6 @@ def corporate(request):
     return render(request, "hknWebsiteProject/corporate.html", {})
 
 
-@login_required()
 def make_members(form, electee):
     context = {}
     uniqnames = form.cleaned_data.get('new_members').split(',')
