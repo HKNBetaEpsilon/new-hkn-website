@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>EECSpeaks Blog Posts</h1>
+   	{% for blog in blogs %}
+   		<a href="#">{{ blog.title }} - {{ blog.publicationDate }} by {{blog.author}}</a><br>
+   	{% endfor %}
+{% endblock %}
