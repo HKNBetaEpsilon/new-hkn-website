@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>{{ blog.title }}</h1>
+    {{ blog.text }} <br>
+    <b>by </b> {{blog.author}}<br>
+    {{ blog.publicationDate }}
+{% endblock %}

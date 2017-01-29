@@ -4,6 +4,6 @@
 {% block content %}
     <h1>EECSpeaks Blog Posts</h1>
    	{% for blog in blogs %}
-   		<a href="#">{{ blog.title }} - {{ blog.publicationDate }} by {{blog.author}}</a><br>
+   		<a href="/eecspeaks/blog/{{ blog.pk }}">{{ blog.title }}</a> - {{ blog.publicationDate }} by {{blog.author}}<br>
    	{% endfor %}
 {% endblock %}

@@ -37,3 +37,10 @@ def add_blogpost(request):
                 return redirect('/eecspeaks')
 
     return render(request, "eecspeaks/add_blogpost.html", context)
+
+def view_post(request, blogid):
+    b = Blog.objects.get(pk=blogid)
+    context = {
+        'blog': b
+    }
+    return render(request, "eecspeaks/show_post.html", context)
