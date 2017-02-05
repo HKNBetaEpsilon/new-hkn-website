@@ -2,10 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h1>Add Blog</h1>
+    <h1 class="hkn-blue">Add Blog</h1>
 
-    <form method='POST' action=''>{% csrf_token %}
-        {{ form|crispy }}
-        <input class='btn btn-default' type='submit' value='Submit'/>
-    </form>
+    {% crispy form form.helper %}
 {% endblock %}
