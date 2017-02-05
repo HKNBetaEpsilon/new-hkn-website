@@ -9,7 +9,8 @@ from .models import Blog
 
 # Create your views here.
 def show_blogposts(request):
-    blogs = Blog.objects.all()
+    # TODO: add pagination
+    blogs = Blog.objects.order_by('-pk')
     context = {
         'blogs' : blogs
     }
@@ -44,3 +45,22 @@ def view_post(request, blogid):
         'blog': b
     }
     return render(request, "eecspeaks/show_post.html", context)
+
+@login_required()
+def edit_post(request, blogid):
+    if not request.user.is_superuser:
+        context = {
+            'error': True,
+            'error_msg': 'You do not have permission to access this page'
+        }
+    b = Blog.objects.get(pk=blogid)
+    if request.POST:
+        form = BlogForm(request.POST, instance=b)
+        if form.is_valid():
+            form.save()
+            return redirect('eecspeaks/blog/%s/'%blogid)
+    form = BlogForm(instance=b)
+    context = {
+        'form': form
+    }
+    return render(request, "eecspeaks/edit_blogpost.html", context)

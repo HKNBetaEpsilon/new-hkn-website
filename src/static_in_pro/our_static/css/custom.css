@@ -122,3 +122,31 @@ body {
 .slc-header {
 	margin-top: 0em;
 }
+
+.full-width {
+	width:100%;
+}
+
+.hkn-blue {
+	color: #100C6C;
+}
+
+.pad-bottom {
+	padding-bottom: 2em;
+}
+
+.blog-form div {
+	padding-bottom: 0.5em;
+}
+
+.blog-form .asteriskField {
+	display:none;
+}
+
+.blog-form textarea {
+	width:100%;
+}
+
+.blog-form input {
+	width:60%;
+}
