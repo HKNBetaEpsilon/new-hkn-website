@@ -99,7 +99,7 @@ def create_new_members(request):
         context = make_members(form,
                                form.cleaned_data.get('type') == 'E')
         form = NewMemberForm()
-        if not context['error']:
+        if 'error' not in context:
             context['new_members_submitted'] = True
 
     context['form'] = form
