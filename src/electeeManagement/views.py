@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from users.forms import Member
 from .forms import SocialForm, ServiceHoursForm
 from .models import Electee, Social, Service_Hours, Requirements
-from utils import is_officer
+from hknWebsiteProject.utils import is_officer
 
 from django.forms import modelformset_factory
 

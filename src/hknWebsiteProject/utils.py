@@ -41,3 +41,12 @@ def get_alumni_with_completed_profile():
     member_list = get_members_with_complete_profile()
     member_list = member_list.filter(edu_level__exact='AL')
     return member_list
+
+def is_officer(uniqname):
+    if uniqname == None or len(uniqname) == 0:
+        return False
+    try:
+        m =  Member.objects.get(uniqname=uniqname)
+        return m.status == 'O'
+    except DoesNotExist as e:
+        return False
