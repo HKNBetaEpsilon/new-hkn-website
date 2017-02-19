@@ -1,4 +1,5 @@
 <!-- Static navbar -->
+{% load hkn_tags %}
 <nav class="navbar navbar-default navbar-static-top ">
     <div class="container">
         <div class="navbar-header ">
@@ -21,18 +22,7 @@
                     <li><a href="{% url 'awesome_actives' %}">Awesome Actives</a></li>
                     <li><a href="{% url 'elections' %}">Elections</a></li>
                 {% endif %}
-                {% if request.user.is_superuser %}
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Tools
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'create_new_members' %}">Create New Members</a></li>
-                            <li><a href="{% url 'edit_leadership' %}">Change Leadership</a></li>
-                            <li><a href="{% url 'misc_tools' %}">Misc Tools</a></li>
-                        </ul>
-                    </li>
+                {% if request.user.username|is_officer %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Electee Managment
@@ -60,6 +50,19 @@
                         </ul>
                     </li>
 
+                {% endif %}
+                {% if request.user.is_superuser %}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Tools
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'create_new_members' %}">Create New Members</a></li>
+                            <li><a href="{% url 'edit_leadership' %}">Change Leadership</a></li>
+                            <li><a href="{% url 'misc_tools' %}">Misc Tools</a></li>
+                        </ul>
+                    </li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
