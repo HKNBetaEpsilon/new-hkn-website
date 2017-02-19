@@ -6,7 +6,6 @@ from django.shortcuts import render, redirect
 from .models import Item, Transaction, Drawer
 from .forms import ItemForm, SalesForm
 
-
 @login_required()
 def items_list(request):
     context = {}
