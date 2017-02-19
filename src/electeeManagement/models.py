@@ -13,11 +13,11 @@ class Electee(models.Model):
     # electee requirement progress
     num_socials_approved = models.IntegerField(default=0)
     num_socials_total = models.IntegerField(default=0)
-    num_service_hours_approved = models.IntegerField(default=0)
-    num_service_hours_total = models.IntegerField(default=0)
-    num_service_hours_db = models.IntegerField(default=0)
-    num_service_hours_hkn = models.IntegerField(default=0)
-    num_service_hours_external = models.IntegerField(default=0)
+    num_service_hours_approved = models.DecimalField(max_digits=6, decimal_places=1, default=0)
+    num_service_hours_total = models.DecimalField(max_digits=6, decimal_places=1, default=0)
+    num_service_hours_db = models.DecimalField(max_digits=6, decimal_places=1, default=0)
+    num_service_hours_hkn = models.DecimalField(max_digits=6, decimal_places=1, default=0)
+    num_service_hours_external = models.DecimalField(max_digits=6, decimal_places=1, default=0)
     electee_interview = models.BooleanField(default=False)
     electee_exam = models.BooleanField(default=False)
     dues = models.BooleanField(default=False)
@@ -57,7 +57,7 @@ class Service_Hours(models.Model):
 
     service_type = models.CharField(max_length=3, choices=SERVICE_TYPE)
     service_name = models.CharField(max_length=100)
-    num_hours = models.IntegerField()
+    num_hours = models.DecimalField(max_digits=6, decimal_places=1)
     approved = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
