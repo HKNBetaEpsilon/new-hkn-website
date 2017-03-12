@@ -5,12 +5,12 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from .models import Item, Transaction, Drawer
 from .forms import ItemForm, SalesForm
-
+from hknWebsiteProject.utils import is_officer 
 
 @login_required()
 def items_list(request):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -26,7 +26,7 @@ def items_list(request):
 @login_required()
 def items_edit(request, item):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -49,7 +49,7 @@ def items_edit(request, item):
 @login_required()
 def items_add(request):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -70,7 +70,7 @@ def items_add(request):
 @login_required()
 def sales(request):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -103,7 +103,7 @@ def sales(request):
 @login_required()
 def stats(request):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -119,7 +119,7 @@ def stats(request):
 @login_required()
 def reset(request):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -134,7 +134,7 @@ def reset(request):
 @login_required()
 def undo(request):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'

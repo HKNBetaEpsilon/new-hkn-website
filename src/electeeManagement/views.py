@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from users.forms import Member
 from .forms import SocialForm, ServiceHoursForm
 from .models import Electee, Social, Service_Hours, Requirements
+from hknWebsiteProject.utils import is_officer
 
 from django.forms import modelformset_factory
 
@@ -26,7 +27,8 @@ def update_approved_hours():
 @login_required()
 def all_electees(request):
     context = {}
-    if not request.user.is_superuser:
+    m =  Member.objects.get(uniqname=request.user.username)
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -161,7 +163,7 @@ def submit_service_hours(request):
 @login_required()
 def electee_submission_approval(request, approved=0):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -204,7 +206,7 @@ def electee_submission_approval(request, approved=0):
 @login_required()
 def edit_electee_requirements(request):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
@@ -267,7 +269,7 @@ def initilize_electee_requirements(request):
 @login_required()
 def electee_turn_ins(request):
     context = {}
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or is_officer(request.user.username)):
         context = {
             'error': True,
             'error_msg': 'You do not have permission to access this page'
