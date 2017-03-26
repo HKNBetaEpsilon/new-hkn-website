@@ -46,6 +46,10 @@ def about(request):
 def corporate(request):
     return render(request, "hknWebsiteProject/corporate.html", {})
 
+def corporatePayments(request):
+    
+
+    return render(request, "hknWebsiteProject/payments.html", {})
 
 def make_members(form, electee):
     context = {}
