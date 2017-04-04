@@ -52,13 +52,19 @@ class Service_Hours(models.Model):
         ('Ex', 'External'),
     )
 
+    STATUSES = (
+        (0, "Unapproved"),
+        (1, "Approved"),
+        (2, "Rejected"),
+    )
+
     # electee who submitted these service hours
     electee = models.ForeignKey(Electee, on_delete=models.CASCADE)
 
     service_type = models.CharField(max_length=3, choices=SERVICE_TYPE)
     service_name = models.CharField(max_length=100)
     num_hours = models.DecimalField(max_digits=6, decimal_places=1)
-    approved = models.BooleanField(default=False)
+    approved = models.IntegerField(choices=STATUSES, default=0) # Todo: store small strings in database
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
     def __unicode__(self):
