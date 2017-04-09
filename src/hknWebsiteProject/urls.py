@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from . import views
+from users import views as userviews
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
@@ -27,14 +28,14 @@ urlpatterns = [
     url(r'^corporate', views.corporate, name='corporate'),
     url(r'^create_new_members', views.create_new_members, name='create_new_members'),
     url(r'^login_user', views.login_user, name='login_user'),
-    url(r'^profile/(?P<uniqname>[a-z]{3,8})/(?P<profile_saved>[0-1])$', 'users.views.profile',
+    url(r'^profile/(?P<uniqname>[a-z]{3,8})/(?P<profile_saved>[0-1])$', userviews.profile,
         name='profile'),
-    url(r'^/awesome_actives', views.awesome_actives, name='awesome_actives'),
-    url(r'^/elections', views.elections, name='elections'),
-    url(r'^/misc_tools/(?P<success>[0-1])$', views.misc_tools, name='misc_tools'),
-    url(r'^/misc_tools', views.misc_tools, name='misc_tools'),
-    url(r'^/email_uncompleted_profiles', views.email_uncompleted_profiles, name='email_uncompleted_profiles'),
-    url(r'^/make_alumni', views.make_alumni, name='make_alumni'),
+    url(r'^awesome_actives', views.awesome_actives, name='awesome_actives'),
+    url(r'^elections', views.elections, name='elections'),
+    url(r'^misc_tools/(?P<success>[0-1])$', views.misc_tools, name='misc_tools'),
+    url(r'^misc_tools', views.misc_tools, name='misc_tools'),
+    url(r'^email_uncompleted_profiles', views.email_uncompleted_profiles, name='email_uncompleted_profiles'),
+    url(r'^make_alumni', views.make_alumni, name='make_alumni'),
 ]
 
 if settings.DEBUG:
