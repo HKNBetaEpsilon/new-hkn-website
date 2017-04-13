@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'js/stripeHandler.js' %}"></script>
+    <form method='POST' id="payment-form" action="">{% csrf_token %}
+        {{ form|crispy}}
+        <div>
+            <label for="card-element">
+                Credit or debit card
+            </label>
+            <div id="card-element">
+
+            </div>
+            <div id="card-errors"></div>
+        </div>
+        <input type="hidden" name="token-field" id="stripeToken" value="miserable_failure" />
+        <input class='btn btn-default' type='submit' value="Submit" />
+    </form>
+{% endblock %}

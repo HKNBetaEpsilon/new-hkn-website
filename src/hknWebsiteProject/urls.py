@@ -24,8 +24,8 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^about', views.about, name='about'),
+    url(r'^corporate/payments', views.corporatePayments, name='corporate_payments'),
     url(r'^corporate$', views.corporate, name='corporate'),
-    url(r'^corporate/payus', views.corporatePayments, name='corporate_payments'),
     url(r'^create_new_members', views.create_new_members, name='create_new_members'),
     url(r'^login_user', views.login_user, name='login_user'),
     url(r'^profile/(?P<uniqname>[a-z]{3,8})/(?P<profile_saved>[0-1])$', 'users.views.profile',

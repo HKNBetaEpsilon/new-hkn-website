@@ -5,6 +5,7 @@ from hknWebsiteProject import settings
 from django.contrib.auth.decorators import login_required
 from users.forms import NewMemberForm
 from users.models import Member
+from .forms import PaymentForm
 
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.mail import EmailMessage
@@ -47,9 +48,17 @@ def corporate(request):
     return render(request, "hknWebsiteProject/corporate.html", {})
 
 def corporatePayments(request):
-    
-
-    return render(request, "hknWebsiteProject/payments.html", {})
+    if request.POST:
+        form = PaymentForm(request)
+        print "oisdfjoisjfoisdjfoisdjfoisdjf"
+        print request.POST.get("token-field", "")
+        return render(request, "hknWebsiteProject/corporate.html", {})
+    else:
+        form = PaymentForm()
+        context = {
+            'form' : form 
+        }
+        return render(request, "hknWebsiteProject/payments.html", context)
 
 def make_members(form, electee):
     context = {}
