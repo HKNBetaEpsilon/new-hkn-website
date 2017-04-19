@@ -293,7 +293,7 @@ def electee_turn_ins(request):
 
 @login_required()
 def convert(request, uniqname):
-    if request.user.is_superuser:
+    if request.user.is_superuser or is_officer(request.user.username):
         if request.POST:
             member = Member.objects.get(uniqname=uniqname)
             if member.status == 'E':
@@ -306,7 +306,7 @@ def convert(request, uniqname):
 
 @login_required()
 def remove_electee(request, uniqname):
-    if request.user.is_superuser:
+    if request.user.is_superuser or is_officer(request.user.username):
         if request.POST:
             member = Member.objects.get(uniqname=uniqname)
             member.delete()
