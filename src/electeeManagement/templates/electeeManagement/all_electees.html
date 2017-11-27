@@ -11,6 +11,7 @@
             <th><h3>Electee Exam</h3></th>
             <th><h3>Dues</h3></th>
             <th><h3>Convert to Active</h3></th>
+            <th><h3>Override</h3></th>
             <th><h3>Remove Electee</h3></th>
         </tr>
         {% for e in electee_list %}
@@ -34,6 +35,12 @@
                 </td>
                 <td class="text-align-center">
                     {% include 'electeeManagement/electee_convert.html' with electee=e %}
+                </td>
+                <td>
+                    <form action="{% url 'electee_convert' e.uniqname %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Force Active" class="btn btn-danger" onclick="return confirm('Are you sure you want convert the electee with uniqname {{ e.uniqname }} to an active?')"/>
+                    </form>
                 </td>
                 <td class="text-align-center">
                     <form action="{% url 'electee_remove' e.uniqname %}" method="post">
