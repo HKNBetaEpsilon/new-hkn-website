@@ -12,3 +12,5 @@ static_in_env
 
 # Ignore my notes
 notes.txt
+
+secret.py
