@@ -1,6 +1,6 @@
 {% load thumbnail %}
 
-{% thumbnail leader_pic "256" crop="center" upscale="False" as im %}
+{% thumbnail leader_pic item.image "256x256" crop="center" upscale="False" as im %}
     <img class="img-responsive img-rounded center-block profile-pic" src="{{ im.url }}"
-         width="256" height="256">
+         width="{{im.width}}" height="{{im.height}}">
 {% endthumbnail %}
