@@ -19,8 +19,10 @@
                 <li><a href="{% url 'corporate' %}">Corporate</a></li>
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'member_list' %}">Members</a></li>
+                    <!--
                     <li><a href="{% url 'awesome_actives' %}">Awesome Actives</a></li>
                     <li><a href="{% url 'elections' %}">Elections</a></li>
+                    -->
                 {% endif %}
                 {% if request.user.username|is_officer or request.user.is_superuser %}
                     <li class="dropdown">
