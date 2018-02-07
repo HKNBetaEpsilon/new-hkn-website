@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^login_user', views.login_user, name='login_user'),
     url(r'^profile/(?P<uniqname>[a-z]{3,8})/(?P<profile_saved>[0-1])$', userviews.profile,
         name='profile'),
-    url(r'^awesome_actives', views.awesome_actives, name='awesome_actives'),
+    url(r'^mentoring_competition', views.mentoring_competition, name='mentoring_competition'),
     url(r'^elections', views.elections, name='elections'),
     url(r'^misc_tools/(?P<success>[0-1])$', views.misc_tools, name='misc_tools'),
     url(r'^misc_tools', views.misc_tools, name='misc_tools'),

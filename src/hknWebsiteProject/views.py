@@ -151,9 +151,9 @@ This is an automated message please do not reply as this email is not checked. I
 
 
 @login_required()
-def awesome_actives(request):
+def mentoring_competition(request):
     context = {}
-    return render(request, "hknWebsiteProject/awesome_actives.html", context)
+    return render(request, "hknWebsiteProject/mentoring_competition.html", context)
 
 
 @login_required()
