@@ -3,6 +3,10 @@ static_in_env
 *.pyc
 .DS_store
 
+# Python3 testing env
+pythenv
+pythenv/
+
 # Ignore IDE files
 .idea
 .idea/

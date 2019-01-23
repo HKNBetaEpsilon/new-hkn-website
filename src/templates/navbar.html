@@ -17,7 +17,6 @@
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'leadership' %}">Leadership</a></li>
                 <li><a href="{% url 'corporate' %}">Corporate</a></li>
-                <!--<li><a href="{% url 'tutoring' %}">Tutoring</a></li>-->
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'member_list' %}">Members</a></li>
                     <li><a href="{% url 'mentoring_competition' %}">Mentoring Competition</a></li>

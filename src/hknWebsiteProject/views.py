@@ -23,7 +23,11 @@ class MyError(Exception):
 
 def home(request, bad_user=False):
     context = {}
-    if not request.user.is_anonymous():
+    try:
+        user_is_anonymous = request.user.is_anonymous()
+    except TypeError:
+        user_is_anonymous = request.user.is_anonymous
+    if not user_is_anonymous:
         # display prompt to ask member to complete their profile
         if not has_complete_profile(request.user.username):
             context = {
