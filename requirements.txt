@@ -1,12 +1,9 @@
-Django==1.9
-Pillow==3.1.0
+Django==2.1.5
+Pillow==5.4.1
 PyJWT==1.4.0
-django-crispy-forms==1.6.0
-oauthlib==1.0.3
-python-openid==2.2.5
-python-social-auth==0.2.13
+django-crispy-forms
+social-auth-app-django==3.1.0
 requests==2.9.1
-requests-oauthlib==0.6.0
 six==1.10.0
 wsgiref==0.1.2
 sorl-thumbnail==12.3
