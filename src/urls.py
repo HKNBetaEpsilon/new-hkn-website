@@ -26,7 +26,7 @@ urlpatterns = [
     path('electeeManagement/', include('electeeManagement.urls')),
     path('leadership/', include('leadership.urls')),
     path('users/', include('users.urls')),
-    path('', include(('social.apps.django_app.urls', 'social'), namespace='social')),
+    path('', include(('social_django.urls', 'social'), namespace='social')),
     path('', include(('django.contrib.auth.urls', 'auth'), namespace='auth')),
     path('admin/', admin.site.urls),
 ]
