@@ -9,7 +9,7 @@ from users.models import Member
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.mail import EmailMessage
 from django.shortcuts import render
-from utils import has_complete_profile, get_members_with_complete_profile, \
+from .utils import has_complete_profile, get_members_with_complete_profile, \
     get_members_with_uncomplete_profile
 
 

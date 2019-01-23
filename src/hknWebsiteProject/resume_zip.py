@@ -3,7 +3,7 @@ import zipfile
 
 import os
 from django.conf import settings
-from utils import get_current_members_with_completed_profile
+from .utils import get_current_members_with_completed_profile
 
 
 def zipdir(path, zipf):
@@ -58,4 +58,4 @@ def zip_resumes():
     make_zip(resumes_year_dir, 'HKN_resumes_by_year.zip')
     make_zip(resumes_major_dir, 'HKN_resumes_by_major.zip')
 
-    print "Updated Resumes Zips"
+    print("Updated Resumes Zips")
