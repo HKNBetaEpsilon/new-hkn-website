@@ -17,4 +17,6 @@ pythenv/
 # Ignore my notes
 notes.txt
 
+# Server Configuration
 secret.py
+production_settings.py
