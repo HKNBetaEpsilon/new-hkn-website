@@ -10,6 +10,8 @@ pythenv/
 # Ignore IDE files
 .idea
 .idea/
+.vscode
+.vscode/
 
 # Ignore DB file
 *.sqlite3
