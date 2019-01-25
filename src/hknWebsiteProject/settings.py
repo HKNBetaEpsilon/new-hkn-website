@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'hknWebsiteProject.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 try:
-    from production_settings import DATABASES
+    from .production_settings import DATABASES
 except ImportError:
-    from development_settings import DATABASES
+    from .development_settings import DATABASES
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

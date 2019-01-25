@@ -1,6 +1,6 @@
 # Settings specific to the development server (local servers)
 import os
-from settings import BASE_DIR
+from .settings import BASE_DIR
 
 DATABASES = {
     'default': {
